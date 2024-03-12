@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Requests;
+
+class RegisterValidation extends BaseRequestFormApi
+{
+    //Determine the rules for the registeration process:
+    public function rules(): array
+    {
+        return [
+            "first_name" => 'required|min:2|max:20',
+            "last_name" => 'required|min:2|max:20',
+            "email" => 'required|email|unique:users',
+            "password" => 'required|min:6|max:100',
+            "confirm_password" => 'required|same:password',
+            "address" => 'required',
+            "mobile_number" => 'required',
+            "gender" => 'required',
+            "date_of_born" => 'required',
+
+        ];
+    }
+
+
+}
