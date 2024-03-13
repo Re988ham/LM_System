@@ -1,18 +1,18 @@
 <?php
 
-// namespace App\Http\Controllers;
+//namespace App\Http\Controllers\Auth;
 
 // use Exception;
 // use Illuminate\Http\Request;
 // use Laravel\Socialite\Facades\Socialite;
 // use App\Models\User;
 // use Illuminate\Support\Facades\Auth;
-// use App\Http\Controllers\BaseController;
 
 
+//use App\Http\Controllers\BaseController;
 
-// class SocialiteController extends BaseController
-// {
+//class SocialiteController extends BaseController
+//{
 //     public function redirectToGoogle()
 //     {
 //         return Socialite::driver('google')->redirect();
@@ -46,4 +46,4 @@
 //             dd($e->getMessage());
 //         }
 //     }
-// }
+//}

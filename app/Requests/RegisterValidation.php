@@ -4,11 +4,11 @@ namespace App\Requests;
 
 class RegisterValidation extends BaseRequestFormApi
 {
-    //Determine the rules for the registeration process:
+    // Determine the rules for the registration process:
     public function rules(): array
     {
         return [
-           "name" => 'required|min:2|max:20',
+            "name" => 'required|min:2|max:20',
             "email" => 'required|email|unique:users',
             "password" => 'required|min:6|max:100',
             "confirm_password" => 'required|same:password',
@@ -16,7 +16,6 @@ class RegisterValidation extends BaseRequestFormApi
             "mobile_number" => 'required',
             "gender" => 'required',
             "date_of_born" => 'required',
-
         ];
     }
 
