@@ -8,8 +8,7 @@ class RegisterValidation extends BaseRequestFormApi
     public function rules(): array
     {
         return [
-            "first_name" => 'required|min:2|max:20',
-            "last_name" => 'required|min:2|max:20',
+           "name" => 'required|min:2|max:20',
             "email" => 'required|email|unique:users',
             "password" => 'required|min:6|max:100',
             "confirm_password" => 'required|same:password',
