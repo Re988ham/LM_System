@@ -15,10 +15,9 @@ class ProfileController extends BaseController
     }
 
     // To Show Profile Information:
-    public function showProfileInfo($user_id)
+    public function showProfileInfo()
     {
-        $user = $this->profileService->profileUser($user_id);
-
+        $user = $this->profileService->profileUser();
         if ($user) {
             return $this->sendResponse($user);
         } else {

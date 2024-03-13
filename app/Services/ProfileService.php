@@ -6,9 +6,10 @@ use App\Models\User;
 
 class ProfileService
 {
-    public function profileUser($user_id)
+    public function profileUser()
     {
-        $user = User::find($user_id);
+        $user = auth('sanctum')->user();
+
         if ($user) {
             $dis = public_path('images/users/');
             return [
