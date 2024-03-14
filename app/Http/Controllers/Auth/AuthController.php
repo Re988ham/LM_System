@@ -61,7 +61,7 @@ class AuthController extends BaseController
         }
     }
 
-
+    
     // Logout Function:
     public function logout(Request $request)
     {

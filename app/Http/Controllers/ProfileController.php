@@ -21,8 +21,7 @@ class ProfileController extends BaseController
         if ($user) {
             return $this->sendResponse($user);
         } else {
-            return $this->sendError("User not found!!");
+            return $this->sendError("Something goes wrong!!");
         }
     }
 }
-

@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Http\Controllers\BaseController;
 use Illuminate\Support\Facades\Hash;
 
-class LoginService extends BaseController
+class LoginService
 {
 
     public function loginUser(array $data)
