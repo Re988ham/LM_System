@@ -21,18 +21,18 @@ use Illuminate\Support\Facades\Route;
 Route::controller(AuthController::class)->group(function () {
     Route::post('register', 'register');
     Route::post('login', 'login');
-    Route::post('logout', 'logout');
+    Route::post('logout', 'logout')->middleware('sanctum');
 });
-//Profile API:
 
-Route::prefix('profile')->group(function () {
+
+//Profile API:
+Route::middleware('sanctum')->prefix('profile')->group(function () {
     Route::get('/', [ProfileController::class, 'showProfileInfo']);
-    //  Route::put('/', [UserController::class, 'updateProfileInfo']);
+    // Route::put('/', [ProfileController::class, 'updateProfileInfo']);
 });
 
 
 // Route::get('auth/google/callback', SocialiteController::class, 'handleGoogleCallback');
-
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
