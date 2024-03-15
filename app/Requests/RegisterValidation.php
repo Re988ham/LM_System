@@ -13,7 +13,7 @@ class RegisterValidation extends BaseRequestFormApi
             "password" => 'required|min:6|max:100',
             "confirm_password" => 'required|same:password',
             "address" => 'required',
-            "mobile_number" => 'required|numeric',
+            "mobile_number" => 'required|numeric|unique:users',
             "gender" => 'required',
             "date_of_born" => 'required',
             "image" => "nullable|image"

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use App\Models\User;
 
 class ProfileService
 {
@@ -12,7 +13,7 @@ class ProfileService
         $user = auth('sanctum')->user();
 
         if ($user) {
-            $dis = public_path('images/users/');
+            $dis = public_path('images\\users\\');
             $imagePath = $user->image ? $dis . $user->image : null; // Check if image exists
 
             return [
@@ -47,17 +48,36 @@ class ProfileService
         }
     }
 
-    public function deleteProfileImage()
+    public function updateProfileImage(Request $request)
     {
         $user = auth('sanctum')->user();
         if ($user) {
             $destination = $user->image;
             if (File::exists($destination)) {
                 File::delete($destination);
-                $user->image = Null;
-                $result = $user->save();
-                return $result;
             }
+            $newdfilename = time() . $request->image->getClientOriginalName();
+            $destinationPath = public_path('images\\users\\');
+            $request->image->move($destinationPath, $newdfilename);
+            $user->image = $destinationPath . $newdfilename;
+            $result = $user->save();
+            return $result;
+        } else {
+            return null;
+        }
+    }
+
+    public function deleteProfileImage()
+    {
+        $user = auth('sanctum')->user();
+        if ($user) {
+            $destination =  $user->image;
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
+            $user->image = Null;
+            $result = $user->save();
+            return $result;
         } else {
             return null;
         }
@@ -66,13 +86,16 @@ class ProfileService
 
 
 //For Experience:
-//if ($request->hasFile('image')) {
-    // $destination = public_path('images\\users\\' . $user->image);
-    // if (File::exists($destination)) {
-    //     File::delete($destination);
-    // }
-    // $newdfilename = time() . $request->image->getClientOriginalName();
-    // $destinationPath = public_path('images\\\users\\');
-    // $request->image->move($destinationPath, $newdfilename);
-    // $user->image = $newdfilename;
+// $user = auth('sanctum')->user();
+// if ($user) {
+//     $destination = $user->image;
+//     if (File::exists($destination)) {
+//         File::delete($destination);
+//     }
+//     // $path = $request['image']->store('images\\users\\', 'public');
+//     $path = $request->image->store('images/users/', 'public');
+//     $result = $user->update(['image' => $path]);
+//     return $result;
+// } else {
+//     return null;
 // }

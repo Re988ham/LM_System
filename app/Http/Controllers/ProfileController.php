@@ -42,6 +42,17 @@ class ProfileController extends BaseController
         }
     }
 
+    public function updateImage(Request $request)
+    {
+
+        $user = $this->profileService->updateProfileImage($request);
+        if ($user) {
+            return $this->sendResponse("Image Updated Successfully");
+        } else {
+            return $this->sendError("Something goes wrong");
+        }
+    }
+
     public function deleteImage()
     {
         $user = $this->profileService->deleteProfileImage();
