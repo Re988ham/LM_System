@@ -28,7 +28,7 @@ Route::controller(AuthController::class)->group(function () {
 //Profile API:
 Route::middleware('sanctum')->prefix('profile')->group(function () {
     Route::get('/', [ProfileController::class, 'showProfileInfo']);
-    // Route::put('/', [ProfileController::class, 'updateProfileInfo']);
+    Route::put('/', [ProfileController::class, 'updateProfileInfo']);
 });
 
 

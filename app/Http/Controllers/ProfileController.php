@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\ProfileService;
+use Illuminate\Support\Facades\File;
 
 class ProfileController extends BaseController
 {
@@ -23,5 +24,17 @@ class ProfileController extends BaseController
         } else {
             return $this->sendError("Something goes wrong!!");
         }
+    }
+
+    //To Update Profile Information:
+    public function updateProfileInfo(Request $request)
+    {
+        $user = $this->profileService->updateProfileUser($request);
+        if ($user) {
+            return $this->sendResponse($user);
+        } else {
+            return $this->sendError("Something goes wrong");
+        }
+
     }
 }

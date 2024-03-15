@@ -15,8 +15,8 @@ class RegisterService
     $data['password'] = Hash::make($data['password']);
 
     if (isset($data['image']) && $data['image']->isValid()) {
-        $destinationPath = public_path('images/users');
-        $fileName = time() . '_' . $data['image']->getClientOriginalName();
+        $destinationPath = public_path('images\\users\\');
+        $fileName = time() . ' _ ' . $data['image']->getClientOriginalName();
         $data['image']->move($destinationPath, $fileName);
         $data['image'] = $destinationPath . $fileName;
     }
