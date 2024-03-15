@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Requests\ProfileValidation;
 use App\Services\ProfileService;
 use Illuminate\Support\Facades\File;
 
@@ -26,15 +27,19 @@ class ProfileController extends BaseController
         }
     }
 
-    //To Update Profile Information:
-    public function updateProfileInfo(Request $request)
+    // To Update Profile Information:
+    public function updateProfileInfo(ProfileValidation $profileValidation)
     {
-        $user = $this->profileService->updateProfileUser($request);
-        if ($user) {
-            return $this->sendResponse($user);
+        if (!empty($profileValidation->getErrors())) {
+            return response()->json($profileValidation->getErrors(), 406);
         } else {
-            return $this->sendError("Something goes wrong");
+            $user = $this->profileService->updateProfileUser($profileValidation->request()->all());
+            if ($user) {
+                return $this->sendResponse($user);
+            } else {
+                return $this->sendError("Something goes wrong");
+            }
         }
-
     }
+   
 }

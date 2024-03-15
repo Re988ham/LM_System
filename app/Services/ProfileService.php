@@ -2,10 +2,8 @@
 
 namespace App\Services;
 
-use App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use App\Models\User;
 
 class ProfileService
 {
@@ -32,28 +30,33 @@ class ProfileService
         }
     }
 
-    public function updateProfileUser(Request $request)
+    public function updateProfileUser(array $request)
     {
         $user = auth('sanctum')->user();
         if ($user) {
-            if ($request->address || $request->mobile_number) {
-                $user->address = $request->address;
-                $user->mobile_number = $request->mobile_number;
+            if (isset($request['address'])) {
+                $user->address = $request['address'];
             }
-            if ($request->hasFile('image')) {
-                $destination = public_path('images\\users\\' . $user->image);
-                if (File::exists($destination)) {
-                    File::delete($destination);
-                }
-                $newdfilename = time() . $request->image->getClientOriginalName();
-                $destinationPath = public_path('images\\\users\\');
-                $request->image->move($destinationPath, $newdfilename);
-                $user->image = $newdfilename;
+            if (isset($request['mobile_number'])) {
+                $user->mobile_number = $request['mobile_number'];
             }
-           $result = $user->save();
+            $result = $user->save();
             return $result;
         } else {
             return null;
         }
     }
 }
+
+
+//For Experience:
+//if ($request->hasFile('image')) {
+    // $destination = public_path('images\\users\\' . $user->image);
+    // if (File::exists($destination)) {
+    //     File::delete($destination);
+    // }
+    // $newdfilename = time() . $request->image->getClientOriginalName();
+    // $destinationPath = public_path('images\\\users\\');
+    // $request->image->move($destinationPath, $newdfilename);
+    // $user->image = $newdfilename;
+// }
