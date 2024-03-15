@@ -29,6 +29,7 @@ Route::controller(AuthController::class)->group(function () {
 Route::middleware('sanctum')->prefix('profile')->group(function () {
     Route::get('/', [ProfileController::class, 'showProfileInfo']);
     Route::put('/', [ProfileController::class, 'updateProfileInfo']);
+    Route::delete('/', [ProfileController::class, 'deleteImage']);
 });
 
 

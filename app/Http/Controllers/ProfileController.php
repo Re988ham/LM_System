@@ -41,5 +41,14 @@ class ProfileController extends BaseController
             }
         }
     }
-   
+
+    public function deleteImage()
+    {
+        $user = $this->profileService->deleteProfileImage();
+        if ($user) {
+            return $this->sendResponse($user);
+        } else {
+            return $this->sendError("Something goes wrong");
+        }
+    }
 }

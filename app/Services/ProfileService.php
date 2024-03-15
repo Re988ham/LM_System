@@ -46,6 +46,22 @@ class ProfileService
             return null;
         }
     }
+
+    public function deleteProfileImage()
+    {
+        $user = auth('sanctum')->user();
+        if ($user) {
+            $destination = $user->image;
+            if (File::exists($destination)) {
+                File::delete($destination);
+                $user->image = Null;
+                $result = $user->save();
+                return $result;
+            }
+        } else {
+            return null;
+        }
+    }
 }
 
 
