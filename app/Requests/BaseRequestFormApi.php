@@ -28,16 +28,11 @@ abstract class BaseRequestFormApi
             $validator = Validator::make($this->_request->all(), $rules);
 
             if ($validator->fails()) {
-                $this->status = false; // Set status to false if validation fails
-                $this->errors = $validator->errors()->all(); // Assign errors here
-//                return response()->json([
-//                    "message" => "Validation failed..!",
-//                    "errors" => $this->errors
-//                ], 406);
+                $this->status = false;
+                $this->errors = $validator->errors()->all();
             }
         }
     }
-
 
     public function isStatus(): bool
     {

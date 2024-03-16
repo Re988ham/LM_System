@@ -36,12 +36,10 @@ class AuthController extends BaseController
 
         $message['user'] = $user->toArray();
         $message['user']['role_id'] = 3;
-        // User::find('role_id');
         $message['token'] = $user->createToken('AppName')->plainTextToken;
 
         return $this->sendResponse($message);
     }
-
 
     // Login Function:
     public function login(LoginValidation $loginValidation)
@@ -61,7 +59,6 @@ class AuthController extends BaseController
         }
     }
 
-    
     // Logout Function:
     public function logout(Request $request)
     {

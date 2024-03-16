@@ -8,14 +8,13 @@ use App\Models\User;
 
 class ProfileService
 {
+
+    // Service of show profile information:
     public function profileUser()
     {
-        $user = auth('sanctum')->user();
-
+        $user = User::find(auth('sanctum')->id());
         if ($user) {
-            $dis = public_path('images\\users\\');
-            $imagePath = $user->image ? $dis . $user->image : null; // Check if image exists
-
+            $imagePath = $user->image ? $user->image : null; // Check if image exists
             return [
                 'name' => $user->name,
                 'email' => $user->email,
@@ -31,15 +30,23 @@ class ProfileService
         }
     }
 
-    public function updateProfileUser(array $request)
+    // Service of update profile information(address, mobile_number, image):
+    public function updateProfileUser(array $data)
     {
-        $user = auth('sanctum')->user();
+        $user = User::find(auth('sanctum')->id());
         if ($user) {
-            if (isset($request['address'])) {
-                $user->address = $request['address'];
+            if (isset($data['mobile_number'])) {
+                $user->mobile_number = $data['mobile_number'];
             }
-            if (isset($request['mobile_number'])) {
-                $user->mobile_number = $request['mobile_number'];
+            if (isset($data['address'])) {
+                $user->address = $data['address'];
+            }
+            if (isset($data['image'])) {
+                if ($user->image) {
+                    $this->deleteProfileImage($user);
+                }
+                $newdestinationpath = public_path("images\\users\\");
+                $user->image = ImageService::saveImage($data['image'], $newdestinationpath);
             }
             $result = $user->save();
             return $result;
@@ -48,41 +55,25 @@ class ProfileService
         }
     }
 
-    public function updateProfileImage(Request $request)
+    //Service of delete profile image:
+    public function deleteProfileImage($user): bool
     {
-        $user = auth('sanctum')->user();
-        if ($user) {
-            $destination = $user->image;
-            if (File::exists($destination)) {
-                File::delete($destination);
-            }
-            $newdfilename = time() . $request->image->getClientOriginalName();
-            $destinationPath = public_path('images\\users\\');
-            $request->image->move($destinationPath, $newdfilename);
-            $user->image = $destinationPath . $newdfilename;
-            $result = $user->save();
-            return $result;
-        } else {
-            return null;
-        }
-    }
+        $destination = $user->image;
+        if (File::exists($destination)) {
+            File::delete($destination);
 
-    public function deleteProfileImage()
-    {
-        $user = auth('sanctum')->user();
-        if ($user) {
-            $destination =  $user->image;
-            if (File::exists($destination)) {
-                File::delete($destination);
-            }
-            $user->image = Null;
-            $result = $user->save();
-            return $result;
-        } else {
-            return null;
+            $user->image = null;
+            return $user->save();
         }
+        return false;
     }
 }
+
+
+
+
+
+
 
 
 //For Experience:
@@ -98,4 +89,23 @@ class ProfileService
 //     return $result;
 // } else {
 //     return null;
+// }
+
+// public function updateProfileImage(Request $request)
+// {
+//     $user = auth('sanctum')->user();
+//     if ($user) {
+//         $destination = $user->image;
+//         if (File::exists($destination)) {
+//             File::delete($destination);
+//         }
+//         $newdfilename = time() . $request->image->getClientOriginalName();
+//         $destinationPath = public_path('images\\users\\');
+//         $request->image->move($destinationPath, $newdfilename);
+//         $user->image = $destinationPath . $newdfilename;
+//         $result = $user->save();
+//         return $result;
+//     } else {
+//         return null;
+//     }
 // }

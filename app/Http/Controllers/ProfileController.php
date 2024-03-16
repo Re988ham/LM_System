@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Requests\ProfileValidation;
 use App\Services\ProfileService;
-use Illuminate\Support\Facades\File;
+use App\Models\User;
 
 class ProfileController extends BaseController
 {
@@ -23,11 +22,11 @@ class ProfileController extends BaseController
         if ($user) {
             return $this->sendResponse($user);
         } else {
-            return $this->sendError("Something goes wrong!!");
+            return $this->sendError("Something went wrong!!");
         }
     }
 
-    // To Update Profile Information:
+    // To Update Profile Information (address, mobile_number, image):
     public function updateProfileInfo(ProfileValidation $profileValidation)
     {
         if (!empty($profileValidation->getErrors())) {
@@ -35,29 +34,20 @@ class ProfileController extends BaseController
         } else {
             $user = $this->profileService->updateProfileUser($profileValidation->request()->all());
             if ($user) {
-                return $this->sendResponse($user);
+                return $this->sendResponse("Profile Information has been Updated Successfully");
             } else {
-                return $this->sendError("Something goes wrong");
+                return $this->sendError("Something went wrong!!");
             }
         }
     }
 
-    public function updateImage(Request $request)
-    {
-
-        $user = $this->profileService->updateProfileImage($request);
-        if ($user) {
-            return $this->sendResponse("Image Updated Successfully");
-        } else {
-            return $this->sendError("Something goes wrong");
-        }
-    }
-
+    // To delete image profile:
     public function deleteImage()
     {
-        $user = $this->profileService->deleteProfileImage();
-        if ($user) {
-            return $this->sendResponse($user);
+        $user = User::find(auth('sanctum')->id());
+        $isDeleted = $this->profileService->deleteProfileImage($user);
+        if ($isDeleted) {
+            return $this->sendResponse("Image has been deleted successfully");
         } else {
             return $this->sendError("Something goes wrong");
         }
