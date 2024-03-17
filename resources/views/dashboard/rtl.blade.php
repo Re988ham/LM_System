@@ -1,4 +1,4 @@
-@extends('layouts.user_type.auth')
+@extends('dashboard.layouts.user_type.auth')
 
 @section('content')
 
@@ -623,7 +623,7 @@
 
 @endsection
 
-@push('rtl')  
+@push('rtl')
   <script>
     window.onload = function() {
       var ctx = document.getElementById("chart-bars").getContext("2d");
