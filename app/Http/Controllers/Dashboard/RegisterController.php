@@ -26,14 +26,14 @@ class RegisterController extends Controller
             'address' => ['required', 'max:50'],
             'mobile_number' => ['required', 'digits:10', 'starts_with:09', 'unique:users,mobile_number'],
             'gender' => ['required', 'in:male,female'],
-            'date' => ['required', 'date_format:Y-m-d'],// 'date_format:Y-m-d'
+            'date' => ['required'],
 //            'image' => ['required', 'image', 'max:2048', 'mimes:jpeg,png'],
         ]);
-
+        static $role_id =2;
         $attributes['password'] = bcrypt($attributes['password']);
-
         session()->flash('success', 'Your account has been created.');
         $user = User::create($attributes);
+        $user->update(['role_id' => $role_id]);
         Auth::login($user);
         return redirect('/dashboard');
     }

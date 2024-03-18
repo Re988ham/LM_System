@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('mobile_number')->nullable();
             $table->string('image')->nullable();
             $table->enum('gender', ['male', 'female'])->nullable();
-            $table->date('date_of_born')->format('YYYY-MM-DD')->nullable();
+            $table->date('date')->nullable();
             $table->foreignId('role_id')->default(3);
             $table->string('google_id')->nullable();
             $table->rememberToken();

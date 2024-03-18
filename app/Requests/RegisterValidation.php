@@ -4,7 +4,7 @@ namespace App\Requests;
 
 class RegisterValidation extends BaseRequestFormApi
 {
-    // Determine the rules for the registration process:
+    // Determine the rules for the registration process API:
     public function rules(): array
     {
         return [
