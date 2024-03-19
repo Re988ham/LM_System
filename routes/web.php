@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\InfoUserController;
 use App\Http\Controllers\Dashboard\RegisterController;
 use App\Http\Controllers\Dashboard\ResetController;
 use App\Http\Controllers\Dashboard\SessionsController;
+use App\Http\Controllers\GoogleLoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -61,3 +62,14 @@ Route::group(['middleware' => 'guest'], function () {
 Route::get('/login', function () {
     return view('dashboard/session/login-session');
 })->name('login');
+
+
+Route::get('google',function(){
+
+    Return view('googleAuth');
+
+});
+
+Route::get('auth/google', [GoogleLoginController::class,'redirectToGoogle']);
+
+Route::get('auth/google/callback', [GoogleLoginController::class,'handleGoogleCallback']);
