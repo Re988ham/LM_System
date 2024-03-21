@@ -23,7 +23,7 @@ class User extends Authenticatable
         'password',
         'address',
         'mobile_number',
-        'date',
+        'birth_date',
         'gender',
         'image',
         'google_id',

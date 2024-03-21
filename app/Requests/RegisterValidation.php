@@ -15,8 +15,9 @@ class RegisterValidation extends BaseRequestFormApi
             "address" => 'required',
             "mobile_number" => 'required|numeric|unique:users',
             "gender" => 'required',
-            "date_of_born" => 'required',
+            "birth_date" => 'required',
             "image" => "nullable|image|mimes:jpeg,png,jpg,gif"
+
         ];
     }
 }

@@ -15,8 +15,8 @@ use App\Http\Controllers\DashboardControllers\Auth\WebAuthController;
                 <div class="card-header pb-0 text-left bg-transparent">
                   <h4 class="font-weight-bolder text-info text-gradient">Welcome to our </h4>
                   <h4 class="font-weight-bolder text-info text-gradient">Learning Management System.</h4>
-                  <p class="mb-0">Create a new acount<br></p>
-                  <p class="mb-0">OR Sign in with these credentials:</p>
+                  {{-- <p class="mb-0">Create a new acount<br></p>
+                  <p class="mb-0">OR Sign in with these credentials:</p> --}}
                 </div>
                 <div class="card-body">
                   <form role="form" method="POST" action="/login">

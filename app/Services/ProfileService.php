@@ -22,7 +22,7 @@ class ProfileService
                 'mobile_number' => $user->mobile_number,
                 'gender' => $user->gender,
                 'role' => 'student',
-                'date_of_birth' => $user->date_of_born,
+                'birth_date' => $user->birth_date,
                 'image' => $imagePath, // Return image path or null
             ];
         } else {
