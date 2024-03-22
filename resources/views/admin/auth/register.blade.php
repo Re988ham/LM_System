@@ -23,9 +23,9 @@
                         </div>
                         <div class="row px-xl-5 px-sm-4 px-3">
                             <div class="col-3 ms-auto px-1">
-                                <a class="btn btn-outline-light w-100" href="javascript:;">
+                                <a class="btn btn-outline-light w-100" href="javascript:">
                                     <svg width="24px" height="32px" viewBox="0 0 64 64" version="1.1"
-                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink32">
+                                        xmlns="http://www.w3.org/2000/svg">
                                         <g id="Artboard" stroke="none" stroke-width="1" fill="none"
                                             fill-rule="evenodd">
                                             <g id="facebook-3" transform="translate(3.000000, 3.000000)"
@@ -41,9 +41,9 @@
                                 </a>
                             </div>
                             <div class="col-3 me-auto px-1">
-                                <a class="btn btn-outline-light w-100" href="javascript:;">
+                                <a class="btn btn-outline-light w-100" href="javascript:">
                                     <svg width="24px" height="32px" viewBox="0 0 64 64" version="1.1"
-                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        xmlns="http://www.w3.org/2000/svg">
                                         <g id="Artboard" stroke="none" stroke-width="1" fill="none"
                                             fill-rule="evenodd">
                                             <g id="google-icon" transform="translate(3.000000, 2.000000)"
@@ -73,85 +73,118 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form role="form text-left" method="POST" action="/register">
+                            <form role="form text-left" method="POST" action="/register" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="imageUpload" class="form-label">Upload Image</label>
-                                    <input type="file" class="form-control" name="image" id="imageUpload"
-                                        aria-label="Upload image" accept="image/*">
-                                    <div class="preview-container" style="margin-top: 10px;">
-                                        <img id="preview" src="#" alt="Image preview"
-                                            style="display: none; max-width: 100%; height: auto; border-radius: 50%;">
-                                    </div>
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" placeholder="Name" name="name"
-                                            id="name" aria-label="Name" aria-describedby="name"
-                                            value="{{ old('name') }}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <input type="email" class="form-control" placeholder="Email" name="email"
-                                            id="email" aria-label="Email" aria-describedby="email-addon"
-                                            value="{{ old('email') }}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <input type="password" class="form-control" placeholder="Password"
-                                            name="password" id="password" aria-label="Password"
-                                            aria-describedby="password-addon">
-                                    </div>
-                                    <div class="mb-3">
-                                        <input type="confirm_password" class="form-control"
-                                            placeholder="confirm_password" name="confirm_password" id="confirm_password"
-                                            aria-label="confirm_password" aria-describedby="confirm_password">
-                                    </div>
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" placeholder="mobile number"
-                                            name="mobile_number" id="mobile_number" aria-label="mobile_number"
-                                            aria-describedby="mobile_number" value="{{ old('mobile_number') }}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" placeholder="address" name="address"
-                                            id="address" aria-label="address" aria-describedby="address"
-                                            value="{{ old('address') }}">
-                                    </div>
-                                    <div class="mb-3" style="display: inline">
-                                        <label for="gender">Gender:</label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gender" id="male"
-                                                value="male" {{ old('gender') === 'male' ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="male">
-                                                Male
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gender" id="female"
-                                                value="female" {{ old('gender') === 'female' ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="female">
-                                                Female
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="date">Date:</label>
-                                        <input type="date" class="form-control" placeholder="YYYY-MM-DD"
-                                            name="birth_date" id="date" aria-label="Date" aria-describedby="date"
-                                            value="{{ old('date') }}">
-                                    </div>
-
-                                    <div class="form-check form-check-info text-left">
-                                        <input class="form-check-input" type="checkbox" name="agreement"
-                                            id="flexCheckDefault" checked>
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            I agree the <a href="javascript:;" class="text-dark font-weight-bolder">Terms
-                                                and Conditions</a>
+                                    <div class="image-upload-container text-center">
+                                        <input type="file" class="form-control d-none" name="image" id="imageUpload"
+                                            accept="image/*">
+                                        <label for="imageUpload"
+                                            class="image-preview rounded-circle overflow-hidden d-flex justify-content-center"
+                                            style="max-width: 150px; max-height: 150px; cursor: pointer; margin: 0 auto;">
+                                            <img id="preview" src="{{ asset('assets/img/R (3).jpg') }}"
+                                                alt="Image preview" style="object-fit: cover; width: 100%; height: 100%;">
                                         </label>
                                     </div>
-                                    <div class="text-center">
-                                        <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign
-                                            up</button>
+                                </div>
+
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Name" name="name"
+                                        id="name" aria-label="Name" aria-describedby="name"
+                                        value="{{ old('name') }}">
+                                    @error('name')
+                                        <div class="text text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <input type="email" class="form-control" placeholder="Email" name="email"
+                                        id="email" aria-label="Email" aria-describedby="email-addon"
+                                        value="{{ old('email') }}">
+                                    @error('email')
+                                        <div class="text text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <input type="password" class="form-control" placeholder="Password" name="password"
+                                        id="password" aria-label="Password" aria-describedby="password-addon">
+                                    @error('password')
+                                        <div class="text text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <input type="password" class="form-control" placeholder="confirm_password"
+                                        name="confirm_password" id="confirm_password" aria-label="confirm_password"
+                                        aria-describedby="confirm_password">
+                                    @error('confirm_password')
+                                        <div class="text text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="mobile number"
+                                        name="mobile_number" id="mobile_number" aria-label="mobile_number"
+                                        aria-describedby="mobile_number" value="{{ old('mobile_number') }}">
+                                    @error('mobile_number')
+                                        <div class="text text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="address" name="address"
+                                        id="address" aria-label="address" aria-describedby="address"
+                                        value="{{ old('address') }}">
+                                    @error('address')
+                                        <div class="text text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3" style="display: inline">
+                                    <label for="gender">Gender:</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="male"
+                                            value="male" {{ old('gender') === 'male' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="male">
+                                            Male
+                                        </label>
                                     </div>
-                                    <p class="text-sm mt-3 mb-0">Already have an account? <a href="{{ route('signIn') }}"
-                                            class="text-dark font-weight-bolder">Sign
-                                            in</a></p>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="female"
+                                            value="female" {{ old('gender') === 'female' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="female">
+                                            Female
+                                        </label>
+                                    </div>
+                                    @error('gender')
+                                        <div class="text text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="date">Birth_Date:</label>
+                                    <input type="date" class="form-control" placeholder="YYYY-MM-DD"
+                                        name="birth_date" id="birth_date" aria-label="BirthDate"
+                                        aria-describedby="birth_date" value="{{ old('date') }}">
+                                    @error('birth_date')
+                                        <div class="text text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-check form-check-info text-left">
+                                    <input class="form-check-input" type="checkbox" name="agreement"
+                                        id="flexCheckDefault" checked>
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        I agree the <a href="javascript:" class="text-dark font-weight-bolder">Terms
+                                            and Conditions</a>
+                                    </label>
+                                    @error('agreement')
+                                        <div class="text text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign
+                                        up
+                                    </button>
+                                </div>
+                                <p class="text-sm mt-3 mb-0">Already have an account?
+                                    <a href="{{ route('signIn') }}" class="text-dark font-weight-bolder">
+                                        Sign in
+                                    </a>
+                                </p>
                             </form>
                         </div>
                     </div>
@@ -159,4 +192,18 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        document.getElementById('imageUpload').addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('preview').src = e.target.result;
+                };
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    </script>
 @endsection

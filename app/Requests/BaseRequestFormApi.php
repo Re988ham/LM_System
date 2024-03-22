@@ -29,7 +29,7 @@ abstract class BaseRequestFormApi
 
             if ($validator->fails()) {
                 $this->status = false;
-                $this->errors = $validator->errors()->all();
+                $this->errors = $validator->errors()->getMessages();
             }
         }
     }

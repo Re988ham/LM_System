@@ -37,6 +37,6 @@ Route::controller(WebAuthController::class)->group(function () {
     Route::post('register', 'register')->name('register');
     Route::get('signUp', 'signUp')->name('signUp');
     Route::get('signIn', 'signIn')->name('signIn');
-    Route::post('login', 'login')->name('login')->name('login');
+    Route::post('login', 'login')->name('login');
     Route::post('logout', 'logout')->middleware('sanctum');
 });

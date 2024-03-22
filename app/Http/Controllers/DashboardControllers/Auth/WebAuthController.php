@@ -25,12 +25,20 @@ class WebAuthController extends BaseController
         $this->logoutService = $logoutService;
     }
 
+    //Sign up function:
+    public function signUp()
+    {
+        return view('admin/auth/register');
+    }
+
     // Register Function:
     public function register(RegisterValidation $registerValidation)
     {
         if (!empty($registerValidation->getErrors())) {
             $errors = $registerValidation->getErrors();
-            return view('admin/auth/register', ['errors' => $errors]);
+            return redirect()->back()
+                ->withErrors($errors)
+                ->withInput($registerValidation->request()->all());
         }
 
         $user = $this->registerService->registerUser($registerValidation->request()->all());
@@ -41,23 +49,21 @@ class WebAuthController extends BaseController
         }
     }
 
-    //Sign up function:
-    public function signUp()
+    //Sign in function:
+    public function signIn()
     {
-        return view('admin/auth/register');
+        return view('admin/auth/login');
     }
 
- //Sign in function:
- public function signIN()
- {
-     return view('admin/auth/login');
- }
     // Login Function:
     public function login(LoginValidation $loginValidation)
     {
         if (!empty($loginValidation->getErrors())) {
             $errors = $loginValidation->getErrors();
-            return view('welcome', ['errors' => $errors]);
+            return redirect()
+                ->route('signIn')
+                ->withErrors($errors)
+                ->withInput($loginValidation->request()->all());
         } else {
             $user = $this->loginService->loginUser($loginValidation->request()->all());
             if ($user) {
@@ -68,6 +74,7 @@ class WebAuthController extends BaseController
             }
         }
     }
+
 
 
     // Logout Function:
