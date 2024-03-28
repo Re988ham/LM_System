@@ -8,7 +8,8 @@ use App\Requests\RegisterValidation;
 use App\Services\LoginService;
 use App\Services\LogoutService;
 use App\Services\RegisterService;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class WebAuthController extends BaseController
@@ -23,6 +24,13 @@ class WebAuthController extends BaseController
         $this->registerService = $registerService;
         $this->loginService = $loginService;
         $this->logoutService = $logoutService;
+
+        //verfication by email
+        $this->middleware('guest')->except([
+            'logout', 'home'
+        ]);
+        $this->middleware('auth')->only('logout', 'home');
+        $this->middleware('verified')->only('home');
     }
 
     //Sign up function:
@@ -47,6 +55,14 @@ class WebAuthController extends BaseController
         if ($user) {
             return redirect()->route('dashboard');
         }
+
+        // verfication by email 
+        event(new Registered($user));
+
+        $credentials = $request->only('email', 'password');
+        Auth::attempt($credentials);
+        $request->session()->regenerate();
+        return redirect()->route('verification.notice');
     }
 
     //Sign in function:
@@ -78,15 +94,10 @@ class WebAuthController extends BaseController
 
 
     // Logout Function:
-    public function logout(Request $request)
+    public function logout()
     {
-        $response = $this->logoutService->logoutUser();
-        if ($response) {
-            $message = "Logout Successfully.";
-            return $this->sendResponse($message, 204);
-        } else {
-            $message = "Something goes wrong!!";
-            return $this->sendError($message);
-        }
+        Auth::logout();
+
+        return redirect()->route('signIn')->with(['success'=>'You\'ve been logged out.']);
     }
 }

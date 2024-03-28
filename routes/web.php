@@ -1,14 +1,8 @@
 <?php
 
-// use App\Http\Controllers\Dashboard\ChangePasswordController;
-// use App\Http\Controllers\Dashboard\InfoUserController;
-// use App\Http\Controllers\Dashboard\RegisterController;
-// use App\Http\Controllers\Dashboard\ResetController;
-// use App\Http\Controllers\Dashboard\SessionsController;
-// use App\Http\Controllers\GoogleLoginController;
-
-
+use App\Http\Controllers\Dashboard\Auth\VerificationController;
 use App\Http\Controllers\DashboardControllers\Auth\WebAuthController;
+use App\Http\Controllers\GoogleLoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardControllers\HomeController;
 
@@ -38,5 +32,15 @@ Route::controller(WebAuthController::class)->group(function () {
     Route::get('signUp', 'signUp')->name('signUp');
     Route::get('signIn', 'signIn')->name('signIn');
     Route::post('login', 'login')->name('login');
-    Route::post('logout', 'logout')->middleware('sanctum');
+    Route::get('logout', 'logout')->name('logout');
+});
+
+Route::get('/login/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('/login/google/callback', [GoogleLoginController::class, 'handleGoogleCallback']);
+
+// Define Custom Verification Routes
+Route::controller(VerificationController::class)->group(function() {
+    Route::get('/email/verify', 'notice')->name('verification.notice');
+    Route::get('/email/verify/{id}/{hash}', 'verify')->name('verification.verify');
+    Route::post('/email/resend', 'resend')->name('verification.resend');
 });

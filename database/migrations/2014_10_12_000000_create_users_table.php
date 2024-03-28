@@ -16,11 +16,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('address');
-            $table->string('mobile_number');
+            $table->string('address')->nullable();
+            $table->string('mobile_number')->nullable();
             $table->string('image')->nullable();
-            $table->enum('gender', ['male', 'female']);
-            $table->date('birth_date');
+            $table->enum('gender', ['male', 'female'])->nullable();
+            $table->date('birth_date')->nullable();
+            //$table->integer('code');
             $table->foreignId('role_id')->default(3);
             $table->string('google_id')->nullable();
             $table->rememberToken();
