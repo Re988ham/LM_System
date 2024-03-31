@@ -44,3 +44,6 @@ Route::controller(VerificationController::class)->group(function() {
     Route::get('/email/verify/{id}/{hash}', 'verify')->name('verification.verify');
     Route::post('/email/resend', 'resend')->name('verification.resend');
 });
+
+
+

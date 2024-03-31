@@ -3,9 +3,10 @@
 
 
 @section('content')
+
     <section class="min-vh-100 mb-8">
         <div class="page-header align-items-start min-vh-50 pt-5 pb-11 mx-3 border-radius-lg"
-            style="background-image: url('../assets/img/curved-images/curved14.jpg');">
+            style="background-image: url('../assets/img/picture.png');">
             <span class="mask bg-gradient-dark opacity-6"></span>
             <div class="container">
                 <div class="row justify-content-center">
@@ -24,19 +25,16 @@
                             <h5>Register with</h5>
                         </div>
 
-
                         <div class="card-body">
                             <form role="form text-left" method="POST" action="/register" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mb-3">
                                     <div class="image-upload-container text-center">
-                                        <input type="file" class="form-control d-none" name="image" id="imageUpload"
-                                            accept="image/*">
-                                        <label for="imageUpload"
-                                            class="image-preview rounded-circle overflow-hidden d-flex justify-content-center"
-                                            style="max-width: 150px; max-height: 150px; cursor: pointer; margin: 0 auto;">
-                                            <img id="preview" src="{{ asset('assets/img/R (3).jpg') }}"
-                                                alt="Image preview" style="object-fit: cover; width: 100%; height: 100%;">
+                                        <input type="file" class="form-control d-none" name="image" id="imageUpload" accept="image/*">
+                                        <label for="imageUpload" class="image-preview rounded-circle overflow-hidden d-flex justify-content-center"
+                                               style="max-width: 150px; max-height: 150px; cursor: pointer; margin: 0 auto;">
+                                            <img id="preview" src="{{ asset('images/profile.png') }}" alt="Image preview"
+                                                 style="object-fit: cover; width: 100%; height: 100%;">
                                         </label>
                                     </div>
                                 </div>
@@ -148,16 +146,5 @@
     </section>
 @endsection
 
-@section('scripts')
-    <script type="text/javascript">
-        document.getElementById('imageUpload').addEventListener('change', function() {
-            if (this.files && this.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('preview').src = e.target.result;
-                };
-                reader.readAsDataURL(this.files[0]);
-            }
-        });
-    </script>
-@endsection
+
+

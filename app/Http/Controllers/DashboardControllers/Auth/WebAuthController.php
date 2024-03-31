@@ -56,13 +56,13 @@ class WebAuthController extends BaseController
             return redirect()->route('dashboard');
         }
 
-        // verfication by email 
-        event(new Registered($user));
-
-        $credentials = $request->only('email', 'password');
-        Auth::attempt($credentials);
-        $request->session()->regenerate();
-        return redirect()->route('verification.notice');
+        // verfication by email
+//        event(new Registered($user));
+//
+//        $credentials = $request->only('email', 'password');
+//        Auth::attempt($credentials);
+//        $request->session()->regenerate();
+//        return redirect()->route('verification.notice');
     }
 
     //Sign in function:

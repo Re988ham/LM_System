@@ -2,6 +2,7 @@
 
 //use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\CRUD_OperationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,3 +39,5 @@ Route::middleware('sanctum')->prefix('profile')->group(function () {
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/insert', [CRUD_OperationController::class, 'creat']);
