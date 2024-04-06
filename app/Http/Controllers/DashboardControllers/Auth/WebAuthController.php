@@ -24,6 +24,13 @@ class WebAuthController extends BaseController
         $this->registerService = $registerService;
         $this->loginService = $loginService;
         $this->logoutService = $logoutService;
+
+        //verfication by email
+        $this->middleware('guest')->except([
+            'logout', 'home'
+        ]);
+        $this->middleware('auth')->only('logout', 'home');
+        $this->middleware('verified')->only('home');
     }
 
     //Sign up function:
@@ -48,6 +55,14 @@ class WebAuthController extends BaseController
         if ($user) {
             return redirect()->route('dashboard');
         }
+
+        // verfication by email
+//        event(new Registered($user));
+//
+//        $credentials = $request->only('email', 'password');
+//        Auth::attempt($credentials);
+//        $request->session()->regenerate();
+//        return redirect()->route('verification.notice');
     }
 
     //Sign in function:
