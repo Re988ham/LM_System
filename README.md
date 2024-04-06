@@ -1,18 +1,3 @@
-+ Auth with google
-  notice:To download the socialite package, simply run this command:
-  -> “composer require laravel/socialite”
-  in env  'google' => [
-  'client_id' => '433552084977-358da5pgdf9i8in1bjuce81msoj6e2jv.apps.googleusercontent.com',
-  'client_secret' => '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',
-  'redirect' => 'http://127.0.0.1:8000/login/google/callback',
-  ]
-  in config/service:
-  GOOGLE_CLIENT_ID=433552084977-358da5pgdf9i8in1bjuce81msoj6e2jv.apps.googleusercontent.com
-  GOOGLE_CLIENT_SECRET=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
-  GOOGLE_REDIRECT_URI=http://127.0.0.1:8000/login/google/callback
-
-+ First version of database and models with relations
-  for the main app's idea
 
 the link of ERD here : (Editing is allowable)
 
