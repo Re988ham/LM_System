@@ -2,6 +2,7 @@
 
 //use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\User\GetCountriesController;
 use App\Http\Controllers\CRUD_OperationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
@@ -34,10 +35,12 @@ Route::middleware('sanctum')->prefix('profile')->group(function () {
 });
 
 
-// Route::get('auth/google/callback', SocialiteController::class, 'handleGoogleCallback');
+//General API:
+Route::get('getCountries', [GetCountriesController::class, 'getCountries']);
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/insert', [CRUD_OperationController::class, 'creat']);
+// Route::post('/insert', [CRUD_OperationController::class, 'creat']);

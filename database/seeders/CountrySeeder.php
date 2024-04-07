@@ -22,6 +22,9 @@ class CountrySeeder extends Seeder
             $countryNames[] = $faker->unique()->country;
         }
 
+        // Sort the country names alphabetically
+        sort($countryNames);
+
         // Insert the country names into the database
         foreach ($countryNames as $countryName) {
             DB::table('countries')->insert([
