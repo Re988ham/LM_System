@@ -2,10 +2,15 @@
 
 namespace App\Services;
 
+use Illuminate\Http\UploadedFile;
+
 class ImageService
 {
+    /**
+     Service for manage image operations in the system.
+    */
 
-    public static function saveImage($image, string $destinationPath): ?string
+    public static function saveImage(UploadedFile $image, string $destinationPath): ?string
     {
         if ($image->isValid()) {
             $fileName = time() . '_' . $image->getClientOriginalName();
@@ -16,7 +21,3 @@ class ImageService
         return null;
     }
 }
-
-
-//Note:
-//we will build this function because we want to use image many times, and we will use the same system to manage it.
