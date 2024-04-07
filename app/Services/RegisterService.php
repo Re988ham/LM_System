@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use App\Services\SpecializationService;
+
 
 class RegisterService
 {
@@ -19,14 +19,6 @@ class RegisterService
             $data['image'] = ImageService::saveImage($data['image'], $destinationPath);
         }
 
-        $user = User::create($data);
-
-        if (isset($data['specialization_id']) && is_array($data['specialization_id'])) {
-            $specializationIds = $data['specialization_id'];
-            $specializationService = new SpecializationService();
-            $specializationService->chooseSpecialization($user->id, $specializationIds);
-        }
-
-        return $user;
+        return User::create($data);
     }
 }

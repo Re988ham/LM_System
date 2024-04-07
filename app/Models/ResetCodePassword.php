@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserSpecialization extends Model
+class ResetCodePassword extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'specialization_id',
-
+        'email',
+        'code',
+        'created_at',
+        'updated_at',
     ];
-
 }

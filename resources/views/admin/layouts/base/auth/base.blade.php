@@ -6,9 +6,8 @@
     @include('admin.layouts.sidebar.auth.sidebar')
 
     <main class="main-content position-relative border-radius-lg ">
-
         <!-- Navbar -->
-        @include('admin.layouts.navbar.auth.navbar')
+        @include('admin.layouts.navbar.guest.navbar')
         <!-- End Navbar -->
 
         <div class="container-fluid py-4">
@@ -19,14 +18,7 @@
             <!-- End Footer -->
         </div>
     </main>
-    @include('components.fixed-plugin')
 @endsection
 
 
 
-
-
-
-
-
-           

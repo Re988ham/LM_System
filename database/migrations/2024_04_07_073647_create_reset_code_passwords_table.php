@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_specializations', function (Blueprint $table) {
+        Schema::create('reset_code_passwords', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->constrained('users')->cascadeOnDelete();
-            $table->integer('specialization_id')->constrained('specializations')->cascadeOnDelete();
-            $table->timestamps();
+            $table->string('email')->unique();
+            $table->string('code');
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_specializations');
+        Schema::dropIfExists('reset_code_passwords');
     }
 };
