@@ -11,9 +11,12 @@ abstract class BaseRequestFormApi
 {
     protected $_request;
 
-    private $status = true;
+    private $status = false;
 
     private $errors = [];
+
+    protected $validatedData = [];
+
 
     abstract public function rules(): array;
 
@@ -25,16 +28,30 @@ abstract class BaseRequestFormApi
         if (!is_null($request)) {
             $this->_request = $request;
             $rules = $this->rules();
-            $validator = Validator::make($this->_request->all(), $rules);
+            $validator = Validator::make(
+                $this->_request->all(),
+                $rules
+            );
 
             if ($validator->fails()) {
-                $this->status = false;
+                // Set status to true if validation fails
+                $this->status = true;
+                // Assign errors here
                 $this->errors = $validator->errors()->getMessages();
+            } else {
+                $this->validatedData = $validator->validated();
+                //$this->validatedData = $this->request()->all();
             }
         }
     }
 
-    public function isStatus(): bool
+    public function request()
+    {
+        return $this->_request;
+    }
+
+
+    public function hasError(): bool
     {
         return $this->status;
     }
@@ -44,8 +61,13 @@ abstract class BaseRequestFormApi
         return $this->errors;
     }
 
-    public function request()
+    public function has($key): bool
     {
-        return $this->_request;
+        return $this->_request->has($key);
+    }
+
+    public function validatedData()
+    {
+        return $this->validatedData;
     }
 }

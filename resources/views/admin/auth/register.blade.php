@@ -1,9 +1,6 @@
 @extends('admin.layouts.base.guest.base')
 
-
-
 @section('content')
-
     <section class="min-vh-100 mb-8">
         <div class="page-header align-items-start min-vh-50 pt-5 pb-11 mx-3 border-radius-lg"
             style="background-image: url('../assets/img/picture.png');">
@@ -145,6 +142,3 @@
         </div>
     </section>
 @endsection
-
-
-
