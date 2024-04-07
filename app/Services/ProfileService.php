@@ -71,36 +71,4 @@ class ProfileService
 }
 
 
-//For Experience:
-// $user = auth('sanctum')->user();
-// if ($user) {
-//     $destination = $user->image;
-//     if (File::exists($destination)) {
-//         File::delete($destination);
-//     }
-//     // $path = $request['image']->store('images\\users\\', 'public');
-//     $path = $request->image->store('images/users/', 'public');
-//     $result = $user->update(['image' => $path]);
-//     return $result;
-// } else {
-//     return null;
-// }
 
-// public function updateProfileImage(Request $request)
-// {
-//     $user = auth('sanctum')->user();
-//     if ($user) {
-//         $destination = $user->image;
-//         if (File::exists($destination)) {
-//             File::delete($destination);
-//         }
-//         $newdfilename = time() . $request->image->getClientOriginalName();
-//         $destinationPath = public_path('images\\users\\');
-//         $request->image->move($destinationPath, $newdfilename);
-//         $user->image = $destinationPath . $newdfilename;
-//         $result = $user->save();
-//         return $result;
-//     } else {
-//         return null;
-//     }
-// }

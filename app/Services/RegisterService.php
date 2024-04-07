@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterService
 {
-
     // Service of register process:
     public function registerUser(array $data): User
     {
@@ -19,6 +18,13 @@ class RegisterService
             $data['image'] = ImageService::saveImage($data['image'], $destinationPath);
         }
 
-        return User::create($data);
+        $user = User::create($data);
+
+        if (isset($data['specialization_id']) && is_array($data['specialization_id'])) {
+            $specializationService = new SpecializationService();
+            $specializationService->chooseSpecialization($user->id, $data['specialization_id']);
+        }
+
+        return $user;
     }
 }

@@ -2,6 +2,8 @@
 
 //use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\User\GetCountryController;
+use App\Http\Controllers\User\GetSpecializationController;
 use App\Http\Controllers\CRUD_OperationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
@@ -33,11 +35,16 @@ Route::middleware('sanctum')->prefix('profile')->group(function () {
     Route::delete('/', [ProfileController::class, 'deleteImage']);
 });
 
+//General API:
+Route::get('getCountries', [GetCountryController::class, 'getCountries']);
+Route::get('getSpecializations', [GetSpecializationController::class, 'getSpecializations']);
 
-// Route::get('auth/google/callback', SocialiteController::class, 'handleGoogleCallback');
+
+
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/insert', [CRUD_OperationController::class, 'creat']);
+// Route::post('/insert', [CRUD_OperationController::class, 'creat']);

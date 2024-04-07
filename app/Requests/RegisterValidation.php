@@ -12,11 +12,12 @@ class RegisterValidation extends BaseRequestFormApi
             "email" => 'required|email|unique:users',
             "password" => 'required|min:6|max:100',
             "confirm_password" => 'required|same:password',
-            "address" => 'required',
+            "country_id" => 'required',
             "mobile_number" => 'required|numeric|unique:users',
             "gender" => 'required',
             "birth_date" => 'required',
-            "image" => "nullable|image|mimes:jpeg,png,jpg,gif"
+            "image" => "nullable|image|mimes:jpeg,png,jpg,gif",
+            "specialization_id" => "nullable|array|max:5"
 
         ];
     }

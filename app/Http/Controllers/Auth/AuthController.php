@@ -35,7 +35,6 @@ class AuthController extends BaseController
         $user = $this->registerService->registerUser($registerValidation->request()->all());
 
         $message['user'] = $user->toArray();
-        $message['user']['role_id'] = 3;
         $message['token'] = $user->createToken('AppName')->plainTextToken;
 
         return $this->sendResponse($message);
@@ -51,7 +50,7 @@ class AuthController extends BaseController
             if ($user) {
                 $message = "You Logged in Successfully";
                 $token = $user->createToken('AppName')->plainTextToken;
-                return $this->sendResponse(['message' => $message, 'token' => $token]);
+                return $this->sendResponse(['message' => $message, 'token' => $token, 'role_id ' => $user->role_id]);
             } else {
                 $message = "Invalid credentials";
                 return $this->sendError(message: $message);
