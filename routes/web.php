@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\Dashboard\Auth\VerificationController;
+//use App\Http\Controllers\Dashboard\Auth\VerificationController;
 use App\Http\Controllers\DashboardControllers\Auth\WebAuthController;
+use App\Http\Controllers\DashboardControllers\EmailController;
+use App\Http\Controllers\DashboardControllers\HomeController;
 use App\Http\Controllers\GoogleLoginController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardControllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,12 +39,13 @@ Route::controller(WebAuthController::class)->group(function () {
 Route::get('/login/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('/login/google/callback', [GoogleLoginController::class, 'handleGoogleCallback']);
 
-// Define Custom Verification Routes
-Route::controller(VerificationController::class)->group(function() {
-    Route::get('/email/verify', 'notice')->name('verification.notice');
-    Route::get('/email/verify/{id}/{hash}', 'verify')->name('verification.verify');
-    Route::post('/email/resend', 'resend')->name('verification.resend');
-});
+//// Define Custom Verification Routes
+//Route::controller(VerificationController::class)->group(function() {
+//    Route::get('/email/verify', 'notice')->name('verification.notice');
+//    Route::get('/email/verify/{id}/{hash}', 'verify')->name('verification.verify');
+//    Route::post('/email/resend', 'resend')->name('verification.resend');
+//});
 
 
 
+Route::get('/send-email', [EmailController::class, 'index']);
