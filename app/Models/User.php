@@ -24,14 +24,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'country',
-        'specialization',
         'mobile_number',
         'birth_date',
-<<<<<<< HEAD
         'code',
-=======
-        //'code',
->>>>>>> ed1f74a1f0c876f204dcb737ef14993d567efc72
         'gender',
         'image',
         'google_id',
@@ -60,8 +55,5 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
     ];
 
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class);
-    }
+  
 }
