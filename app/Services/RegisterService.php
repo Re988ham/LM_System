@@ -4,9 +4,11 @@ namespace App\Services;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Services\SpecializationService;
 
 class RegisterService
 {
+
     // Service of register process:
     public function registerUser(array $data): User
     {
