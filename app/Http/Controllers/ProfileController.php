@@ -34,6 +34,7 @@ class ProfileController extends BaseController
         } else {
             $user = $this->profileService->updateProfileUser($profileValidation->validatedData());
             if ($user) {
+                $user = $this->profileService->profileUser();
                 return $this->sendResponse($user);
             } else {
                 return $this->sendError("Something went wrong!!");

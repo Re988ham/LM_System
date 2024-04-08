@@ -17,12 +17,12 @@ class ProfileService
             return [
                 'name' => $user->name,
                 'email' => $user->email,
-                'address' => $user->address,
                 'mobile_number' => $user->mobile_number,
                 'gender' => $user->gender,
-                'role' => 'student',
                 'birth_date' => $user->birth_date,
                 'image' => $imagePath, // Return image path or null
+                'country' => $user->country,
+                'interests' => $user->specializations->pluck('name', 'id'),
             ];
         } else {
             return null;
@@ -37,9 +37,9 @@ class ProfileService
             if (isset($data['mobile_number'])) {
                 $user->mobile_number = $data['mobile_number'];
             }
-            if (isset($data['country_id'])) {
-                $user->country_id = $data['country_id'];
-            }
+            // if (isset($data['country_id'])) {
+            //     $user->country_id = $data['country_id'];
+            // }
             // Handle image update
             if (isset($data['image'])) {
                 // Delete previous image if exists
@@ -69,6 +69,3 @@ class ProfileService
         return false;
     }
 }
-
-
-

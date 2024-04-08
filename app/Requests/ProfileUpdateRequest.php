@@ -27,24 +27,25 @@ class ProfileUpdateRequest extends BaseRequestFormApi
             ];
         }
 
-        // Check if the 'address' field is present in the request
-        //if (array_key_exists('address', $this->request()->all())) {
-        if ($this->has('country_id')) {
-            $rules['country_id'] = [
-                'required',
-            ];
-        }
-
-        // Check if the 'image' field is present in the request
-        //if (array_key_exists('image', $this->request()->all())) {
         if ($this->has('image')) {
             $rules['image'] = [
                 'nullable',
                 'image',
                 'mimes:jpeg,png,jpg,gif',
-                //'max:2048',  // Maximum uploaded image size
+            
             ];
         }
+        // Check if the 'address' field is present in the request
+        //if (array_key_exists('address', $this->request()->all())) {
+        // if ($this->has('country_id')) {
+        //     $rules['country_id'] = [
+        //         'required',
+        //     ];
+        // }
+
+        // Check if the 'image' field is present in the request
+        //if (array_key_exists('image', $this->request()->all())) {
+
 
         return $rules;
     }
