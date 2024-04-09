@@ -50,6 +50,7 @@ class WebAuthController extends BaseController
         }
 
         $user = $this->registerService->registerUser($registerValidation->request()->all());
+
         $message['user'] = $user->toArray();
         $message['user']['role_id'] = 3;
         if ($user) {

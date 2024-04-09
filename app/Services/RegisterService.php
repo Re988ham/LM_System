@@ -3,11 +3,14 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Traits\SendEmailTrait;
 use Illuminate\Support\Facades\Hash;
 
 
 class RegisterService
 {
+    use SendEmailTrait;
+
     // Service of register process:
     public function registerUser(array $data): User
     {
@@ -24,7 +27,8 @@ class RegisterService
             $specializationService = new SpecializationService();
             $specializationService->chooseSpecialization($user->id, $data['specialization_id']);
         }
-
+        $useremail=$user['email'];
+        $this->SendGreetingEmail($useremail);
         return $user;
     }
 }

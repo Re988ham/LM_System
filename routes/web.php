@@ -45,7 +45,3 @@ Route::get('/login/google/callback', [GoogleLoginController::class, 'handleGoogl
 //    Route::get('/email/verify/{id}/{hash}', 'verify')->name('verification.verify');
 //    Route::post('/email/resend', 'resend')->name('verification.resend');
 //});
-
-
-
-Route::get('/send-email', [EmailController::class, 'index']);

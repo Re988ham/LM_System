@@ -5,14 +5,16 @@ namespace App\Http\Controllers\DashboardControllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Mail\SendCodeResetPassword;
 use App\Models\ResetCodePassword;
+use App\Traits\SendEmailTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class ForgotPasswordController extends Controller
 {
+    use SendEmailTrait;
     public function __invoke(Request $request): \Illuminate\Foundation\Application|\Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
     {
-        $data = $request->validate([
+        $email = $request->validate([
             'email' => 'required|email|exists:users',
         ]);
 
@@ -26,8 +28,7 @@ class ForgotPasswordController extends Controller
         $codeData = ResetCodePassword::create($data);
 
         // Send email to user
-        Mail::to($request->email)->send(new SendCodeResetPassword($codeData->code));
-
+        $this->SendCodeEmail($email,$codeData);
         return response(['message' => trans('code.sent')], 200);
     }
 }
