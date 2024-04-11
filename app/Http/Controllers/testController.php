@@ -4,17 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Traits\SendNotificationTrait;
-use Illuminate\Support\Facades\Auth;
 
 
 class testController extends Controller
 {
     use SendNotificationTrait;
+
     public function index()
     {
-            $to = auth::user()->getRememberToken();
-            // Rest of your code...
-            $this->PushNotify($to,'ssss','ddddddddd');
-            dd($to);
+        $user = User::find(auth('sanctum')->id());
+        $userToken = $user->getRememberToken();
+
+//        return response()->json([
+//            "token" => $userToken
+//        ]);
+        // Rest of your code...
+        $this->PushNotify($userToken, 'ssss', 'ddddddddd');
     }
 }
