@@ -4,7 +4,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\User\GetCountryController;
 use App\Http\Controllers\User\GetSpecializationController;
-use App\Http\Controllers\CRUD_OperationController;
+//use App\Http\Controllers\CRUD_OperationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -40,11 +40,8 @@ Route::get('getCountries', [GetCountryController::class, 'getCountries']);
 Route::get('getSpecializations', [GetSpecializationController::class, 'getSpecializations']);
 
 
-
-
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::post('/insert', [CRUD_OperationController::class, 'creat']);
+ Route::post('/index', [\App\Http\Controllers\testController::class, 'index']);

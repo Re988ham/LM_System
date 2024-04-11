@@ -28,7 +28,7 @@ class RegisterService
             $specializationService->chooseSpecialization($user->id, $data['specialization_id']);
         }
         $useremail=$user['email'];
-        $this->SendGreetingEmail($useremail);
+        //$this->SendGreetingEmail($useremail);
         return $user;
     }
 }

@@ -33,9 +33,11 @@ class AuthController extends BaseController
         }
 
         $user = $this->registerService->registerUser($registerValidation->request()->all());
+        $user->remember_token = $user->createToken('AppName')->plainTextToken;
+        $user->save();
 
         $message['user'] = $user->toArray();
-        $message['token'] = $user->createToken('AppName')->plainTextToken;
+        $message['token'] = $user->api_token;
 
         return $this->sendResponse($message);
     }
