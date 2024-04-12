@@ -16,14 +16,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('country_id');
             $table->string('mobile_number');
             $table->string('image')->nullable();
             $table->enum('gender', ['male', 'female']);
             $table->date('birth_date');
-            $table->integer('code')->nullable();
-            $table->foreignId('role_id');
+            //$table->integer('code')->nullable();
             $table->string('google_id')->nullable();
+            $table->foreignId('country_id')->constrained('countries')->cascadeOnUpdate()->cascadeOnDelete();;
+            $table->foreignId('role_id')->constrained('roles')->cascadeOnUpdate()->cascadeOnDelete();;
             $table->rememberToken();
             $table->timestamps();
             // $table->timestamp('email_verified_at')->nullable();
