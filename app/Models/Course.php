@@ -12,6 +12,7 @@ class Course extends Model
     protected $fillable =[
         'name',
         'specialization_id',
+
     ];
 
     public function specialization()
