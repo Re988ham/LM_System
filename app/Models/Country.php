@@ -11,7 +11,7 @@ class Country extends Model
 
     public function scopeGetAllCountries($query)
     {
-        return $query->orderBy('name')->chunk(10, function ($countries) {
+        return $query->orderBy('id')->chunk(1000, function ($countries) {
             foreach ($countries as $country) {
                 yield $country;
             }
@@ -24,6 +24,12 @@ class Country extends Model
     protected $fillable = [
         'name'
     ];
+    protected $hidden=[
+        'created_at',
+        'updated_at',
+
+    ];
+
 
     public function users()
     {
