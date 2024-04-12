@@ -9,6 +9,18 @@ class Country extends Model
 {
     use HasFactory;
 
+    public function scopeGetAllCountries($query)
+    {
+        return $query->orderBy('name')->chunk(10, function ($countries) {
+            foreach ($countries as $country) {
+                yield $country;
+            }
+        });
+    }
+
+
+
+
     protected $fillable = [
         'name'
     ];
