@@ -57,7 +57,7 @@ trait SendNotificationTrait
         curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
 
         $response = curl_exec($ch);
-
+        // the resulte
         dd($response);
     }
 }
