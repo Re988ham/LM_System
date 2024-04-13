@@ -13,6 +13,7 @@ class Element extends Model
         'name',
         'path',
         'country_id',
+
     ];
 
     public function country():  BelongsTo

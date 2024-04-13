@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->foreignId('specialization_id')->constrained('specializations')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
+
         });
     }
 

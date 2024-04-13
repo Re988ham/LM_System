@@ -17,6 +17,7 @@ class GetCountryController extends BaseController
         } else {
             return $this->sendError("Something went wrong!!");
         }
+
     }
 
 }
