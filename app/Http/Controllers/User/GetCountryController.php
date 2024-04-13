@@ -10,12 +10,9 @@ class GetCountryController extends BaseController
 
     public function getCountries()
     {
-        $countries = [];
-        Country::getAllCountries()->each(function ($country) use (&$countries) {
-            $countries[] = $country;
-        });
+        $countries = Country::all();
+        if ($countries) {
 
-        if (!empty($countries)) {
             return $this->sendResponse($countries);
         } else {
             return $this->sendError("Something went wrong!!");
