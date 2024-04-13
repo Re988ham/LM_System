@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('path');
             $table->string('image')->nullable();
-            $table->foreignId('course_id')->constrained('Courses')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('country_id')->constrained('Countries')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->integer('course_id')->references('id')->on('courses')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->integer('country_id')->references('id')->on('countries')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
 
         });
