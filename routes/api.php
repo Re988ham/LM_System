@@ -1,7 +1,10 @@
 <?php
 
 //use App\Http\Controllers\Auth\SocialiteController;
-use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\User\Auth\AuthController;
+use App\Http\Controllers\User\Auth\CodeCheckController;
+use App\Http\Controllers\User\Auth\ForgotPasswordController;
+use App\Http\Controllers\User\Auth\ResetPasswordController;
 use App\Http\Controllers\User\GetCountryController;
 use App\Http\Controllers\User\GetSpecializationController;
 //use App\Http\Controllers\CRUD_OperationController;
@@ -39,9 +42,14 @@ Route::middleware('sanctum')->prefix('profile')->group(function () {
 Route::get('getCountries', [GetCountryController::class, 'getCountries']);
 Route::get('getSpecializations', [GetSpecializationController::class, 'getSpecializations']);
 
+//reset password via email
+Route::post('password/email',  ForgotPasswordController::class);
+Route::post('password/code/check', CodeCheckController::class);
+Route::post('password/reset', ResetPasswordController::class);
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+    return $request->user();});
 
- Route::post('/index', [\App\Http\Controllers\testController::class, 'index']);
+//testing controller
+Route::post('/index', [\App\Http\Controllers\testController::class, 'index']);
