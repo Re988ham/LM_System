@@ -12,6 +12,9 @@ class Course extends Model
     protected $fillable =[
         'name',
         'specialization_id',
+        'user_id',
+        'description',
+        'status',
 
     ];
 
@@ -20,8 +23,8 @@ class Course extends Model
         return $this->belongsToMany(Specialization::class);
     }
 
-    public function element()
+    public function lesson()
     {
-        return $this->hasMany(Element::class);
+        return $this->hasMany(Lesson::class);
     }
 }

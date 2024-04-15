@@ -17,4 +17,9 @@ class Specialization extends Model
     {
         return $this->belongsToMany(User::class, 'specialization_of_users');
     }
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
 }

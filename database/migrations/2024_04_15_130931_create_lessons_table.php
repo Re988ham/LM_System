@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('courses', function (Blueprint $table) {
+        Schema::create('lessons', function (Blueprint $table) {
             $table->id();
+            $table->integer('course_id')->constrained('course')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('name');
-            $table->integer('specialization_id')->constrained('specializations')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->integer('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('description');
-            $table->enum('status', ['pending', 'accepted']);
             $table->timestamps();
-
         });
     }
 
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('courses');
+        Schema::dropIfExists('lessons');
     }
 };

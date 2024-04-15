@@ -43,9 +43,11 @@ Route::get('getCountries', [GetCountryController::class, 'getCountries']);
 Route::get('getSpecializations', [GetSpecializationController::class, 'getSpecializations']);
 
 //reset password via email
-Route::post('password/email',  ForgotPasswordController::class);
-Route::post('password/code/check', CodeCheckController::class);
-Route::post('password/reset', ResetPasswordController::class);
+Route::prefix('password')->group(function () {
+    Route::post('/email',  ForgotPasswordController::class);
+    Route::post('/code/check', CodeCheckController::class);
+    Route::post('/reset', ResetPasswordController::class);
+});
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
