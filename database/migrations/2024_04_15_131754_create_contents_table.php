@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-//            $table->integer('lesson_id')->constrained('lessons')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->integer('course_id')->constrained('course')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->integer('course_id')->constrained('courses')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('url');
             $table->enum('type', ['video', 'document']);
             $table->timestamps();
