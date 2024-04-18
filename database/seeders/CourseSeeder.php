@@ -1,5 +1,6 @@
 <?php
 namespace Database\Seeders;
+use App\Models\Country;
 use App\Models\Course;
 use App\Models\Specialization;
 use App\Models\User;
@@ -27,6 +28,7 @@ class CourseSeeder extends Seeder
                 'user_id' => rand(1,10),
                 'description' => substr(fake()->paragraph(3), 0, 100),
                 'status' => $statuses[random_int(0,1)],
+                'country_id'=>rand(1,10),
                 'created_at'=>now(),
                 'updated_at'=>now(),
             ];

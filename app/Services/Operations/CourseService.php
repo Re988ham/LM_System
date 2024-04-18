@@ -3,6 +3,7 @@
 namespace App\Services\Operations;
 
 use App\Models\course;
+use App\Services\ImageService;
 
 class CourseService{
     public function getallcourses(){
@@ -23,6 +24,10 @@ class CourseService{
 
     public function createcourse($data){
 
+        if (isset($data['image'])) {
+            $destinationPath = public_path('images\\courses\\');
+            $data['image'] = ImageService::saveImage($data['image'], $destinationPath);
+        }
         $course =Course::create($data);
         return $course;
     }

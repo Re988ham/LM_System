@@ -36,4 +36,9 @@ class Country extends Model
 
         return $this->hasMany(User::class);
     }
+    public function courses()
+    {
+
+        return $this->hasMany(Course::class);
+    }
 }

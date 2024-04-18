@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->enum('gender', ['male', 'female']);
             $table->date('birth_date');
-            //$table->integer('code')->nullable();
             $table->string('google_id')->nullable();
             $table->integer('country_id')->constrained('countries')->cascadeOnUpdate()->cascadeOnDelete();;
             $table->integer('role_id')->constrained('roles')->cascadeOnUpdate()->cascadeOnDelete();;

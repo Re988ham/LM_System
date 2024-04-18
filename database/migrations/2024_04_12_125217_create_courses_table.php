@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('specialization_id')->constrained('specializations')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->integer('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('description');
+            $table->string('image')->nullable();
             $table->enum('status', ['pending', 'accepted']);
+            $table->integer('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->integer('specialization_id')->constrained('specializations')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->integer('country_id')->constrained('countries')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
 
         });

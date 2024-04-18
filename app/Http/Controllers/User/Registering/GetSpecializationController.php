@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\User\Registering;
 
 use App\Http\Controllers\BaseController;
 use App\Models\Specialization;

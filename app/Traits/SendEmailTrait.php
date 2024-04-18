@@ -14,7 +14,7 @@ trait SendEmailTrait
     {
         $testMailData = [
             'title' => 'EDUspark',
-            'body' => 'hi .your welcome in our app ?',
+            'body' => 'Hi .your welcome in our app ?',
             'img-path'=>"public/assets/app_img/logo_image.png"
         ];
 

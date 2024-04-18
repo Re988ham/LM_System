@@ -1,16 +1,16 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\sendnotify;
 use App\Http\Controllers\User\Auth\AuthController;
 use App\Http\Controllers\User\Auth\CodeCheckController;
 use App\Http\Controllers\User\Auth\ForgotPasswordController;
 use App\Http\Controllers\User\Auth\ResetPasswordController;
-
-use App\Http\Controllers\User\GetCountryController;
-use App\Http\Controllers\User\GetSpecializationController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\HomeWedget\LastTenController;
 use App\Http\Controllers\User\Operation\ContentController;
 use App\Http\Controllers\User\Operation\CourseController;
+use App\Http\Controllers\User\Registering\GetCountryController;
+use App\Http\Controllers\User\Registering\GetSpecializationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -66,7 +66,13 @@ Route::middleware('auth:sanctum')->prefix('content')->group(function () {
     Route::post('/update/{id}', [ContentController::class, 'update']);
     Route::post('/delete/{id}', [ContentController::class, 'delete']);
 });
-
+//Home Wedget API
+Route::middleware('auth:sanctum')->prefix('Home')->group(function () {
+    Route::get('/last_updated_courses', [LastTenController::class, 'GetUpdatedcourses']);
+    Route::get('/trend_Country_courses', [LastTenController::class, 'TrendCoursesInHisCountry']);
+    Route::get('/rand_related_courses', [LastTenController::class, 'RandomRelatedCourses']);
+//    Route::post('/delete/{id}', [LastTenController::class, 'delete']);
+});
 //send notification to mobile
 Route::post('/send_notify', [sendnotify::class, 'sendWebNotification']);
 
