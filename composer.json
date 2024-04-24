@@ -12,7 +12,8 @@
         "laravel/socialite": "^5.12",
         "laravel/tinker": "^2.8",
         "spatie/laravel-permission": "^6.4",
-      "ext-curl": "*"
+      "ext-curl": "*",
+      "ext-http": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

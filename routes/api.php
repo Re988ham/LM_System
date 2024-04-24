@@ -9,6 +9,7 @@ use App\Http\Controllers\User\Auth\ResetPasswordController;
 use App\Http\Controllers\User\HomeWedget\LastTenController;
 use App\Http\Controllers\User\Operation\ContentController;
 use App\Http\Controllers\User\Operation\CourseController;
+use App\Http\Controllers\User\Operation\SearchController;
 use App\Http\Controllers\User\Registering\GetCountryController;
 use App\Http\Controllers\User\Registering\GetSpecializationController;
 use Illuminate\Http\Request;
@@ -71,7 +72,12 @@ Route::middleware('auth:sanctum')->prefix('Home')->group(function () {
     Route::get('/last_updated_courses', [LastTenController::class, 'GetUpdatedcourses']);
     Route::get('/trend_Country_courses', [LastTenController::class, 'TrendCoursesInHisCountry']);
     Route::get('/rand_related_courses', [LastTenController::class, 'RandomRelatedCourses']);
-//    Route::post('/delete/{id}', [LastTenController::class, 'delete']);
+
+});
+//searching in course
+Route::middleware('auth:sanctum')->group(function () {
+Route::get('/search',[SearchController::class,'search']);
+
 });
 //send notification to mobile
 Route::post('/send_notify', [sendnotify::class, 'sendWebNotification']);
