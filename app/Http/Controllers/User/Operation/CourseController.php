@@ -19,9 +19,9 @@ class CourseController extends Controller
         $this->ResponseService = $responseService;
     }
 
-    public function index()
+    public function index($specializeid)
     {
-        $response = $this->courseService->getallcourses();
+        $response = $this->courseService->getallcourses($specializeid);
         return $this->ResponseService->sendResponse($response);
     }
 

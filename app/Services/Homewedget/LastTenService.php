@@ -2,7 +2,10 @@
 
 namespace App\Services\Homewedget;
 
+use App\Models\Content;
+use App\Models\Country;
 use App\Models\Course;
+use App\Models\Specialization;
 use App\Models\User;
 
 
@@ -14,20 +17,33 @@ class LastTenService
     {
         $user = User::find(auth('sanctum')->id());
 
-        if($user)
-        {
+        if ($user) {
             $userSpecializations = $user->specializations;
-            $specializationIds = [];
+            $specializationIds = $userSpecializations->pluck('id');
 
-            foreach ($userSpecializations as $specialization) {
-                $specializationIds[] = $specialization->id;
-            }
             $relatedCourses = Course::whereIn('specialization_id', $specializationIds)
                 ->latest('updated_at')
                 ->take(10)
                 ->get();
-            return $relatedCourses;
+
+            $updatedCourses = [];
+
+            foreach ($relatedCourses as $course) {
+                $country = Country::find($course->country_id);
+                $specialization = Specialization::find($course->specialization_id);
+                $author = User::find($course->user_id);
+
+                $courseData = $course->toArray();
+                $courseData['country_id'] = $country->name;
+                $courseData['specialization_id'] = $specialization->name;
+                $courseData['user_id'] = $author->name;
+
+                $updatedCourses[] = $courseData;
+            }
+
+            return $updatedCourses;
         }
+
         return null;
     }
     /*function for show last 10 updated courses which have same
@@ -52,7 +68,22 @@ class LastTenService
                     ->take(10)
                     ->get();
 
-                return $relatedCourses;
+                $updatedCourses = [];
+
+                foreach ($relatedCourses as $course) {
+                    $country = Country::find($course->country_id);
+                    $specialization = Specialization::find($course->specialization_id);
+                    $author = User::find($course->user_id);
+
+                    $courseData = $course->toArray();
+                    $courseData['country_id'] = $country->name;
+                    $courseData['specialization_id'] = $specialization->name;
+                    $courseData['user_id'] = $author->name;
+
+                    $updatedCourses[] = $courseData;
+                }
+
+                return $updatedCourses;
             }
         }
 
@@ -75,7 +106,24 @@ class LastTenService
                 ->inRandomOrder()
                 ->take(10)
                 ->get();
-            return $relatedCourses;
+
+            $updatedCourses = [];
+
+            foreach ($relatedCourses as $course) {
+                $country = Country::find($course->country_id);
+                $specialization = Specialization::find($course->specialization_id);
+                $author = User::find($course->user_id);
+
+                $courseData = $course->toArray();
+                $courseData['country_id'] = $country->name;
+                $courseData['specialization_id'] = $specialization->name;
+                $courseData['user_id'] = $author->name;
+
+                $updatedCourses[] = $courseData;
+            }
+
+            return $updatedCourses;
+
         }
         return null;
     }

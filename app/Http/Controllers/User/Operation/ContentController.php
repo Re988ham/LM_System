@@ -19,9 +19,9 @@ class ContentController extends Controller
         $this->ResponseService = $responseService;
     }
 
-    public function index()
+    public function index($courseid)
     {
-        $response = $this->contentService->getallcontents();
+        $response = $this->contentService->getallcontents($courseid);
         return $this->ResponseService->sendResponse($response);
     }
 

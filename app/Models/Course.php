@@ -23,7 +23,7 @@ class Course extends Model
         return $this->belongsToMany(Specialization::class);
     }
 
-    public function lesson()
+    public function content()
     {
         return $this->hasMany(Content::class);
     }

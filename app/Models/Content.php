@@ -8,11 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Content extends Model
 {
     use HasFactory;
-    protected $fillable =[
+
+    protected $fillable = [
         'name',
         'course_id',
         'url',
         'type',
 
     ];
+
+
+    public function course()
+    {
+        return $this->belongsToMany(Course::class);
+    }
+
 }

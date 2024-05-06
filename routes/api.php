@@ -7,6 +7,7 @@ use App\Http\Controllers\User\Auth\CodeCheckController;
 use App\Http\Controllers\User\Auth\ForgotPasswordController;
 use App\Http\Controllers\User\Auth\ResetPasswordController;
 use App\Http\Controllers\User\HomeWedget\LastTenController;
+use App\Http\Controllers\User\HomeWedget\TapBarController;
 use App\Http\Controllers\User\Operation\ContentController;
 use App\Http\Controllers\User\Operation\CourseController;
 use App\Http\Controllers\User\Operation\SearchController;
@@ -54,7 +55,7 @@ Route::prefix('password')->group(function () {
 
 //Course API:
 Route::middleware('auth:sanctum')->prefix('course')->group(function () {
-    Route::get('/show', [CourseController::class, 'index']);
+    Route::get('/show/{specializeid}', [CourseController::class, 'index']);
     Route::post('/create', [CourseController::class, 'store']);
     Route::post('/update/{id}', [CourseController::class, 'update']);
     Route::post('/delete/{id}', [CourseController::class, 'delete']);
@@ -62,7 +63,7 @@ Route::middleware('auth:sanctum')->prefix('course')->group(function () {
 
 //content API:
 Route::middleware('auth:sanctum')->prefix('content')->group(function () {
-    Route::get('/show', [ContentController::class, 'index']);
+    Route::get('/show/{courseid}', [ContentController::class, 'index']);
     Route::post('/create', [ContentController::class, 'store']);
     Route::post('/update/{id}', [ContentController::class, 'update']);
     Route::post('/delete/{id}', [ContentController::class, 'delete']);
@@ -72,6 +73,8 @@ Route::middleware('auth:sanctum')->prefix('Home')->group(function () {
     Route::get('/last_updated_courses', [LastTenController::class, 'GetUpdatedcourses']);
     Route::get('/trend_Country_courses', [LastTenController::class, 'TrendCoursesInHisCountry']);
     Route::get('/rand_related_courses', [LastTenController::class, 'RandomRelatedCourses']);
+    Route::get('/Getvideos_tapbar', [TapBarController::class, 'GetVideos']);
+    Route::get('/Getdocuments_tapbar', [TapBarController::class, 'GetDocuments']);
 
 });
 //searching in course

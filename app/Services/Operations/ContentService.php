@@ -6,11 +6,11 @@ use App\Models\content;
 use App\Models\Course;
 
 class ContentService{
-    public function getallcontents(){
+    public function getallcontents($courseid){
 
         $contents = [];
 
-        Course::chunk(10, function($chunk) use(&$contents){
+        Content::where('course_id',$courseid)->chunk(10, function($chunk) use(&$contents){
 
             foreach($chunk as $content){
                 $contents[] = $content;
