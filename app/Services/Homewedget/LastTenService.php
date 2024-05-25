@@ -34,17 +34,21 @@ class LastTenService
                 $author = User::find($course->user_id);
 
                 $courseData = $course->toArray();
-                $courseData['country_id'] = $country->name;
-                $courseData['specialization_id'] = $specialization->name;
-                $courseData['user_id'] = $author->name;
+                $courseData['country_name'] = $country ? $country->name : 'Unknown Country';
+                $courseData['specialization_name'] = $specialization ? $specialization->name : 'Unknown Specialization';
+                $courseData['author_name'] = $author ? $author->name : 'Unknown Author';
 
                 $updatedCourses[] = $courseData;
             }
 
-            return $updatedCourses;
+            return response()->json([
+                'data' => $updatedCourses
+            ]);
         }
 
-        return null;
+        return response()->json([
+            'message' => 'User not found'
+        ], 404);
     }
     /*function for show last 10 updated courses which have same
 
