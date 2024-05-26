@@ -75,6 +75,7 @@ Route::middleware('auth:sanctum')->prefix('Home')->group(function () {
     Route::get('/rand_related_courses', [LastTenController::class, 'RandomRelatedCourses']);
     Route::get('/Getvideos_tapbar', [TapBarController::class, 'GetVideos']);
     Route::get('/Getdocuments_tapbar', [TapBarController::class, 'GetDocuments']);
+    Route::get('/Getcourses_tapbar', [TapBarController::class, 'GetCourses']);
 
 });
 //searching in course

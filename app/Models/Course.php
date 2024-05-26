@@ -15,7 +15,8 @@ class Course extends Model
         'user_id',
         'description',
         'status',
-
+        'country_id',
+        'image',
     ];
 
     public function specialization()

@@ -18,6 +18,17 @@ class TapBarController extends Controller
         $this->responseService=$responseService;
     }
 
+    public function GetCourses(){
+        $courses=$this->GetFromContentService->Getcourses();
+
+        if (!empty($courses)) {
+            return $this->responseService->sendResponse($courses);
+        } else {
+            return $this->responseService->sendResponse("There aren't videos currently!");
+        }
+
+    }
+
     public function GetVideos(){
         $randVideo=$this->GetFromContentService->Getvideos();
 

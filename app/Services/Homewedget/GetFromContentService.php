@@ -19,9 +19,9 @@ class GetFromContentService
             $specializationIds = $userSpecializations->pluck('id');
             $relatedvideos = [];
 
-            $relatedcourses = Course::whereIn('specialization_id', $specializationIds)->get();
+            $relatedvid = Course::whereIn('specialization_id', $specializationIds)->get();
 
-            foreach ($relatedcourses as $course) {
+            foreach ($relatedvid as $course) {
                 $relatedvideos[] = $course->content->filter(function($content) {
                     return $content->type == 'video';
                 });
@@ -41,9 +41,9 @@ class GetFromContentService
             $specializationIds = $userSpecializations->pluck('id');
             $relatedvideos = [];
 
-            $relatedcourses = Course::whereIn('specialization_id', $specializationIds)->get();
+            $relateddoc = Course::whereIn('specialization_id', $specializationIds)->get();
 
-            foreach ($relatedcourses as $course) {
+            foreach ($relateddoc as $course) {
                 $relateddocuments[] = $course->content->filter(function($content) {
                     return $content->type == 'document';
                 });;
@@ -55,4 +55,20 @@ class GetFromContentService
         return null;
     }
 
+    public function Getcourses()
+    {
+        $user = User::find(auth('sanctum')->id());
+
+        if ($user) {
+            $userSpecializations = $user->specializations;
+            $specializationIds = $userSpecializations->pluck('id');
+            $relatedcourses = [];
+
+            $relatedcourses = Course::whereIn('specialization_id', $specializationIds)->get();
+
+            return collect($relatedcourses)->flatten();
+        }
+
+        return null;
+    }
 }

@@ -16,7 +16,7 @@ class CourseValidation extends BaseRequestFormApi
             "description"=>'required|string|min:10|max:2000',
             "status"=>'required',
             "image" => "nullable|image|mimes:jpeg,png,jpg,gif",
-
+            "country_id"=>"required",
         ];
     }
 }

@@ -13,8 +13,9 @@ class ImageService
     public static function saveImage(UploadedFile $image, string $destinationPath): ?string
     {
         if ($image->isValid()) {
+            $destination = public_path($destinationPath);
             $fileName = time() . '_' . $image->getClientOriginalName();
-            $image->move($destinationPath, $fileName);
+            $image->move($destination, $fileName);
             return $destinationPath . $fileName;
         }
 

@@ -36,15 +36,18 @@ class CourseService{
         return Course::find($id)->first();
     }
 
-    public function createcourse($data){
+    public function createcourse($data)
+    {
+        $destinationPath ='/images/courses/';
 
         if (isset($data['image'])) {
-            $destinationPath = public_path('images\\courses\\');
-            $data['image'] = ImageService::saveImage($data['image'], $destinationPath);
+            $data['image'] = ImageService::saveImage($data['image'],$destinationPath );
         }
-        $course =Course::create($data);
+
+        $course = Course::create($data);
         return $course;
     }
+
 
     public function updatecourse($id,$data){
         $course = $this->getcourse($id);

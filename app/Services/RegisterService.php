@@ -17,7 +17,7 @@ class RegisterService
         $data['password'] = Hash::make($data['password']);
 
         if (isset($data['image'])) {
-            $destinationPath = public_path('images\\users\\');
+            $destinationPath ='/images/users/';
             $data['image'] = ImageService::saveImage($data['image'], $destinationPath);
         }
 
