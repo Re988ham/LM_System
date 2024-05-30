@@ -24,7 +24,7 @@ class TapBarController extends Controller
         if (!empty($courses)) {
             return $this->responseService->sendResponse($courses);
         } else {
-            return $this->responseService->sendResponse("There aren't videos currently!");
+            return $this->responseService->sendResponse("There aren't courses currently!");
         }
 
     }

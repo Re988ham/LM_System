@@ -15,12 +15,14 @@ class ContentSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         for ($i = 0; $i < 90; $i++) {
+            $statuses = ['pending', 'accepted'];
 
             $data = [
                 'name' => $faker->word,
                 'course_id' => rand(1, 10),
                 'url' => 'https://example.com/' . Str::random(10),
                 'type' => $faker->randomElement(['video', 'document']),
+                'status' => $statuses[random_int(0,1)],
                 'created_at'=>now(),
                 'updated_at'=>now(),
             ];

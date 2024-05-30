@@ -14,6 +14,7 @@ class Content extends Model
         'course_id',
         'url',
         'type',
+        'status',
 
     ];
 

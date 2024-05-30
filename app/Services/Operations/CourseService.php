@@ -13,18 +13,22 @@ class CourseService{
 
         $courses = [];
 
-        Course::where('specialization_id', $specializeid)->chunk(10, function($chunk) use(&$courses){
+        Course::where('specialization_id', $specializeid)
+           // ->where('status', 'accepted')
+            ->chunk(10, function($chunk) use(&$courses){
 
             foreach($chunk as $course){
                 $countryid =$course->country_id;
                 $specializeid=$course->specialization_id;
                 $autherid=$course->user_id;
                 $country =Country::find($countryid);
-                $specialize=Specialization::find($specializeid);
-                $auther=User::find($autherid);
-                $course['country_id']= $country->name;
-                $course['specialization_id']= $specialize->name;
-                $course['user_id']= $auther->name;
+                $specialization=Specialization::find($specializeid);
+                $author=User::find($autherid);
+                $course['country_id']= $country ? $country->name : 'Unknown Country';
+                $course['specialization_id']= $specialization ? $specialization->name : 'Unknown Specialization';
+                $course['user_id']= $author ? $author->name : 'Unknown Author';
+
+
 
                 $courses[] = $course;
 

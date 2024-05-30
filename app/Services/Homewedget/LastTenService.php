@@ -21,7 +21,8 @@ class LastTenService
             $userSpecializations = $user->specializations;
             $specializationIds = $userSpecializations->pluck('id');
 
-            $relatedCourses = Course::whereIn('specialization_id', $specializationIds)
+            $relatedCourses = Course::whereIn('specialization_id', $specializationIds)//->where('status','accepted')
+                ->where('status', 'accepted')
                 ->latest('updated_at')
                 ->take(10)
                 ->get();
@@ -34,9 +35,9 @@ class LastTenService
                 $author = User::find($course->user_id);
 
                 $courseData = $course->toArray();
-                $courseData['country_id'] = $country->name;
-                $courseData['specialization_id'] = $specialization->name;
-                $courseData['user_id'] = $author->name;
+                $courseData['country_name'] = $country ? $country->name : 'Unknown Country';
+                $courseData['specialization_name'] = $specialization ? $specialization->name : 'Unknown Specialization';
+                $courseData['author_name'] = $author ? $author->name : 'Unknown Author';
 
                 $updatedCourses[] = $courseData;
             }
@@ -63,6 +64,7 @@ class LastTenService
                 $specializationIds = $userSpecializations->pluck('id')->toArray();
 
                 $relatedCourses = Course::whereIn('specialization_id', $specializationIds)
+                    ->where('status', 'accepted')
                     ->where('country_id', $userCountry->id)
                     ->latest('updated_at')
                     ->take(10)
@@ -76,9 +78,9 @@ class LastTenService
                     $author = User::find($course->user_id);
 
                     $courseData = $course->toArray();
-                    $courseData['country_id'] = $country->name;
-                    $courseData['specialization_id'] = $specialization->name;
-                    $courseData['user_id'] = $author->name;
+                    $courseData['country_name'] = $country ? $country->name : 'Unknown Country';
+                    $courseData['specialization_name'] = $specialization ? $specialization->name : 'Unknown Specialization';
+                    $courseData['author_name'] = $author ? $author->name : 'Unknown Author';
 
                     $updatedCourses[] = $courseData;
                 }
@@ -103,6 +105,7 @@ class LastTenService
                 $specializationIds[] = $specialization->id;
             }
             $relatedCourses = Course::whereIn('specialization_id', $specializationIds)
+                ->where('status', 'accepted')
                 ->inRandomOrder()
                 ->take(10)
                 ->get();
@@ -115,9 +118,10 @@ class LastTenService
                 $author = User::find($course->user_id);
 
                 $courseData = $course->toArray();
-                $courseData['country_id'] = $country->name;
-                $courseData['specialization_id'] = $specialization->name;
-                $courseData['user_id'] = $author->name;
+                $courseData['country_name'] = $country ? $country->name : 'Unknown Country';
+                $courseData['specialization_name'] = $specialization ? $specialization->name : 'Unknown Specialization';
+                $courseData['author_name'] = $author ? $author->name : 'Unknown Author';
+
 
                 $updatedCourses[] = $courseData;
             }

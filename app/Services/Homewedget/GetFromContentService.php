@@ -2,7 +2,6 @@
 
 namespace App\Services\Homewedget;
 
-use App\Models\Content;
 use App\Models\Course;
 use App\Models\User;
 
@@ -19,11 +18,11 @@ class GetFromContentService
             $specializationIds = $userSpecializations->pluck('id');
             $relatedvideos = [];
 
-            $relatedvid = Course::whereIn('specialization_id', $specializationIds)->get();
+            $relatedvid = Course::whereIn('specialization_id', $specializationIds)->where('status','accepted')->get();
 
             foreach ($relatedvid as $course) {
                 $relatedvideos[] = $course->content->filter(function($content) {
-                    return $content->type == 'video';
+                    return $content->type == 'video' && $content->status == 'accepted';
                 });
             }
 
@@ -41,11 +40,11 @@ class GetFromContentService
             $specializationIds = $userSpecializations->pluck('id');
             $relatedvideos = [];
 
-            $relateddoc = Course::whereIn('specialization_id', $specializationIds)->get();
+            $relateddoc = Course::whereIn('specialization_id', $specializationIds)->where('status','accepted')->get();
 
             foreach ($relateddoc as $course) {
                 $relateddocuments[] = $course->content->filter(function($content) {
-                    return $content->type == 'document';
+                    return $content->type == 'document' && $content->status == 'accepted';
                 });;
             }
 
@@ -64,7 +63,7 @@ class GetFromContentService
             $specializationIds = $userSpecializations->pluck('id');
             $relatedcourses = [];
 
-            $relatedcourses = Course::whereIn('specialization_id', $specializationIds)->get();
+            $relatedcourses = Course::whereIn('specialization_id', $specializationIds)->where('status','accepted')->get();
 
             return collect($relatedcourses)->flatten();
         }
