@@ -7,6 +7,7 @@ use App\Models\course;
 use App\Models\Specialization;
 use App\Models\User;
 use App\Services\ImageService;
+use Illuminate\Support\Facades\Auth;
 
 class CourseService{
     public function getallcourses($specializeid){
@@ -43,11 +44,12 @@ class CourseService{
     public function createcourse($data)
     {
         $destinationPath ='/images/courses/';
+       $userid = auth::user()->id();
 
         if (isset($data['image'])) {
             $data['image'] = ImageService::saveImage($data['image'],$destinationPath );
         }
-
+        $data['user_id']=$userid;
         $course = Course::create($data);
         return $course;
     }
