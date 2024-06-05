@@ -12,6 +12,7 @@ class ContentService{
 
         Content::where('course_id',$courseid)
             ->where('status','accepted')
+
             ->chunk(10, function($chunk) use(&$contents){
 
             foreach($chunk as $content){

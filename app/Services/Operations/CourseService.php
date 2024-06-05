@@ -11,11 +11,12 @@ use Illuminate\Support\Facades\Auth;
 
 class CourseService{
     public function getallcourses($specializeid){
-
+        $autherid = Auth::user()->id;
         $courses = [];
 
         Course::where('specialization_id', $specializeid)
-           // ->where('status', 'accepted')
+            ->where('status', 'accepted')
+            ->where('user_id',$autherid)
             ->chunk(10, function($chunk) use(&$courses){
 
             foreach($chunk as $course){
@@ -44,7 +45,7 @@ class CourseService{
     public function createcourse($data)
     {
         $destinationPath ='/images/courses/';
-       $userid = auth::user()->id();
+       $userid = Auth::user()->id;
 
         if (isset($data['image'])) {
             $data['image'] = ImageService::saveImage($data['image'],$destinationPath );

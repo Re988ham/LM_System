@@ -13,6 +13,7 @@ use App\Http\Controllers\User\Operation\CourseController;
 use App\Http\Controllers\User\Operation\SearchController;
 use App\Http\Controllers\User\Registering\GetCountryController;
 use App\Http\Controllers\User\Registering\GetSpecializationController;
+use App\Http\Controllers\User\Specializationwedget\SpecializationwedgetController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,7 +43,7 @@ Route::middleware('sanctum')->prefix('profile')->group(function () {
     Route::delete('/', [ProfileController::class, 'deleteImage']);
 });
 
-//General API:
+//General APIs:
 Route::get('getCountries', [GetCountryController::class, 'getCountries']);
 Route::get('getSpecializations', [GetSpecializationController::class, 'getSpecializations']);
 
@@ -53,22 +54,22 @@ Route::prefix('password')->group(function () {
     Route::post('/reset', ResetPasswordController::class);
 });
 
-//Course API:
-Route::middleware('auth:sanctum')->prefix('course')->group(function () {
-    Route::get('/show/{specializeid}', [CourseController::class, 'index']);
-    Route::post('/create', [CourseController::class, 'store']);
-    Route::post('/update/{id}', [CourseController::class, 'update']);
-    Route::post('/delete/{id}', [CourseController::class, 'delete']);
+//Course mangments  APIs:
+Route::middleware('auth:sanctum')->prefix('course')->controller(CourseController::class)->group(function () {
+    Route::get('/show/{specializeid}', 'index');
+    Route::post('/create', 'store');
+    Route::post('/update/{id}', 'update');
+    Route::post('/delete/{id}', 'delete');
 });
 
-//content API:
-Route::middleware('auth:sanctum')->prefix('content')->group(function () {
-    Route::get('/show/{courseid}', [ContentController::class, 'index']);
-    Route::post('/create', [ContentController::class, 'store']);
-    Route::post('/update/{id}', [ContentController::class, 'update']);
-    Route::post('/delete/{id}', [ContentController::class, 'delete']);
+//content mangments APIs:
+Route::middleware('auth:sanctum')->prefix('content')->controller(ContentController::class)->group(function () {
+    Route::get('/show/{courseid}', 'index');
+    Route::post('/create', 'store');
+    Route::post('/update/{id}', 'update');
+    Route::post('/delete/{id}', 'delete');
 });
-//Home Wedget API
+//Home Wedget APIs
 Route::middleware('auth:sanctum')->prefix('Home')->group(function () {
     Route::get('/last_updated_courses', [LastTenController::class, 'GetUpdatedcourses']);
     Route::get('/trend_Country_courses', [LastTenController::class, 'TrendCoursesInHisCountry']);
@@ -78,6 +79,13 @@ Route::middleware('auth:sanctum')->prefix('Home')->group(function () {
     Route::get('/Getcourses_tapbar', [TapBarController::class, 'GetCourses']);
 
 });
+//Specialization (category) Wedget APIs
+Route::middleware('auth:sanctum')->controller(SpecializationwedgetController::class)->prefix('Specialization')->group(function () {
+    Route::get('/getspecializations', 'getspecialization');
+    Route::get('/getcourses/{id}', 'getcoursesbyspeclizationid');
+    Route::get('/getcontent/{id}', 'getcontentsbycourseid');
+});
+
 //searching in course
 Route::middleware('auth:sanctum')->group(function () {
 Route::get('/search',[SearchController::class,'search']);
