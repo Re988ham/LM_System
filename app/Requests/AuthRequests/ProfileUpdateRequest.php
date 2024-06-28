@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Requests;
+namespace App\Requests\AuthRequests;
 
+use App\Requests\BaseRequestFormApi;
 use Illuminate\Validation\Rule;
 
 class ProfileUpdateRequest extends BaseRequestFormApi
@@ -32,7 +33,7 @@ class ProfileUpdateRequest extends BaseRequestFormApi
                 'nullable',
                 'image',
                 'mimes:jpeg,png,jpg,gif',
-            
+
             ];
         }
         // Check if the 'address' field is present in the request

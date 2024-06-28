@@ -6,7 +6,7 @@ use App\Models\Country;
 use App\Models\course;
 use App\Models\Specialization;
 use App\Models\User;
-use App\Services\ImageService;
+use App\Services\GeneralServices\ImageService;
 use Illuminate\Support\Facades\Auth;
 
 class CourseService{

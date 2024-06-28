@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Requests;
+namespace App\Requests\AuthRequests;
+
+use App\Requests\BaseRequestFormApi;
 
 class LoginValidation extends BaseRequestFormApi
 {

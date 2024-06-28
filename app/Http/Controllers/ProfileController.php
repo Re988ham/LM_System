@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Requests\ProfileUpdateRequest;
-use App\Services\ProfileService;
+use App\Requests\AuthRequests\ProfileUpdateRequest;
+use App\Services\AuthServices\ProfileService;
 
 class ProfileController extends BaseController
 {

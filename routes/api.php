@@ -12,6 +12,7 @@ use App\Http\Controllers\User\HomeWedget\TapBarController;
 use App\Http\Controllers\User\Operation\ContentController;
 use App\Http\Controllers\User\Operation\CourseController;
 use App\Http\Controllers\User\Operation\SearchController;
+use App\Http\Controllers\User\QuizWedget\QuizeController;
 use App\Http\Controllers\User\Registering\GetCountryController;
 use App\Http\Controllers\User\Registering\GetSpecializationController;
 use App\Http\Controllers\User\Specializationwedget\SpecializationwedgetController;
@@ -98,6 +99,13 @@ Route::middleware('auth:sanctum')->prefix('live')->controller(LiveController::cl
 Route::middleware('auth:sanctum')->prefix('chat')->controller(ChattingController::class)->group(function (){
     Route::get('/getusers','show');
 });
+
+//Quize Wedget APIs:
+Route::middleware('auth:sanctum')->prefix('quize')->controller(QuizeController::class)->group(function (){
+    Route::post('/createquize','create');
+    Route::get('/getquizes','getquizes');
+    Route::get('/getquestions/{id}','getQuestions');
+    });
 
 //searching in course
 Route::middleware('auth:sanctum')->group(function () {

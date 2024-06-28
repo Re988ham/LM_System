@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\GeneralServices;
 
-use App\Models\User;
 use App\Models\SpecializationOfUser;
 
-use Illuminate\Support\Facades\Hash;class SpecializationService
+class SpecializationService
 {
     // Service of register process:
     public function chooseSpecialization($userId, array $specializationIds)

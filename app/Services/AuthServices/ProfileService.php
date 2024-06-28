@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\AuthServices;
 
 use App\Models\User;
+use App\Services\GeneralServices\ImageService;
 use Illuminate\Support\Facades\File;
 
 class ProfileService

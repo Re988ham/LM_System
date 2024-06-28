@@ -17,6 +17,7 @@ class LiveService
       $data['user_id'] = Auth()->user()->id;
       $live =Live::create($data);
 
+
       return $live;
     }
 

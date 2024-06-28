@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User\ChattingWedget;
 
 use App\Http\Controllers\Controller;
 use App\Services\ChattingWedget\ChattingService;
-use App\Services\ResponseService;
+use App\Services\GeneralServices\ResponseService;
 
 class ChattingController extends Controller
 {

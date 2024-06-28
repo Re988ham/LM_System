@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User\Specializationwedget;
 
 use App\Http\Controllers\Controller;
-use App\Services\ResponseService;
+use App\Services\GeneralServices\ResponseService;
 use App\Services\Specializationwedget\SpecializationwedgetService;
 use Illuminate\Support\Facades\Log;
 

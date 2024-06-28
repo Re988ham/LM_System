@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\User\Auth;
 
 use App\Http\Controllers\BaseController;
-use App\Requests\LoginValidation;
-use App\Requests\RegisterValidation;
-use App\Services\LoginService;
-use App\Services\LogoutService;
-use App\Services\RegisterService;
+use App\Requests\AuthRequests\LoginValidation;
+use App\Requests\AuthRequests\RegisterValidation;
+use App\Services\AuthServices\LoginService;
+use App\Services\AuthServices\LogoutService;
+use App\Services\AuthServices\RegisterService;
 use Illuminate\Http\Request;
 
 

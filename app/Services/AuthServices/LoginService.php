@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\AuthServices;
 
 use App\Models\User;
-use App\Http\Controllers\BaseController;
 use Illuminate\Support\Facades\Hash;
 
 class LoginService

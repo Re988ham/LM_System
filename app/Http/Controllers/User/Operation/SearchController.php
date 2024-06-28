@@ -4,9 +4,8 @@ namespace App\Http\Controllers\User\Operation;
 
 use App\Http\Controllers\Controller;
 use App\Requests\Operations\SearchValidation;
-use App\Services\ResponseService;
-use App\Services\SearchService;
-use Illuminate\Http\Request;
+use App\Services\GeneralServices\ResponseService;
+use App\Services\GeneralServices\SearchService;
 
 class SearchController extends Controller
 {

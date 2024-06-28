@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\GeneralServices;
 
 use App\Models\Course;
-
-use App\Models\Search;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;

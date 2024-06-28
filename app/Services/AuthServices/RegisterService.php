@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\AuthServices;
 
 use App\Models\User;
+use App\Services\GeneralServices\ImageService;
+use App\Services\GeneralServices\SpecializationService;
 use App\Traits\SendEmailTrait;
 use Illuminate\Support\Facades\Hash;
 
