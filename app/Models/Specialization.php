@@ -22,4 +22,9 @@ class Specialization extends Model
     {
         return $this->hasMany(Course::class);
     }
+
+    public function live()
+    {
+        return $this->hasMany(Live::class);
+    }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\User\Auth\AuthController;
 use App\Http\Controllers\User\Auth\CodeCheckController;
 use App\Http\Controllers\User\Auth\ForgotPasswordController;
 use App\Http\Controllers\User\Auth\ResetPasswordController;
+use App\Http\Controllers\User\ChattingWedget\ChattingController;
 use App\Http\Controllers\User\HomeWedget\LastTenController;
 use App\Http\Controllers\User\HomeWedget\TapBarController;
 use App\Http\Controllers\User\Operation\ContentController;
@@ -14,8 +15,10 @@ use App\Http\Controllers\User\Operation\SearchController;
 use App\Http\Controllers\User\Registering\GetCountryController;
 use App\Http\Controllers\User\Registering\GetSpecializationController;
 use App\Http\Controllers\User\Specializationwedget\SpecializationwedgetController;
+use App\Http\Controllers\User\LiveWedget\LiveController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +50,7 @@ Route::middleware('sanctum')->prefix('profile')->group(function () {
 Route::get('getCountries', [GetCountryController::class, 'getCountries']);
 Route::get('getSpecializations', [GetSpecializationController::class, 'getSpecializations']);
 
-//reset password via email
+//reset password via email:
 Route::prefix('password')->group(function () {
     Route::post('/email',  ForgotPasswordController::class);
     Route::post('/code/check', CodeCheckController::class);
@@ -79,11 +82,21 @@ Route::middleware('auth:sanctum')->prefix('Home')->group(function () {
     Route::get('/Getcourses_tapbar', [TapBarController::class, 'GetCourses']);
 
 });
-//Specialization (category) Wedget APIs
+//Specialization (category) Wedget APIs:
 Route::middleware('auth:sanctum')->controller(SpecializationwedgetController::class)->prefix('Specialization')->group(function () {
     Route::get('/getspecializations', 'getspecialization');
     Route::get('/getcourses/{id}', 'getcoursesbyspeclizationid');
     Route::get('/getcontent/{id}', 'getcontentsbycourseid');
+});
+//Lives Wedget APIs:
+Route::middleware('auth:sanctum')->prefix('live')->controller(LiveController::class)->group(function (){
+    Route::get('/getlives','show');
+    Route::post('/createlive','create');
+});
+
+//Chatting Wedget APIs:
+Route::middleware('auth:sanctum')->prefix('chat')->controller(ChattingController::class)->group(function (){
+    Route::get('/getusers','show');
 });
 
 //searching in course

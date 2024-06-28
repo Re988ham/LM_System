@@ -5,7 +5,7 @@ namespace App\Services\Homewedget;
 use App\Models\Course;
 use App\Models\User;
 
-        //give me the class diagrame?
+
     // Service of last 10 objects in Home widget (The results Change depending on the user ):
 class GetFromContentService
 {
