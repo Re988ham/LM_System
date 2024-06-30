@@ -38,25 +38,25 @@ class ProfileService
             if (isset($data['mobile_number'])) {
                 $user->mobile_number = $data['mobile_number'];
             }
-            // if (isset($data['country_id'])) {
-            //     $user->country_id = $data['country_id'];
-            // }
+
             // Handle image update
             if (isset($data['image'])) {
                 // Delete previous image if exists
                 if ($user->image) {
                     $this->deleteProfileImage($user);
                 }
-                // Upload and set the new image
-                $newdestinationpath = public_path("images\\users\\");
+                $newdestinationpath ='/images/users/';
+
                 $user->image = ImageService::saveImage($data['image'], $newdestinationpath);
             }
+
             $user->save();
             return $user;
         } else {
             return null;
         }
     }
+
 
     // Service of delete profile image:
     public function deleteProfileImage($user): bool
