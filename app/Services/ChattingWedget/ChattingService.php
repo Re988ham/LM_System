@@ -15,7 +15,13 @@ class ChattingService
     */
 
     public function getusers(){
-        return User::get();
+        $users = User::get();
+        foreach($users as $user){
+
+            $user['specializations'] = $user->specializations;
+
+        }
+        return $users;
     }
 
 }

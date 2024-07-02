@@ -5,6 +5,8 @@ namespace App\Services\LivesWedget;
 
 
 use App\Models\Live;
+use App\Models\Specialization;
+use App\Models\User;
 use Carbon\Carbon;
 
 class LiveService
@@ -22,9 +24,15 @@ class LiveService
     }
 
     public function getlives(){
-        return Live::where('date_start','>=',carbon::now()->toDateString())
-             ->where('time_start','>=',carbon::now()->toDateString())
-             ->get();
+        $lives = Live::where('date_start','>=',carbon::now()->toDateString())
+            ->where('time_start','>=',carbon::now()->toDateString())
+            ->get();
+        foreach ($lives as $live){
+            $live['user_id']= User::find($live->user_id)->name;
+            $live['specialization_id']= Specialization::find($live->specialization_id)->name;
+
+        }
+        return $lives;
     }
 
 }
