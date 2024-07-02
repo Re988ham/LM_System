@@ -28,8 +28,8 @@ class LiveService
             ->where('time_start','>=',carbon::now()->toDateString())
             ->get();
         foreach ($lives as $live){
-            $live['user_id']= User::find($live->user_id)->name;
-            $live['specialization_id']= Specialization::find($live->specialization_id)->name;
+            $live['user']= User::find($live->user_id)->name;
+            $live['specialization']= Specialization::find($live->specialization_id)->name;
 
         }
         return $lives;
