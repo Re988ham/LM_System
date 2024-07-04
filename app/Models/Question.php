@@ -14,12 +14,13 @@ class Question extends Model
         'quize_id'
     ];
 
-    public function answer(){
-
+    public function answers(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
         return $this->hasMany(Answer::class);
     }
 
-    public function quize(){
+    public function quize(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
 
         return $this->belongsToMany(Quize::class);
     }

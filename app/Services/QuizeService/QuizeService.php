@@ -54,20 +54,15 @@ class QuizeService
         return Quize::all();
     }
 
-    public function getQuestions($id)
+    public function getQuestions($quizId)
     {
-        return Question::where('quize_id',$id)->get();
+        $questions = Question::where('quize_id', $quizId)
+                ->with('answers')
+                ->get();
+
+            return response()->json(['questions' => $questions]);
+
     }
-//    public function createQuestions($data, $quiz)
-//    {
-//        $questions = [];
-//        if ($quiz) {
-//            $quizId = $quiz->id;
-//            foreach ($data['questions'] as $ques) {
-//                $ques['quize_id'] = $quizId;
-//                $questions[] = Question::create($ques);
-//            }
-//        }
-//        return $questions;
-//    }
+
+
 }

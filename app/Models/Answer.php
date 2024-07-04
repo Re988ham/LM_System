@@ -14,4 +14,9 @@ class Answer extends Model
         'is_true',
         'question_id'
     ];
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
+    }
 }
