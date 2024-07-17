@@ -3,6 +3,7 @@
 namespace App\Services\QuizService;
 
 use App\Models\Answer;
+use App\Models\Country;
 use App\Models\Course;
 use App\Models\Question;
 use App\Models\Quiz;
@@ -112,4 +113,21 @@ class QuizService
 
         return $response;
     }
+    public function get_my_courses()
+    {
+        $autherid = Auth::user()->id;
+        $courses = [];
+
+        Course::select('id','name')
+            ->where('status', 'accepted')
+            ->where('user_id', $autherid)
+            ->chunk(10, function($chunk) use(&$courses) {
+                foreach($chunk as $course) {
+                    $courses[] = $course;
+                }
+            });
+
+        return $courses;
+    }
+
 }

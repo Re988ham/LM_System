@@ -3,15 +3,10 @@
 namespace App\Http\Controllers\User\QuizWedget;
 
 use App\Http\Controllers\Controller;
-use App\Models\Course;
-use App\Models\Quiz;
-use App\Models\Specialization;
-use App\Models\User;
 use App\Requests\QuizWedget\QuizValidation;
 use App\Services\GeneralServices\ResponseService;
 use App\Services\QuizService\QuizService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class QuizController extends Controller
 {
@@ -69,4 +64,16 @@ class QuizController extends Controller
             return $this->responseService->sendError("Something went wrong!!");
         }
     }
+
+    public function getmycourses()
+    {
+        $response = $this->QuizService->get_my_courses();
+
+        if (!empty($response)) {
+            return $this->responseService->sendResponse($response);
+        } else {
+            return $this->responseService->sendError("No courses found.");
+        }
+    }
+
 }

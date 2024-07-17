@@ -108,6 +108,7 @@ Route::middleware('auth:sanctum')->prefix('Quiz')->controller(QuizController::cl
     Route::get('/getquizzes','getquizzes');
     Route::get('/getquestions/{id}','getQuestions');
     Route::post('/certification','sendcertification');
+    Route::get('/getmycourses','getmycourses');
 
 });
 
