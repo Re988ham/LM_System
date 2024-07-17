@@ -12,7 +12,7 @@ use App\Http\Controllers\User\HomeWedget\TapBarController;
 use App\Http\Controllers\User\Operation\ContentController;
 use App\Http\Controllers\User\Operation\CourseController;
 use App\Http\Controllers\User\Operation\SearchController;
-use App\Http\Controllers\User\QuizWedget\QuizeController;
+use App\Http\Controllers\User\QuizWedget\QuizController;
 use App\Http\Controllers\User\Registering\GetCountryController;
 use App\Http\Controllers\User\Registering\GetSpecializationController;
 use App\Http\Controllers\User\Specializationwedget\SpecializationwedgetController;
@@ -64,6 +64,8 @@ Route::middleware('auth:sanctum')->prefix('course')->controller(CourseController
     Route::post('/create', 'store');
     Route::post('/update/{id}', 'update');
     Route::post('/delete/{id}', 'delete');
+    Route::post('/enrollment/{course_id}', 'enrollment');
+
 });
 
 //content mangments APIs:
@@ -100,12 +102,14 @@ Route::middleware('auth:sanctum')->prefix('chat')->controller(ChattingController
     Route::get('/getusers','show');
 });
 
-//Quize Wedget APIs:
-Route::middleware('auth:sanctum')->prefix('quize')->controller(QuizeController::class)->group(function (){
-    Route::post('/createquize','create');
-    Route::get('/getquizes','getquizes');
+//Quiz Wedget APIs:
+Route::middleware('auth:sanctum')->prefix('Quiz')->controller(QuizController::class)->group(function (){
+    Route::post('/createquiz','create');
+    Route::get('/getquizzes','getquizzes');
     Route::get('/getquestions/{id}','getQuestions');
-    });
+    Route::post('/certification','sendcertification');
+
+});
 
 //searching in course
 Route::middleware('auth:sanctum')->group(function () {

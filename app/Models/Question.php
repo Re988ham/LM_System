@@ -10,8 +10,8 @@ class Question extends Model
     use HasFactory;
 
     protected $fillable =[
-        'body',
-        'quize_id'
+        'text',
+        'quiz_id'
     ];
 
     public function answers(): \Illuminate\Database\Eloquent\Relations\HasMany
@@ -19,9 +19,9 @@ class Question extends Model
         return $this->hasMany(Answer::class);
     }
 
-    public function quize(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function quiz(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
 
-        return $this->belongsToMany(Quize::class);
+        return $this->belongsToMany(Quiz::class);
     }
 }

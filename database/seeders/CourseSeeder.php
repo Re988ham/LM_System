@@ -23,7 +23,7 @@ class CourseSeeder extends Seeder
         for($i = 0; $i < 90; $i++) {
             $statuses = ['pending', 'accepted'];
             $courses[] = [
-                'name' => fake()->name,
+                'name' => fake()->company,
                 'specialization_id' => rand(1,10),
                 'user_id' => rand(1,10),
                 'description' => substr(fake()->paragraph(3), 0, 100),

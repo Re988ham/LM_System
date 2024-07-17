@@ -4,18 +4,21 @@ namespace App\Http\Controllers\User\Operation;
 
 use App\Http\Controllers\Controller;
 use App\Requests\Operations\CourseValidation;
+use App\Services\GeneralServices\EnrollmentService;
 use App\Services\GeneralServices\ResponseService;
 use App\Services\Operations\CourseService;
 
 class CourseController extends Controller
 {
+    public EnrollmentService $enrollmentService;
     public ResponseService $responseService;
     public CourseService $courseService;
 
-    public function __construct(ResponseService $responseService, CourseService $courseService)
+    public function __construct(ResponseService $responseService, CourseService $courseService,EnrollmentService $enrollmentService)
     {
         $this->courseService = $courseService;
         $this->ResponseService = $responseService;
+        $this->enrollmentService = $enrollmentService;
     }
 
     public function index($specializeid)
@@ -63,4 +66,13 @@ class CourseController extends Controller
         }
     }
 
+    public function enrollment($course_id)
+    {
+        $response = $this->enrollmentService->store_Enrollment($course_id);
+        if (!empty($response)) {
+            return $this->ResponseService->sendResponse($response);
+        } else {
+            return $this->ResponseService->sendError("Something went wrong!!");
+        }
+    }
 }

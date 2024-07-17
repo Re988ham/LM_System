@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Requests\QuizeWedget;
+namespace App\Requests\QuizWedget;
 
 use App\Requests\BaseRequestFormApi;
 
-class QuizeValidation extends BaseRequestFormApi
+class QuizValidation extends BaseRequestFormApi
 {
     // Determine the rules for the live process API:
     public function rules() : array
     {
         return [
-            "name" => 'required|string|max:255',
+            "title" => 'required|string|max:255',
             "question_number" => 'required|integer',
-            "specialization_id" => 'required|integer',
+            "course_id" => 'required|integer',
            // "questions"=>'required|array',
 
         ];
