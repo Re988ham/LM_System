@@ -6,6 +6,7 @@ use App\Http\Controllers\User\Auth\AuthController;
 use App\Http\Controllers\User\Auth\CodeCheckController;
 use App\Http\Controllers\User\Auth\ForgotPasswordController;
 use App\Http\Controllers\User\Auth\ResetPasswordController;
+use App\Http\Controllers\User\BlogWedget\BlogController;
 use App\Http\Controllers\User\ChattingWedget\ChattingController;
 use App\Http\Controllers\User\HomeWedget\LastTenController;
 use App\Http\Controllers\User\HomeWedget\TapBarController;
@@ -110,6 +111,15 @@ Route::middleware('auth:sanctum')->prefix('Quiz')->controller(QuizController::cl
     Route::post('/certification','sendcertification');
     Route::get('/getmycourses','getmycourses');
 
+});
+
+//Blog Wedget APIs:
+Route::middleware('auth:sanctum')->prefix('blog')->controller(BlogController::class)->group(function () {
+    Route::post('/createpost', 'createpost');
+    Route::post('/createcomment', 'createcomment');
+    Route::post('/createlike', 'createlike');
+    Route::get('/getposts', 'getposts');
+    Route::get('/getcomments/{post_id}', 'getcomments');
 });
 
 //searching in course
