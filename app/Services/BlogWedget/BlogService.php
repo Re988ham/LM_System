@@ -3,6 +3,7 @@
 namespace App\Services\BlogWedget;
 
 use App\Models\Comment;
+use App\Models\Country;
 use App\Models\Like;
 use App\Models\Post;
 use App\Models\User;
@@ -47,7 +48,9 @@ class BlogService{
         $posts= Post::all();
         foreach ($posts as $post) {
             $user = User::find($post->user_id);
+            $country = Country::find($user->country_id);
             $post['auther name'] = $user->name;
+            $post['auther country'] = $country->name;
             $post['auther image'] = $user->image;
         }
         return $posts;
