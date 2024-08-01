@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Quiz extends Model
 {
     use HasFactory;
-    protected $fillable =[
+
+    protected $table = 'quizzes';
+
+    protected $fillable = [
         'title',
         'question_number',
         'course_id',
@@ -16,14 +19,15 @@ class Quiz extends Model
     ];
 
 
-    public function questions(){
-
+    public function questions()
+    {
         return $this->hasMany(Question::class);
     }
 
-    public function courses(){
-
-        return $this->belongsToMany(Course::class);
+    // TODO: change to course
+    public function courses()
+    {
+        return $this->belongsTo(Course::class);
     }
 
     public function user()

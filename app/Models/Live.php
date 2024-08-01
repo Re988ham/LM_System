@@ -9,7 +9,7 @@ class Live extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
+    protected $fillable = [
         'title',
         'time_start',
         'date_start',
@@ -18,12 +18,14 @@ class Live extends Model
         'specialization_id'
     ];
 
-    public function users(){
+    public function users()
+    {
 
         return $this->belongsToMany(User::class);
     }
 
-    public function specialization(){
+    public function specialization()
+    {
 
         return $this->belongsToMany(Specialization::class);
     }

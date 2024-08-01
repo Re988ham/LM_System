@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-//use App\Enums\EnrollmentStatus;
+use App\Enums\EnrollmentStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,9 +19,9 @@ class Enrollment extends Model
         'grade',
     ];
 
-//    protected $casts = [
-//        'status' => EnrollmentStatus::class,
-//    ];
+    protected $casts = [
+        'status' => EnrollmentStatus::class,
+    ];
 
     public function user() {
         return $this->belongsTo(User::class);
