@@ -42,8 +42,7 @@ class Course extends Model
         return $this->belongsTo(User::class);
     }
 
-    // TODO: change to contents
-    public function content()
+    public function contents()
     {
         return $this->hasMany(Content::class);
     }

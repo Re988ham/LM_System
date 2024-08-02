@@ -14,28 +14,19 @@ class CourseSeeder extends Seeder
     {
         DB::table('courses')->truncate();
 
-        $courses = [
-            // 10 courses defined
-
-        ];
-
         // Use a loop to generate 90 more courses
-        for($i = 0; $i < 90; $i++) {
+        for ($i = 0; $i < 90; $i++) {
             $statuses = ['pending', 'accepted'];
-            $courses[] = [
-                'name' => fake()->company,
-                'specialization_id' => rand(1,10),
-                'user_id' => rand(1,10),
+            $course = [
+                'name' => fake()->name,
+                'specialization_id' => rand(1, 10),
+                'user_id' => rand(1, 10),
                 'description' => substr(fake()->paragraph(3), 0, 100),
-                'status' => $statuses[random_int(0,1)],
-                'country_id'=>rand(1,10),
-                'created_at'=>now(),
-                'updated_at'=>now(),
+                'status' => $statuses[random_int(0, 1)],
+                'country_id' => rand(1, 10),
+                'created_at' => now(),
+                'updated_at' => now(),
             ];
-
-        }
-
-        foreach($courses as $course) {
             DB::table('courses')->insert($course);
         }
     }
