@@ -10,12 +10,11 @@ use App\Services\GeneralServices\ImageService;
 use Illuminate\Support\Facades\Auth;
 
 class CourseService{
-    public function getallcourses($specializeid){
+    public function getallcourses(){
         $autherid = Auth::user()->id;
         $courses = [];
 
-        Course::where('specialization_id', $specializeid)
-            ->where('status', 'accepted')
+        Course::where('status', 'accepted')
             ->where('user_id',$autherid)
             ->chunk(10, function($chunk) use(&$courses){
 
@@ -57,7 +56,7 @@ class CourseService{
 
 
     public function updatecourse($id,$data){
-        $course = $this->getcourse($id);
+        $course = Course::where('id', $id)->first();
         $course->update($data);
         $course->save();
 

@@ -33,7 +33,7 @@ class ContentService{
     }
 
     public function updatecontent($id,$data){
-        $content = $this->getcontent($id);
+        $content = Content::where('id', $id)->first();
         $content->update($data);
         $content->save();
 

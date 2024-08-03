@@ -48,6 +48,7 @@ class SpecializationwedgetController extends Controller
         }
     }
 
+
     public function getcontentsbycourseid($id)
     {
         try {
