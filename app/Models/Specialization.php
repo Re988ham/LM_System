@@ -9,8 +9,10 @@ class Specialization extends Model
 {
     use HasFactory;
 
+    protected $table = 'specializations';
+
     protected $fillable = [
-        'name'
+        'name',
     ];
 
     public function users()

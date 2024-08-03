@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Content;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,8 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-//         \App\Models\User::factory(10)->create();
-       // Course::factory(10)->create();
+        //\App\Models\User::factory(10)->create();
+        // Course::factory(10)->create();
 
         $this->call([
             RoleAndPermissionSeeder::class,
@@ -24,7 +23,6 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             CourseSeeder::class,
             ContentSeeder::class,
-
         ]);
     }
 }

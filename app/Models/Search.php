@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Search extends Model
 {
-    protected $fillable =[
+    use HasFactory;
+
+    protected $fillable = [
         'query',
         'filter',
     ];
-
-
-    use HasFactory;
 }

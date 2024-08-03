@@ -9,7 +9,7 @@ class Answer extends Model
 {
     use HasFactory;
 
-    protected $fillable =[
+    protected $fillable = [
         'text',
         'is_correct',
         'question_id'

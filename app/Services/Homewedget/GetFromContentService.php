@@ -21,7 +21,7 @@ class GetFromContentService
             $relatedvid = Course::whereIn('specialization_id', $specializationIds)->where('status','accepted')->get();
 
             foreach ($relatedvid as $course) {
-                $relatedvideos[] = $course->content->filter(function($content) {
+                $relatedvideos[] = $course->contents->filter(function($content) {
                     return $content->type == 'video' && $content->status == 'accepted';
                 });
             }
@@ -43,7 +43,7 @@ class GetFromContentService
             $relateddoc = Course::whereIn('specialization_id', $specializationIds)->where('status','accepted')->get();
 
             foreach ($relateddoc as $course) {
-                $relateddocuments[] = $course->content->filter(function($content) {
+                $relateddocuments[] = $course->contents->filter(function($content) {
                     return $content->type == 'document' && $content->status == 'accepted';
                 });;
             }

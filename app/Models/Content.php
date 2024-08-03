@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ContentStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,13 +16,21 @@ class Content extends Model
         'url',
         'type',
         'status',
-
     ];
 
+    protected $casts = [
+        'status' => ContentStatus::class,
+    ];
+
+    public function changeStatus(ContentStatus $newStatus)
+    {
+        $this->status = $newStatus;
+        $this->save();
+    }
 
     public function course()
     {
-        return $this->belongsToMany(Course::class);
+        return $this->belongsTo(Course::class);
     }
 
 }
