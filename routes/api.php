@@ -16,6 +16,7 @@ use App\Http\Controllers\User\Operation\SearchController;
 use App\Http\Controllers\User\QuizWedget\QuizController;
 use App\Http\Controllers\User\Registering\GetCountryController;
 use App\Http\Controllers\User\Registering\GetSpecializationController;
+use App\Http\Controllers\User\Sidebar\SidebarController;
 use App\Http\Controllers\User\Specializationwedget\SpecializationwedgetController;
 use App\Http\Controllers\User\LiveWedget\LiveController;
 use Illuminate\Http\Request;
@@ -120,6 +121,20 @@ Route::middleware('auth:sanctum')->prefix('blog')->controller(BlogController::cl
     Route::post('/createlike', 'createlike');
     Route::get('/getposts', 'getposts');
     Route::get('/getcomments/{post_id}', 'getcomments');
+});
+
+//Sidebar APIs:
+Route::middleware('auth:sanctum')->prefix('sidebar')->controller(SidebarController::class)->group(function () {
+    Route::get('/getlibrarycontent', 'getlibrarycontent');
+    Route::get('/getmycourses', 'getmycourses');
+    Route::get('/getmyXPs', 'getmyXPs');
+    Route::get('/getmylibrary', 'getmylibrary');
+    Route::post('/updatemyxp/{xp}', 'updatemyxp');
+    Route::post('/librarypaying/{book_id}', 'librarypaying');
+    Route::post('/libraryrefaunding/{book_id}', 'refundFromMyLibrary');
+
+
+
 });
 
 //searching in course

@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Services\ChattingWedget;
+namespace App\Services\Application\ChattingWedget;
 
 
 
-use App\Models\Live;
 use App\Models\User;
-use Carbon\Carbon;
 
 class ChattingService
 {

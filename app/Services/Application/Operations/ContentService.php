@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Services\Operations;
+namespace App\Services\Application\Operations;
 
 use App\Models\content;
-use App\Models\Course;
 
 class ContentService{
     public function getallcontents($courseid){

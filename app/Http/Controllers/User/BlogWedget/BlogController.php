@@ -6,9 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Requests\BlogWedget\StorecommentRequest;
 use App\Requests\BlogWedget\StorelikeRequest;
 use App\Requests\BlogWedget\StorePostRequest;
-use App\Services\BlogWedget\BlogService;
+use App\Services\Application\BlogWedget\BlogService;
 use App\Services\GeneralServices\ResponseService;
-use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {

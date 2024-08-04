@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Requests\AuthRequests\ProfileUpdateRequest;
-use App\Services\AuthServices\ProfileService;
+use App\Services\Application\AuthServices\ProfileService;
 
 class ProfileController extends BaseController
 {

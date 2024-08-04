@@ -4,8 +4,8 @@ namespace App\Http\Controllers\User\LiveWedget;
 
 use App\Http\Controllers\Controller;
 use App\Requests\LiveWedget\LiveValidation;
+use App\Services\Application\LivesWedget\LiveService;
 use App\Services\GeneralServices\ResponseService;
-use App\Services\LivesWedget\LiveService;
 
 class LiveController extends Controller
 {

@@ -18,7 +18,7 @@ class EnrollmentService
         $data['user_id'] = Auth::user()->id;
         //$data['enrollment_date'] = Carbon::now();
 
-        $enrollment = Enrollment::create($data);
+        $enrollment = Enrollment::firstOrCreate($data);
         return $enrollment;
     }
 }

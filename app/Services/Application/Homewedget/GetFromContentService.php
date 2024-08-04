@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services\Homewedget;
+namespace App\Services\Application\Homewedget;
 
 use App\Models\Course;
 use App\Models\User;
 
 
-    // Service of last 10 objects in Home widget (The results Change depending on the user ):
+// Service of last 10 objects in Home widget (The results Change depending on the user ):
 class GetFromContentService
 {
     public function Getvideos()

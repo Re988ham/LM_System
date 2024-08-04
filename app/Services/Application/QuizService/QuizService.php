@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Services\QuizService;
+namespace App\Services\Application\QuizService;
 
 use App\Models\Answer;
-use App\Models\Country;
 use App\Models\Course;
 use App\Models\Question;
 use App\Models\Quiz;

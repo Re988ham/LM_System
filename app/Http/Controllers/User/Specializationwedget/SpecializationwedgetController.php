@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\User\Specializationwedget;
 
 use App\Http\Controllers\Controller;
+use App\Services\Application\Specializationwedget\SpecializationwedgetService;
 use App\Services\GeneralServices\ResponseService;
-use App\Services\Specializationwedget\SpecializationwedgetService;
 use Illuminate\Support\Facades\Log;
 
 class SpecializationwedgetController extends Controller

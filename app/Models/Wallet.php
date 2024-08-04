@@ -5,19 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Book extends Model
+class Wallet extends Model
 {
     use HasFactory;
 
-    protected $table = 'books';
-
     protected $fillable = [
-        'specialization_id',
-        'title',
-        'url',
-        'description',
-        'image',
+        'user_id',
         'xp'
     ];
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
 
 }

@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Services\Homewedget;
+namespace App\Services\Application\Homewedget;
 
-use App\Models\Content;
 use App\Models\Country;
 use App\Models\Course;
 use App\Models\Specialization;
 use App\Models\User;
 
 
-    // Service of last 10 objects in Home widget (The results Change depending on the user ):
+// Service of last 10 objects in Home widget (The results Change depending on the user ):
 class LastTenService
 {
     //function for show last 10 updated courses which have same  Specializations of user

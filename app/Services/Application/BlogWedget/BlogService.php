@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\BlogWedget;
+namespace App\Services\Application\BlogWedget;
 
 use App\Models\Comment;
 use App\Models\Country;

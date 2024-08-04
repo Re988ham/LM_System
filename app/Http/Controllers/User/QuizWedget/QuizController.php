@@ -4,8 +4,8 @@ namespace App\Http\Controllers\User\QuizWedget;
 
 use App\Http\Controllers\Controller;
 use App\Requests\QuizWedget\QuizValidation;
+use App\Services\Application\QuizService\QuizService;
 use App\Services\GeneralServices\ResponseService;
-use App\Services\QuizService\QuizService;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller

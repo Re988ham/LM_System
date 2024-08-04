@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             CourseSeeder::class,
             ContentSeeder::class,
+            WalletSeeder::class,
+            BookSeeder::class,
         ]);
     }
 }

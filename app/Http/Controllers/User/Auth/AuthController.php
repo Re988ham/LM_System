@@ -5,9 +5,9 @@ namespace App\Http\Controllers\User\Auth;
 use App\Http\Controllers\BaseController;
 use App\Requests\AuthRequests\LoginValidation;
 use App\Requests\AuthRequests\RegisterValidation;
-use App\Services\AuthServices\LoginService;
-use App\Services\AuthServices\LogoutService;
-use App\Services\AuthServices\RegisterService;
+use App\Services\Application\AuthServices\LoginService;
+use App\Services\Application\AuthServices\LogoutService;
+use App\Services\Application\AuthServices\RegisterService;
 use Illuminate\Http\Request;
 
 

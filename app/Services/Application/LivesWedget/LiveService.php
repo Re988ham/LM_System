@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\LivesWedget;
+namespace App\Services\Application\LivesWedget;
 
 
 

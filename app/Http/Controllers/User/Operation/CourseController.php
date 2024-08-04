@@ -4,9 +4,9 @@ namespace App\Http\Controllers\User\Operation;
 
 use App\Http\Controllers\Controller;
 use App\Requests\Operations\CourseValidation;
+use App\Services\Application\Operations\CourseService;
 use App\Services\GeneralServices\EnrollmentService;
 use App\Services\GeneralServices\ResponseService;
-use App\Services\Operations\CourseService;
 
 class CourseController extends Controller
 {

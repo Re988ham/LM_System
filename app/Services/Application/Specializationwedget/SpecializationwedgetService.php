@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Specializationwedget;
+namespace App\Services\Application\Specializationwedget;
 
 use App\Models\Content;
 use App\Models\Country;
@@ -41,14 +41,14 @@ class SpecializationwedgetService
     public function getallcontentsbyid($id)
     {
         $contents = [];
-       $contents= Content::all();
-//        Content::where('course_id', $id)
-//            ->where('status', 'accepted')
-//            ->chunk(10, function($chunk) use(&$contents) {
-//                foreach ($chunk as $content) {
-//                    $contents[] = $content;
-//                }
-//            });
+//       $contents= Content::all();
+        Content::where('course_id', $id)
+            ->where('status', 'accepted')
+            ->chunk(10, function($chunk) use(&$contents) {
+                foreach ($chunk as $content) {
+                    $contents[] = $content;
+                }
+            });
 
         return $contents;
     }

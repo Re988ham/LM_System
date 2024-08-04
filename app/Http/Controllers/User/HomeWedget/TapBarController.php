@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\User\HomeWedget;
 
 use App\Http\Controllers\Controller;
+use App\Services\Application\Homewedget\GetFromContentService;
 use App\Services\GeneralServices\ResponseService;
-use App\Services\Homewedget\GetFromContentService;
 
 class TapBarController extends Controller
 {

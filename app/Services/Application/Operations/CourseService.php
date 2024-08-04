@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Operations;
+namespace App\Services\Application\Operations;
 
 use App\Models\Country;
 use App\Models\course;

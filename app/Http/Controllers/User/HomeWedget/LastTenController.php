@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\User\HomeWedget;
 
 use App\Http\Controllers\Controller;
+use App\Services\Application\Homewedget\LastTenService;
 use App\Services\GeneralServices\ResponseService;
-use App\Services\Homewedget\LastTenService;
 
 class LastTenController extends Controller
 {
