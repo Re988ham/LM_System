@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\BookController;
 use App\Http\Controllers\Dashboard\ContentController;
 use App\Http\Controllers\Dashboard\CountryController;
 use App\Http\Controllers\Dashboard\CourseController;
+use App\Http\Controllers\Dashboard\EnrollmentController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\QuestionController;
 use App\Http\Controllers\Dashboard\QuizController;
@@ -63,27 +64,26 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'courses'], function () {
             // Basic Courses CRUD
             Route::get('/', 'index')->name('admin.courses.index');
-            Route::get('/{id}', 'show')->name('admin.courses.show');
+            //Route::get('/show/{id}', 'show')->name('admin.courses.show');
             Route::get('/create', 'create')->name('admin.courses.create');
             Route::post('/store', 'store')->name('admin.courses.store');
             Route::get('/edit/{courseId}', 'edit')->name('admin.courses.edit');
             Route::post('/update', 'update')->name('admin.courses.update');
             Route::get('/destroy/{courseId}', 'destroy')->name('admin.courses.destroy');
             // Extra Operations
-            //Route::get('/pending', 'pendingCourses')->name('admin.courses.pending');
+            Route::get('/pending', 'pendingCourses')->name('admin.courses.pending');
             Route::get('/accept/{courseId}', 'acceptCourse')->name('admin.course.accept');
             Route::get('/contents/{courseId}', 'showCourseContents')->name('admin.course.contents');
             Route::get('/quizzes/{courseId}/', 'showCourseQuizzes')->name('admin.course.quizzes');
-            Route::get('/members/{courseId}/', 'showCourseMembers')->name('admin.course.members');
+            Route::get('/enrollments/{courseId}/', 'showCourseMembers')->name('admin.course.members');
+            Route::get('/enrollments/pending/{courseId}/', 'showCoursePendingMembers')->name('admin.course.pending.members');
         });
     });
-
-    Route::get('/pending', [CourseController::class, 'pendingCourses'])->name('admin.courses.pending');
 
     ############################# Contents #############################
     Route::controller(ContentController::class)->group(function () {
         Route::group(['prefix' => 'contents'], function () {
-            // Basic Courses CRUD
+            // Basic Contents CRUD
             //Route::get('/', 'index')->name('admin.contents.index');
             Route::get('/create/{courseId}', 'create')->name('admin.contents.create');
             Route::post('/store', 'store')->name('admin.contents.store');
@@ -92,6 +92,16 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/destroy/{id}', 'destroy')->name('admin.contents.destroy');
             // Extra Operations
             Route::get('/accept/{id}', 'acceptContent')->name('admin.content.accept');
+        });
+    });
+
+    ############################# Course Enrollments/Members #############################
+    Route::controller(EnrollmentController::class)->group(function () {
+        Route::group(['prefix' => 'enrollments'], function () {
+            // Basic Enrollments CRUD
+            Route::get('/destroy/{id}', 'destroy')->name('admin.enrollments.destroy');
+            // Extra Operations
+            Route::get('/accept/{id}', 'acceptContent')->name('admin.enrollments.accept');
         });
     });
 

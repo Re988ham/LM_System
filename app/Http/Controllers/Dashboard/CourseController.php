@@ -134,7 +134,22 @@ class CourseController extends Controller
      */
     public function showCourseMembers(string $courseId)
     {
-        $users = $this->courseService->showCourseMembers($courseId);
-        return view('dashboard.pages.users.index', compact('users'));
+        $members = $this->courseService->showCourseMembers($courseId);
+        return view('dashboard.pages.courses.enrollments.index', compact(
+            'courseId',
+            'members'
+        ));
+    }
+
+    /**
+     * Display the pending members of specific course.
+     */
+    public function showCoursePendingMembers(string $courseId)
+    {
+        $members = $this->courseService->showCoursePendingMembers($courseId);
+        return view('dashboard.pages.courses.enrollments.index', compact(
+            'courseId',
+            'members'
+        ));
     }
 }
