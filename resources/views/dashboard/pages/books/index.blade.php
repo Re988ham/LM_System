@@ -47,6 +47,10 @@
                                     </th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        XP
+                                    </th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Action
                                     </th>
                                 </tr>
@@ -77,6 +81,11 @@
                                         <td class="text-center">
                                             <p class="text-xs font-weight-bold mb-0">
                                                 {{ $book->description }}
+                                            </p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p class="text-xs font-weight-bold mb-0">
+                                                {{ $book->xp }}
                                             </p>
                                         </td>
                                         <td class="text-center">

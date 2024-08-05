@@ -65,7 +65,11 @@ class BookController extends Controller
     public function edit(string $id)
     {
         $book = $this->bookService->findById($id);
-        return view('dashboard.pages.books.update', compact('book'));
+        $specializations = $this->specializationService->getAllSpecializationsChoices();
+        return view('dashboard.pages.books.update', compact(
+            'book',
+            'specializations'
+        ));
     }
 
     /**

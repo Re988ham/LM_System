@@ -7,7 +7,7 @@
                 <h6 class="mb-0">{{ __('Book Information') }}</h6>
             </div>
             <div class="card-body pt-4 p-3">
-                <form action="{{ route('admin.books.store') }}" method="POST" role="form text-left">
+                <form action="{{ route('admin.books.store') }}" method="POST" enctype="multipart/form-data" role="form text-left">
                     @csrf
                     @if($errors->any())
                         <div class="mt-3  alert alert-primary alert-dismissible fade show" role="alert">
@@ -93,6 +93,19 @@
                                 <div class="@error('book.image')border border-danger rounded-3 @enderror">
                                     <input class="form-control" type="file" id="book-image" name="image">
                                     @error('image')
+                                    <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="book-xp" class="form-control-label">{{ __('Book XP') }}</label>
+                                <div class="@error('book.xp')border border-danger rounded-3 @enderror">
+                                    <input class="form-control" type="number"
+                                           placeholder="Enter a Book XP" id="book-xp" name="xp">
+                                    @error('xp')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                     @enderror
                                 </div>

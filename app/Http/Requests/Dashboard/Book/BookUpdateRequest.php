@@ -28,7 +28,8 @@ class BookUpdateRequest extends FormRequest
             'title' => 'sometimes|string|max:255',
             'url' => 'sometimes|url|max:255',
             'description' => 'sometimes|string|max:255',
-            'image' => 'sometimes|string|max:255',
+            'image' => 'sometimes|mimes:jpg,jpeg,png,pdf|max:2048',
+            'xp' => 'sometimes|integer|min:1',
         ];
     }
 }

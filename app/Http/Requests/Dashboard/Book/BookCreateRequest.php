@@ -27,7 +27,8 @@ class BookCreateRequest extends FormRequest
             'title' => 'required|string|max:255',
             'url' => 'required|url|max:255',
             'description' => 'required|string|max:255',
-            'image' => 'required|string|max:255',
+            'image' => 'required|mimes:jpg,jpeg,png,pdf|max:2048',
+            'xp' => 'required|integer|min:1',
         ];
     }
 }

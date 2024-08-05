@@ -7,7 +7,7 @@
                 <h6 class="mb-0">{{ __('Book Information') }}</h6>
             </div>
             <div class="card-body pt-4 p-3">
-                <form action="{{ route('admin.books.update') }}" method="POST" role="form text-left">
+                <form action="{{ route('admin.books.update') }}" method="POST" enctype="multipart/form-data" role="form text-left">
                     @csrf
                     @if($errors->any())
                         <div class="mt-3  alert alert-primary alert-dismissible fade show" role="alert">
@@ -54,7 +54,7 @@
 
                                 <label for="book-title" class="form-control-label">{{ __('Book Title') }}</label>
                                 <div class="@error('book.title')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" type="text" name="title" value="{{ $book->name }}"
+                                    <input class="form-control" type="text" name="title" value="{{ $book->title }}"
                                            placeholder="Enter a Book Title" id="book-title">
                                     @error('title')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
@@ -81,9 +81,7 @@
                                 <label for="book-description"
                                        class="form-control-label">{{ __('Book Description') }}</label>
                                 <div class="@error('book.description')border border-danger rounded-3 @enderror">
-                                    <textarea class="form-control" id="book-description" name="description">
-                                        {{ $book->description }}
-                                    </textarea>
+                                    <textarea class="form-control" id="book-description" name="description">{{ $book->description }}</textarea>
                                     @error('description')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                     @enderror
@@ -95,7 +93,7 @@
                             <div class="form-group">
                                 <label for="book-image" class="form-control-label">{{ __('Book Thumbnail') }}</label>
                                 <div class="@error('book.image')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" type="file" id="book-image" value="{{ $book->image }}" name="image">
+                                    <input class="form-control" type="file" id="book-image" value="{{ asset('image/books/' . $book->image) }}" name="image">
                                     @error('image')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                     @enderror
@@ -103,6 +101,18 @@
                             </div>
                         </div>
 
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="book-xp" class="form-control-label">{{ __('Book XP') }}</label>
+                                <div class="@error('book.xp')border border-danger rounded-3 @enderror">
+                                    <input class="form-control" type="number" value="{{ $book->xp }}"
+                                           placeholder="Enter a Book XP" id="book-xp" name="xp">
+                                    @error('xp')
+                                    <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="d-flex justify-content-end">
