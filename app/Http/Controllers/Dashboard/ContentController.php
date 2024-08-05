@@ -37,16 +37,16 @@ class ContentController extends Controller
     {
         $validatedData = $request->validated();
         $this->contentService->create($validatedData);
-        return redirect()->route('admin.contents.index')->with('success', 'Content created successfully');
+        return redirect()->route('admin.course.contents', $validatedData['course_id'])->with('success', 'Content created successfully');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $contentId)
     {
-        $courses = $this->courseService->getAllAcceptedCourses();
-        return view('dashboard.pages.contents.create', compact('courses'));
+        $course = $this->courseService->findCourseById($contentId);
+        return view('dashboard.pages.contents.create', compact('course'));
     }
 
     /**
@@ -61,12 +61,12 @@ class ContentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $courseId, string $contentId)
     {
-        $content = $this->contentService->findById($id);
-        $courses = $this->courseService->getAllAcceptedCourses();
+        $content = $this->contentService->findById($contentId);
+        $course = $this->courseService->findCourseById($courseId);
         return view('dashboard.pages.contents.update', compact(
-            'content', 'courses'
+            'content', 'course'
         ));
     }
 

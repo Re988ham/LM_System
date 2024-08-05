@@ -27,7 +27,7 @@ class ContentUpdateRequest extends FormRequest
             'name' => 'required',
             //'course_id' => 'required',
             'url' => 'required',
-            'type' => 'required',
+            'type_id' => 'required',
         ];
     }
 }

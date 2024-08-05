@@ -31,6 +31,8 @@
                         </div>
                     @endif
                     <div class="row">
+                        <input class="form-control" type="hidden" name="course_id" value="{{ $course->id }}">
+
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="content-name" class="form-control-label">{{ __('Content Name') }}</label>
@@ -38,22 +40,6 @@
                                     <input class="form-control" type="text" placeholder="Enter a Content Name"
                                            id="content-name" name="name">
                                     @error('name')
-                                    <p class="text-danger text-xs mt-2">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="course-id" class="form-control-label">{{ __('Course') }}</label>
-                                <div class="@error('course_id') border border-danger rounded-3 @enderror">
-                                    <select class="form-control" id="course-id" name="course_id">
-                                        <option value="" disabled selected>Select a Course</option>
-                                        @foreach($courses as $course)
-                                            <option value="{{ $course->id }}">{{ $course->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('course_id')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -74,13 +60,13 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="content-type" class="form-control-label">{{ __('Content Type') }}</label>
-                                <div class="@error('type') border border-danger rounded-3 @enderror">
-                                    <select class="form-control" id="content-type" name="type">
+                                <div class="@error('type_id') border border-danger rounded-3 @enderror">
+                                    <select class="form-control" id="content-type" name="type_id">
                                         <option value="" disabled selected>Select a Content Type</option>
-                                        <option value="video">Video</option>
-                                        <option value="document">Document</option>
+                                        <option value="1">Video</option>
+                                        <option value="2">Document</option>
                                     </select>
-                                    @error('type')
+                                    @error('type_id')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                     @enderror
                                 </div>

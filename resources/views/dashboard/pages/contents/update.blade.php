@@ -32,10 +32,11 @@
                     @endif
 
                     <div class="row">
+                        <input class="form-control" type="hidden" name="id" value="{{ $content->id }}">
+                        <input class="form-control" type="hidden" name="course_id" value="{{ $course->id }}">
+
                         <div class="col-md-12">
                             <div class="form-group">
-                                <input class="form-control" type="hidden" name="id" value="{{ $content->id }}">
-
                                 <label for="content-name" class="form-control-label">{{ __('Content Name') }}</label>
                                 <div class="@error('name') border border-danger rounded-3 @enderror">
                                     <input class="form-control" type="text" placeholder="Enter a Content Name"
@@ -61,15 +62,16 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="content-type" class="form-control-label">{{ __('Content Type') }}</label>
-                                <div class="@error('type') border border-danger rounded-3 @enderror">
-                                    <select class="form-control" id="content-type" name="type">
-                                        <option value="video" @if($content->type === 'video') selected @endif>Video
+                                <div class="@error('type_id') border border-danger rounded-3 @enderror">
+                                    <select class="form-control" id="content-type" name="type_id">
+                                        <option value="1" @if($content->type_id == 1) selected @endif>
+                                            Video
                                         </option>
-                                        <option value="document" @if($content->type === 'document') selected @endif>
+                                        <option value="2" @if($content->type_id == 2) selected @endif>
                                             Document
                                         </option>
                                     </select>
-                                    @error('type')
+                                    @error('type_id')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                     @enderror
                                 </div>

@@ -22,7 +22,7 @@ class ContentSeeder extends Seeder
                 'name' => $faker->word,
                 'course_id' => rand(1, 10),
                 'url' => 'https://example.com/' . Str::random(10),
-                'type' => $faker->randomElement(['video', 'document']),
+                'type_id' => random_int(1, 2),
                 'status' => $statuses[random_int(0, 1)],
                 'created_at' => now(),
                 'updated_at' => now(),

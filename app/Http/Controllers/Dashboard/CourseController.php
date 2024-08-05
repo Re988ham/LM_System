@@ -111,7 +111,10 @@ class CourseController extends Controller
     public function showCourseContents(string $courseId)
     {
         $contents = $this->courseService->showCourseContents($courseId);
-        return view('dashboard.pages.contents.index', compact('contents'));
+        return view('dashboard.pages.contents.index', compact(
+            'contents',
+            'courseId'
+        ));
     }
 
     /**

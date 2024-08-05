@@ -11,6 +11,7 @@ use App\Http\Controllers\Dashboard\QuestionController;
 use App\Http\Controllers\Dashboard\QuizController;
 use App\Http\Controllers\Dashboard\SessionsController;
 use App\Http\Controllers\Dashboard\SpecializationController;
+use App\Http\Controllers\Dashboard\TypeController;
 use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -84,9 +85,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'contents'], function () {
             // Basic Courses CRUD
             //Route::get('/', 'index')->name('admin.contents.index');
-            Route::get('/create', 'create')->name('admin.contents.create');
+            Route::get('/create/{courseId}', 'create')->name('admin.contents.create');
             Route::post('/store', 'store')->name('admin.contents.store');
-            Route::get('/edit/{id}', 'edit')->name('admin.contents.edit');
+            Route::get('/edit/{courseId}/{contentId}', 'edit')->name('admin.contents.edit');
             Route::post('/update', 'update')->name('admin.contents.update');
             Route::get('/destroy/{id}', 'destroy')->name('admin.contents.destroy');
             // Extra Operations
@@ -159,6 +160,19 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/edit/{id}', 'edit')->name('admin.advertisements.edit');
             Route::post('/update', 'update')->name('admin.advertisements.update');
             Route::get('/destroy/{id}', 'destroy')->name('admin.advertisements.destroy');
+        });
+    });
+
+    ############################# Types #############################
+    Route::controller(TypeController::class)->group(function () {
+        Route::group(['prefix' => 'types'], function () {
+            // Basic Courses CRUD
+            Route::get('/', 'index')->name('admin.types.index');
+            Route::get('/create', 'create')->name('admin.types.create');
+            Route::post('/store', 'store')->name('admin.types.store');
+            Route::get('/edit/{id}', 'edit')->name('admin.types.edit');
+            Route::post('/update', 'update')->name('admin.types.update');
+            Route::get('/destroy/{id}', 'destroy')->name('admin.types.destroy');
         });
     });
 

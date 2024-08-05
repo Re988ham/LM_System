@@ -13,11 +13,11 @@
                     <div class="card-header pb-0">
                         <div class="d-flex flex-row justify-content-between">
                             <div>
-                                <h5 class="mb-0">All Contents</h5>
+                                <h5 class="mb-0">All Types</h5>
                             </div>
-                            <a href="{{ route('admin.contents.create', $courseId) }}" class="btn bg-gradient-primary btn-sm mb-0"
+                            <a href="{{ route('admin.types.create') }}" class="btn bg-gradient-primary btn-sm mb-0"
                                type="button">
-                                +&nbsp; New Content
+                                +&nbsp; New Type
                             </a>
                         </div>
                     </div>
@@ -31,31 +31,7 @@
                                     </th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Name
-                                    </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Course
-                                    </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Link
-                                    </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Type
-                                    </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Status
-                                    </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Create At
-                                    </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Update At
                                     </th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -64,7 +40,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($contents as $content)
+                                @foreach ($types as $type)
                                     <tr>
                                         <td class="ps-4">
                                             <p class="text-xs font-weight-bold mb-0">
@@ -73,52 +49,17 @@
                                         </td>
                                         <td class="text-center">
                                             <p class="text-xs font-weight-bold mb-0">
-                                                {{ $content->name }}
+                                                {{ $type->type }}
                                             </p>
                                         </td>
                                         <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">
-                                                {{ $content->course->name }}
-                                            </p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">
-                                                <a href="{{ $content->url }}" target="_blank">Link</a>
-                                            </p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">
-                                                {{ $content->type->type }}
-                                            </p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="text-xs font-weight-bold badge badge-xs @if($content->status->value === 'pending') bg-gradient-warning @else bg-gradient-success @endif mb-0">
-                                                {{ $content->status }}
-                                            </p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">
-                                                {{ $content->created_at }}
-                                            </p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">
-                                                {{ $content->updated_at }}
-                                            </p>
-                                        </td>
-                                        <td class="text-center">
-                                            @if($content->status->value === 'pending')
-                                            <a href="{{ route('admin.content.accept', $content->id) }}" class="mx-3"
-                                               data-bs-toggle="tooltip" data-bs-original-title="Accept Content">
-                                                <i class="fas fa-check text-secondary"></i>
-                                            </a>
-                                            @endif
-                                            <a href="{{ route('admin.contents.edit', [$courseId, $content->id]) }}" class="mx-3"
-                                               data-bs-toggle="tooltip" data-bs-original-title="Edit Content">
+                                            <a href="{{ route('admin.types.edit', $type->id) }}" class="mx-3"
+                                               data-bs-toggle="tooltip" data-bs-original-title="Edit Type">
                                                 <i class="fas fa-edit text-secondary"></i>
                                             </a>
-                                            <a href="{{ route('admin.contents.destroy', $content->id) }}" class="mx-3"
-                                               data-bs-toggle="tooltip" data-bs-original-title="Delete Content">
+                                            <a href="{{ route('admin.types.destroy', $type->id) }}"
+                                               class="mx-3" data-bs-toggle="tooltip"
+                                               data-bs-original-title="Delete Type">
                                                 <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                             </a>
                                         </td>

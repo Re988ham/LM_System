@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('course_id')->constrained('courses')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->enum('status', ['pending', 'accepted']);
+            $table->enum('status', ['pending', 'accepted'])->default('pending');
             $table->string('url');
-            $table->enum('type', ['video', 'document']);
+            $table->integer('type_id')->constrained('types')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

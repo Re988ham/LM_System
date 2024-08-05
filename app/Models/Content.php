@@ -14,7 +14,7 @@ class Content extends Model
         'name',
         'course_id',
         'url',
-        'type',
+        'type_id',
         'status',
     ];
 
@@ -33,4 +33,7 @@ class Content extends Model
         return $this->belongsTo(Course::class);
     }
 
+    public function type() {
+        return $this->belongsTo(Type::class);
+    }
 }
