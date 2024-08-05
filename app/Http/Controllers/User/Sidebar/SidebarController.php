@@ -69,7 +69,7 @@ class SidebarController extends Controller
         }
 
         return response()->json([
-            'my_library' => $response['my_library'],
+            'deleted book_id of my_library' => $response['deleted book_id of my_library'],
             'current_balance' => $response['current_balance'],
             'message' => $response['message']
         ], 200);

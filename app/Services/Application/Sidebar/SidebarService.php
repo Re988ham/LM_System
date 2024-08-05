@@ -55,7 +55,7 @@ class SidebarService{
     public function getmylibrary(){
 
         $userid = Auth::user()->id;
-        $Mylibrary=Mylibrary::where('user_id',$userid);
+        $Mylibrary=Mylibrary::where('user_id',$userid)->get();
 
         return $Mylibrary;
     }
@@ -122,7 +122,7 @@ class SidebarService{
             $userWallet->update(['xp' => $newXp]);
 
             return [
-                'my_library' => $deleted,
+                'deleted book_id of my_library' => $deleted,
                 'current_balance' => $newXp,
                 'message' => 'Book refunded successfully'
             ];
