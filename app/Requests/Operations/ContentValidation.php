@@ -13,7 +13,7 @@ class ContentValidation extends BaseRequestFormApi
             'name' => 'required|string|min:5|max:100',
             'course_id' => 'required|int',
             'url' => 'required',//['required','url', 'regex:/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i'],
-            'type' => 'required|in:video,document',
+            'type_id' => 'required',
         ];
 
     }
