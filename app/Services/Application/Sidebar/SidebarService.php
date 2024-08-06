@@ -3,6 +3,7 @@
 namespace App\Services\Application\Sidebar;
 
 use App\Models\Book;
+use App\Models\Course;
 use App\Models\Enrollment;
 use App\Models\Mylibrary;
 use App\Models\Wallet;
@@ -13,8 +14,9 @@ class SidebarService{
 
         $userid = Auth::user()->id;
         $courses=Enrollment::where('user_id',$userid)->get();
-
-        return $courses;
+        $courses_id =$courses->pluck('course_id');
+        $response = Course::wherein('id',$courses_id)->get();
+        return $response;
     }
 
     public function getlibrarycontent()
