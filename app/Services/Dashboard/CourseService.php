@@ -69,10 +69,15 @@ class CourseService
         return $course->quizzes;
     }
 
-    public function showCourseMembers(string $id)
+    public function showCourseMembers(string $courseId)
     {
-        $course = $this->findCourseById($id);
+        $course = $this->findCourseById($courseId);
         return $course->members;
     }
 
+    public function showCoursePendingMembers(string $courseId)
+    {
+        $course = $this->findCourseById($courseId);
+        return $course->members->where('status', CourseStatus::PENDING);
+    }
 }

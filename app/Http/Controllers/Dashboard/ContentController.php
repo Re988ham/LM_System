@@ -27,7 +27,7 @@ class ContentController extends Controller
     public function index()
     {
         $contents = $this->contentService->list();
-        return view('dashboard.pages.contents.index', compact('contents'));
+        return view('dashboard.pages.courses.contents.index', compact('contents'));
     }
 
     /**
@@ -37,16 +37,16 @@ class ContentController extends Controller
     {
         $validatedData = $request->validated();
         $this->contentService->create($validatedData);
-        return redirect()->route('admin.course.contents', $validatedData['course_id'])->with('success', 'Content created successfully');
+        return redirect()->route('admin.course.courses.contents', $validatedData['course_id'])->with('success', 'Content created successfully');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(string $contentId)
+    public function create(string $courseId)
     {
-        $course = $this->courseService->findCourseById($contentId);
-        return view('dashboard.pages.contents.create', compact('course'));
+        $course = $this->courseService->findCourseById($courseId);
+        return view('dashboard.pages.courses.contents.create', compact('course'));
     }
 
     /**
@@ -55,7 +55,7 @@ class ContentController extends Controller
     public function show(string $id)
     {
         //$courses = $this->courseService->show($id);
-        return view('dashboard.pages.contents.show');
+        return view('dashboard.pages.courses.contents.show');
     }
 
     /**
@@ -65,7 +65,7 @@ class ContentController extends Controller
     {
         $content = $this->contentService->findById($contentId);
         $course = $this->courseService->findCourseById($courseId);
-        return view('dashboard.pages.contents.update', compact(
+        return view('dashboard.pages.courses.contents.update', compact(
             'content', 'course'
         ));
     }
@@ -78,7 +78,7 @@ class ContentController extends Controller
         try {
             $validatedData = $request->validated();
             $content = $this->contentService->update($validatedData);
-            return redirect()->route('admin.course.contents', $content->course_id)->with('success', 'Content updated successfully');
+            return redirect()->route('admin.course.courses.contents', $content->course_id)->with('success', 'Content updated successfully');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->validator)->withInput();
         }
@@ -91,9 +91,9 @@ class ContentController extends Controller
     {
         try {
             $this->contentService->destroy($id);
-            return redirect()->route('admin.contents.index')->with('success', 'Content deleted successfully.');
+            return redirect()->route('admin.courses.contents.index')->with('success', 'Content deleted successfully.');
         } catch (Exception $e) {
-            return redirect()->route('admin.contents.index')->with('error', $e->getMessage());
+            return redirect()->route('admin.courses.contents.index')->with('error', $e->getMessage());
         }
     }
 
@@ -103,6 +103,6 @@ class ContentController extends Controller
     public function acceptContent(string $id)
     {
         $this->contentService->accept($id);
-        return redirect()->route('admin.contents.index')->with('success', 'Content accepted successfully.');
+        return redirect()->route('admin.courses.contents.index')->with('success', 'Content accepted successfully.');
     }
 }
