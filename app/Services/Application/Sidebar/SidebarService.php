@@ -52,13 +52,15 @@ class SidebarService{
         ];
     }
 
-    public function getmylibrary(){
-
+    public function getmylibrary()
+    {
         $userid = Auth::user()->id;
-        $Mylibrary=Mylibrary::where('user_id',$userid)->get();
-
-        return $Mylibrary;
+        $Mylibrary = Mylibrary::where('user_id', $userid)->get();
+        $bookIds = $Mylibrary->pluck('book_id');
+        $response = Book::whereIn('id', $bookIds)->get();
+        return $response;
     }
+
 
     public function payFromLibrary($book_id)
     {
