@@ -3,25 +3,58 @@
 namespace App\Services\Application\Sidebar;
 
 use App\Models\Book;
+use App\Models\Country;
 use App\Models\Course;
 use App\Models\Enrollment;
 use App\Models\Mylibrary;
+use App\Models\Specialization;
+use App\Models\User;
 use App\Models\Wallet;
 use Illuminate\Support\Facades\Auth;
 
 class SidebarService{
-    public function getmycourses(){
+    public function getmycourses()
+    {
+        $userId = Auth::user()->id;
 
-        $userid = Auth::user()->id;
-        $courses=Enrollment::where('user_id',$userid)->get();
-        $courses_id =$courses->pluck('course_id');
-        $response = Course::wherein('id',$courses_id)->get();
-        return $response;
+        // Retrieve enrolled courses
+        $enrollmentCourses = Enrollment::where('user_id', $userId)->get();
+        $courseIds = $enrollmentCourses->pluck('course_id');
+        $courses = Course::whereIn('id', $courseIds)->get();
+
+        // Iterate over the courses and add the additional information
+        foreach ($courses as $course) {
+            $country = Country::find($course->country_id);
+            $specialization = Specialization::find($course->specialization_id);
+            $author = User::find($course->user_id);
+
+            $course['country_name'] = $country ? $country->name : 'Unknown Country';
+            $course['specialization_name'] = $specialization ? $specialization->name : 'Unknown Specialization';
+            $course['author_name'] = $author ? $author->name : 'Unknown Author';
+        }
+
+        return $courses;
     }
 
+
+    public function unjoin($course_id){
+
+        $userid = Auth::user()->id;
+        $Enrollmentcourse=Enrollment::where('user_id',$userid)
+            ->where('course_id',$course_id)->delete();
+
+        return ['deleted course :' => $Enrollmentcourse ,
+            'course unjoin successfully'];
+
+    }
     public function getlibrarycontent()
     {
-        return Book::all() ;
+        $Books = Book::all();
+        foreach ($Books as $Book) {
+        $specialization = Specialization::find($Book->specialization_id);
+        $Book['specialization_name'] = $specialization ? $specialization->name : 'Unknown Specialization';
+        return $Books;
+        }
     }
 
     public function getMyXp(): array
@@ -59,8 +92,13 @@ class SidebarService{
         $userid = Auth::user()->id;
         $Mylibrary = Mylibrary::where('user_id', $userid)->get();
         $bookIds = $Mylibrary->pluck('book_id');
-        $response = Book::whereIn('id', $bookIds)->get();
-        return $response;
+        $Books = Book::whereIn('id', $bookIds)->get();
+        foreach ($Books as $Book) {
+            $specialization = Specialization::find($Book->specialization_id);
+            $Book['specialization_name'] = $specialization ? $specialization->name : 'Unknown Specialization';
+            return $Books;
+        }
+        return $Books;
     }
 
 
@@ -121,12 +159,18 @@ class SidebarService{
                 return ['error' => 'User wallet not found'];
             }
 
-            $newXp = $userWallet->xp + $bookRecord->xp;
-            $deleted = Mylibrary::where('book_id', $book_id)->delete();
-            $userWallet->update(['xp' => $newXp]);
+            $book = Book::find($book_id);
+            if (!$book) {
+                return ['error' => 'Book not found'];
+            }
+
+            $newXp = $userWallet->xp + $book->xp;
+            $bookRecord->delete();
+            $userWallet->xp = $newXp;
+            $userWallet->save();
 
             return [
-                'deleted book_id of my_library' => $deleted,
+                'deleted book_id of my_library' => $book_id,
                 'current_balance' => $newXp,
                 'message' => 'Book refunded successfully'
             ];
@@ -135,5 +179,6 @@ class SidebarService{
             return ['error' => 'Something went wrong: ' . $e->getMessage()];
         }
     }
+
 
 }

@@ -49,6 +49,12 @@ class SidebarController extends Controller
         $response = $this->SidebarService->getmylibrary();
         return $this->ResponseService->sendResponse($response);
     }
+
+    public function unjoinofcourse($course_id)
+    {
+        $response = $this->SidebarService->unjoin($course_id);
+        return $this->ResponseService->sendResponse($response);
+    }
     public function librarypaying($book_id): \Illuminate\Http\JsonResponse
     {
 

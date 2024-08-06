@@ -14,8 +14,7 @@ class CourseService{
         $autherid = Auth::user()->id;
         $courses = [];
 
-        Course::where('status', 'accepted')
-            ->where('user_id',$autherid)
+        Course::where('user_id',$autherid)
             ->chunk(10, function($chunk) use(&$courses){
 
             foreach($chunk as $course){

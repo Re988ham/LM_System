@@ -132,7 +132,7 @@ Route::middleware('auth:sanctum')->prefix('sidebar')->controller(SidebarControll
     Route::post('/updatemyxp/{xp}', 'updatemyxp');
     Route::post('/librarypaying/{book_id}', 'librarypaying');
     Route::post('/libraryrefaunding/{book_id}', 'refundFromMyLibrary');
-
+    Route::post('/unjoinofcourse/{course_id}', 'unjoinofcourse');
 
 
 });
