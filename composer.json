@@ -13,7 +13,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/socialite": "^5.12",
         "laravel/tinker": "^2.8",
-        "sapientpro/image-comparator": "^1.0",
+        "sapientpro/image-comparator": "*",
         "spatie/laravel-permission": "^6.4"
     },
     "require-dev": {

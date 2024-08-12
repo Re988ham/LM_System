@@ -4,22 +4,26 @@ namespace App\Services\Application\AuthServices;
 
 use App\Models\User;
 use App\Services\GeneralServices\ImageService;
+use App\Services\GeneralServices\ImageComparisonService; // Import ImageComparisonService
 use App\Services\GeneralServices\SpecializationService;
 use App\Traits\SendEmailTrait;
 use Illuminate\Support\Facades\Hash;
-use SapientPro\ImageComparator\ImageResourceException;
-
 
 class RegisterService
 {
     use SendEmailTrait;
 
-    // Service of register process:
+    protected $imageComparisonService; // Instance variable for ImageComparisonService
+
+    public function __construct(ImageComparisonService $imageComparisonService)
+    {
+        $this->imageComparisonService = $imageComparisonService;
+    }
 
     /**
-     * @throws ImageResourceException
+     * Register a user and handle image processing.
      */
-    public function registerUser(array $data): User
+    public function registerUser(array $data): array
     {
         $data['password'] = Hash::make($data['password']);
 
@@ -27,17 +31,24 @@ class RegisterService
             $destinationPath = '/images/users/';
             $data['image'] = ImageService::saveImage($data['image'], $destinationPath);
 
-//            $ImageComparisonService = new ImageComparisonService();
-//            $ImageComparisonService->compareImage($data['image']);
+            // Perform image comparison using ImageComparisonService
+            if ($data['image']) {
+                $similarImages = $this->imageComparisonService->compareImage($data['image']);
+            }
         }
+
         $user = User::create($data);
 
         if (isset($data['specialization_id']) && is_array($data['specialization_id'])) {
             $specializationService = new SpecializationService();
             $specializationService->chooseSpecialization($user->id, $data['specialization_id']);
         }
-        $useremail=$user['email'];
-//        $this->SendGreetingEmail($useremail);
-        return $user;
+
+        // Example sending email
+        $useremail = $user->email;
+//         $this->SendGreetingEmail($useremail);
+
+        return [$user, $similarImages];
     }
+
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Services\GeneralServices;
 
 use Illuminate\Http\UploadedFile;
@@ -7,18 +6,22 @@ use Illuminate\Http\UploadedFile;
 class ImageService
 {
     /**
-     Service for manage image operations in the system.
-    */
-
+     * Save an uploaded image to a specific destination and return the path.
+     *
+     * @param UploadedFile $image
+     * @param string $destinationPath
+     * @return string|null
+     */
     public static function saveImage(UploadedFile $image, string $destinationPath): ?string
     {
         if ($image->isValid()) {
             $destination = public_path($destinationPath);
             $fileName = time() . '_' . $image->getClientOriginalName();
             $image->move($destination, $fileName);
-            return $destinationPath . $fileName;
+            return $destinationPath . '/' . $fileName; // Ensure single slash
         }
 
         return null;
     }
 }
+
