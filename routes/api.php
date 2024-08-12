@@ -62,7 +62,7 @@ Route::prefix('password')->group(function () {
 
 //Course mangments  APIs:
 Route::middleware('auth:sanctum')->prefix('course')->controller(CourseController::class)->group(function () {
-    Route::get('/showc', 'index');
+    Route::get('/show', 'index');
     Route::post('/create', 'store');
     Route::post('/update/{id}', 'update');
     Route::post('/delete/{id}', 'delete');
