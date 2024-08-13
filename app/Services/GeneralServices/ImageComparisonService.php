@@ -2,8 +2,7 @@
 namespace App\Services\GeneralServices;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
+
 use SapientPro\ImageComparator\ImageComparator;
 use SapientPro\ImageComparator\ImageResourceException;
 

@@ -3,26 +3,22 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class warningMail extends Mailable
+class SimilarImagesMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $testMailData;
     public $similarImages;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($testMailData,$similarImages)
+    public function __construct($similarImages)
     {
-        $this->testMailData = $testMailData;
         $this->similarImages = $similarImages;
     }
 
@@ -33,7 +29,8 @@ class warningMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('EDUspark')
-            ->view('emails.testMail');
+        return $this->subject('Similar Images Found')
+            ->view('emails.similar_images')
+            ->with('similarImages', $this->similarImages);
     }
 }
