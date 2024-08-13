@@ -2,12 +2,14 @@
 
 namespace App\Services\Application\AuthServices;
 
+use App\Jobs\CompareImagesJob;
 use App\Models\User;
 use App\Services\GeneralServices\ImageService;
 use App\Services\GeneralServices\ImageComparisonService; // Import ImageComparisonService
 use App\Services\GeneralServices\SpecializationService;
 use App\Traits\SendEmailTrait;
 use Illuminate\Support\Facades\Hash;
+use SapientPro\ImageComparator\ImageResourceException;
 
 class RegisterService
 {
@@ -22,8 +24,9 @@ class RegisterService
 
     /**
      * Register a user and handle image processing.
+     * @throws ImageResourceException
      */
-    public function registerUser(array $data): array
+    public function registerUser(array $data)
     {
         $data['password'] = Hash::make($data['password']);
 
@@ -31,9 +34,11 @@ class RegisterService
             $destinationPath = '/images/users/';
             $data['image'] = ImageService::saveImage($data['image'], $destinationPath);
 
-            // Perform image comparison using ImageComparisonService
+//            if ($data['image']) {
+//                CompareImagesJob::dispatch($data['image'],$data['name']);
+//            }
             if ($data['image']) {
-                $similarImages = $this->imageComparisonService->compareImage($data['image']);
+                $similarImages = $this->imageComparisonService->compareImage($data['image'],$data['name']);
             }
         }
 
@@ -46,9 +51,8 @@ class RegisterService
 
         // Example sending email
         $useremail = $user->email;
-//         $this->SendGreetingEmail($useremail);
-
-        return [$user, $similarImages];
+        // $this->SendGreetingEmail($useremail);
+        return [$user,$similarImages];
     }
 
 }

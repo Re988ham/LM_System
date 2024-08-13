@@ -2,8 +2,10 @@
 
 namespace App\Traits;
 
+use App\Jobs\sendemail;
 use App\Mail\SendCodeResetPassword;
 use App\Mail\SendMail;
+use App\Mail\warningMail;
 use Illuminate\Support\Facades\Mail;
 //use PharIo\Manifest\Email;
 //use PharIo\Manifest\Email;
@@ -18,7 +20,7 @@ trait SendEmailTrait
             'img-path'=>"public/assets/app_img/logo_image.png"
         ];
 
-        Mail::to($email)->queue(new SendMail($testMailData));
+        Mail::to($email)->queue(new SendMail( $testMailData));
 
         //dd('Success! Email has been sent successfully.');
 
@@ -28,4 +30,19 @@ trait SendEmailTrait
         Mail::to($email)->queue(new SendCodeResetPassword($code));
 
     }
+
+    public function SendWarningEmail(string $email, array $similarImages, string $useraname): void
+    {
+        $testMailData = [
+            'title' => 'EDUspark',
+            'body' => 'There is someone tried to make fussing',
+            'img-path' => "public/assets/app_img/warning.png"
+        ];
+
+        Mail::to($email)->send(new warningMail($testMailData, $similarImages, $username));
+    }
+
+
+
+
 }

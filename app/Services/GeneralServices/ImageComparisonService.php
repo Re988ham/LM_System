@@ -1,6 +1,8 @@
 <?php
 namespace App\Services\GeneralServices;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use SapientPro\ImageComparator\ImageComparator;
 use SapientPro\ImageComparator\ImageResourceException;
@@ -14,7 +16,7 @@ class ImageComparisonService
      * @return array
      * @throws ImageResourceException
      */
-    public function compareImage(string $imagePath): array
+    public function compareImage(string $imagePath,string $name): array
     {
         $imageComparator = new ImageComparator();
         $similarImages = [];
@@ -23,13 +25,15 @@ class ImageComparisonService
         $imagesDirectory = public_path('images/users'); // Ensure this is correct
         $images = scandir($imagesDirectory);
 
+        // Replace the comparison and image path generation with the following:
         foreach ($images as $image) {
             if ($image == '.' || $image == '..') {
                 continue;
             }
 
             $currentImageFullPath = $imagesDirectory . '/' . $image;
-            $imagefinalpath=  public_path($imagePath);
+            $imagefinalpath = public_path($imagePath);
+
             // Skip comparing the uploaded image with itself
             if ($currentImageFullPath === $imagefinalpath) {
                 continue;
@@ -39,10 +43,17 @@ class ImageComparisonService
             if (file_exists($currentImageFullPath)) {
                 $similarity = $imageComparator->compare($imagefinalpath, $currentImageFullPath);
 
-                if ($similarity > 80 && !($imagePath === '/images/users//' . $image)) {
+                if ($similarity > 80) {
+                    // Update the path for the similar image
+                    $similarImageRelativePath = '/images/users//' . $image;
+
+                    $similarImageUser = User::where('image', 'like','%'.$similarImageRelativePath.'%')->get();
+
                     $similarImages[] = [
                         'uploaded_image' => $imagePath,
-                        'similar_image' => '/images/users//' . $image,
+                        'uploaded_image_user' => $name,
+                        'similar_image' => $similarImageRelativePath,
+                        'similar_image_user' => $similarImageUser->pluck('name'),
                         'similarity' => $similarity
                     ];
                 }

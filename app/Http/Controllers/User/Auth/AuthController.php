@@ -45,7 +45,7 @@ class AuthController extends BaseController
             return response()->json($loginValidation->getErrors(), 406);
         }
 
-        $user = $this->loginService->loginUser($loginValidation->validated());
+        $user = $this->loginService->loginUser($loginValidation->request()->all());
         if ($user) {
             $message = "You logged in successfully";
             $token = $user->createToken('AppName')->plainTextToken;
