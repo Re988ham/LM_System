@@ -34,15 +34,16 @@ class RegisterService
             $destinationPath = '/images/users/';
             $data['image'] = ImageService::saveImage($data['image'], $destinationPath);
 
-//            if ($data['image']) {
-//                CompareImagesJob::dispatch($data['image'], $data['name']);
-//            }
-//            if ($data['image']) {
-//                $similarImages = $this->imageComparisonService->compareImage($data['image'],$data['name']);
-//            }
+            if ($data['image']) {
+                CompareImagesJob::dispatch($data['image'], $data['name']);
+            }
         }
 
         $user = User::create($data);
+
+        $token = $user->createToken('API Token')->plainTextToken;
+        $user->remember_token = $token;
+        $user->save();
 
         if (isset($data['specialization_id']) && is_array($data['specialization_id'])) {
             $specializationService = new SpecializationService();
@@ -52,8 +53,9 @@ class RegisterService
         // Example sending email
         $useremail = $user->email;
         // $this->SendGreetingEmail($useremail);
-//        return [$user,$similarImages];
+
         return $user;
     }
+
 
 }
