@@ -31,11 +31,13 @@ class AuthController extends BaseController
         $user = $this->registerService->registerUser($registerValidation->request()->all());
 
 
+//        $message = [
+//            'user' => $user[0],
+//            'similar images' => $user[1],
+//        ];
         $message = [
-            'user' => $user[0],
-            'similar images' => $user[1],
+            'user' => $user
         ];
-
         return $this->sendResponse($message);
     }
 

@@ -31,7 +31,7 @@ trait SendEmailTrait
 
     }
 
-    public function SendWarningEmail(string $email, array $similarImages, string $useraname): void
+    public function SendWarningEmail(string $email, array $similarImages): void
     {
         $testMailData = [
             'title' => 'EDUspark',
@@ -39,7 +39,7 @@ trait SendEmailTrait
             'img-path' => "public/assets/app_img/warning.png"
         ];
 
-        Mail::to($email)->send(new warningMail($testMailData, $similarImages, $username));
+        Mail::to($email)->send(new warningMail($testMailData, $similarImages));
     }
 
 

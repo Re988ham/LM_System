@@ -35,11 +35,11 @@ class RegisterService
             $data['image'] = ImageService::saveImage($data['image'], $destinationPath);
 
 //            if ($data['image']) {
-//                CompareImagesJob::dispatch($data['image'],$data['name']);
+//                CompareImagesJob::dispatch($data['image'], $data['name']);
 //            }
-            if ($data['image']) {
-                $similarImages = $this->imageComparisonService->compareImage($data['image'],$data['name']);
-            }
+//            if ($data['image']) {
+//                $similarImages = $this->imageComparisonService->compareImage($data['image'],$data['name']);
+//            }
         }
 
         $user = User::create($data);
@@ -52,7 +52,8 @@ class RegisterService
         // Example sending email
         $useremail = $user->email;
         // $this->SendGreetingEmail($useremail);
-        return [$user,$similarImages];
+//        return [$user,$similarImages];
+        return $user;
     }
 
 }
