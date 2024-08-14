@@ -1,48 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Similar Images Found</title>
 </head>
-<body style="font-family: Arial, sans-serif;">
-<div style="width: 80%; margin: auto; text-align: center;">
-    <div style="font-size: 20px; color: #e74c3c;">
-        <img src="{{ $message->embed(public_path('images/warning.png')) }}" alt="Warning" style="max-width: 50px;">
-        <h1 style="color: #e74c3c;">EDUspark</h1>
-    </div>
-    <p>There is someone trying to make a fuss</p>
-    <table style="width: 100%; height:100%; border-collapse: collapse; margin-top: 20px;">
-        <thead>
-        <tr>
-            <th style="padding: 20px; border: 1px solid #ddd; text-align: center; background-color: #f2f2f2;">Uploaded Image</th>
-            <th style="padding: 20px; border: 1px solid #ddd; text-align: center; background-color: #f2f2f2;">Uploaded Image User</th>
-            <th style="padding: 20px; border: 1px solid #ddd; text-align: center; background-color: #f2f2f2;">Similar Image</th>
-            <th style="padding: 20px; border: 1px solid #ddd; text-align: center; background-color: #f2f2f2;">Similar Image User</th>
-            <th style="padding: 20px; border: 1px solid #ddd; text-align: center; background-color: #f2f2f2;">Similarity</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach ($similarImages as $image)
-            <tr>
-                <td style="padding: 25px; border: 1px solid #ddd; text-align: center;">
-                    <img src="{{ $message->embed(public_path(ltrim($image['uploaded_image'], '/'))) }}" alt="Uploaded Image" style="max-width: 150px; border-radius: 8px;">
-                </td>
-                <td style="padding: 25px; border: 1px solid #ddd; text-align: center;">{{ $image['uploaded_image_user'] }}</td>
-                <td style="padding: 25px; border: 1px solid #ddd; text-align: center;">
-                    <!-- Use Base64 encoding for embedding -->
-                    @php
-                        $path = public_path(ltrim($image['similar_image'], '/'));
-                        $type = pathinfo($path, PATHINFO_EXTENSION);
-                        $data = file_get_contents($path);
-                        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-                    @endphp
-                    <img src="{{ $base64 }}" alt="Similar Image" style="max-width: 150px; border-radius: 8px;">
-                </td>
-                <td style="padding: 25px; border: 1px solid #ddd; text-align: center;">{{ implode(', ', $image['similar_image_user']) }}</td>
-                <td style="padding: 25px; border: 1px solid #ddd; text-align: center;">{{ $image['similarity'] }}%</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+<body style="font-family: Arial, sans-serif; background-color: #f9f9f9; margin: 0; padding: 20px;">
+<div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px;">
+    <h1 style="text-align: center; color: #f00;">Similar Images Found</h1>
+
+    <p style="font-size: 16px; color: #555555;">
+        We have found some images that are similar to the one you uploaded. Below are the details:
+    </p>
+
+    @foreach($similarImages as $comparison)
+        <div style="margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; padding-bottom: 15px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <!-- Display Uploaded Image -->
+                <div style="text-align: center;">
+                    <h4 style="margin: 10px 0; color: #333333;">Uploaded Image</h4>
+                    <img src="{{ $message->embed(public_path($comparison['uploaded_image'])) }}" alt="Uploaded Image"
+                         style="max-width: 150px; max-height: 150px; object-fit: cover; border-radius: 8px; border: 1px solid #ddd; margin-right: 10px;">
+                    <p style="margin: 5px 0; color: #777777;">User: {{ $comparison['uploaded_image_user'] }}</p>
+                </div>
+
+                <!-- Display Similar Image -->
+                <div style="text-align: center;">
+                    <h4 style="margin: 10px 0; color: #333333;">Similar Image</h4>
+                    <img src="{{ $message->embed(public_path($comparison['similar_image'])) }}" alt="Similar Image"
+                         style="max-width: 150px; max-height: 150px; object-fit: cover; border-radius: 8px; border: 1px solid #ddd; margin-left: 10px;">
+                    <p style="margin: 5px 0; color: #777777;">User: {{ $comparison['similar_image_user']->join(', ') }}</p>
+                </div>
+            </div>
+
+            <!-- Display Similarity Percentage -->
+            <div style="text-align: center; margin-top: 10px; font-size: 18px; font-weight: bold; color: #333333;">
+                Similarity: {{ $comparison['similarity'] }}%
+            </div>
+        </div>
+    @endforeach
+
+    <p style="font-size: 16px; color: #555555;">
+        If you have any questions or concerns, please contact us.
+    </p>
 </div>
 </body>
 </html>

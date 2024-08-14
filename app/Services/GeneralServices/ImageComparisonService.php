@@ -12,10 +12,10 @@ class ImageComparisonService
      * Compare two images and return similarity percentage.
      *
      * @param string $imagePath
-     * @param mixed $name ...$
      * @return array
+     * @throws ImageResourceException
      */
-    public function compareImage(string $imagePath,string ...$name): array
+    public function compareImage(string $imagePath,string $name): array
     {
         $imageComparator = new ImageComparator();
         $similarImages = [];
