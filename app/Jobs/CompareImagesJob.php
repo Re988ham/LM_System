@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use SapientPro\ImageComparator\ImageResourceException;
 
@@ -35,13 +36,13 @@ class CompareImagesJob implements ShouldQueue
      * @return void
      * @throws ImageResourceException
      */
-    public function handle()
+    public function handle(): void
     {
-        $imageComparisonService = new ImageComparisonService();
-        $similarImages = $imageComparisonService->compareImage($this->imagePath, $this->name);
+
+
+        $similarImages = (new ImageComparisonService)->compareImage($this->imagePath, $this->name);
 
         if (!empty($similarImages)) {
-            // Send email with the similar images
             Mail::to('mhranabwdqt971@email.com')->send(new \App\Mail\SimilarImagesMail($similarImages));
         }
     }

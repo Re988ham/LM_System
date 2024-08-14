@@ -32,14 +32,14 @@ trait SendEmailTrait
 
     }
 
-    public function SendWarningEmail(string $email, array $similarImages): void
-    {
-        $testMailData = [
-            'title' => 'EDUspark',
-            'body' => 'There is someone tried to make fuss',
-            'img-path' => storage_path('app/public/assets/app_img/warning.png') // Updated path to point to your uploaded image
-        ];
-
-        Mail::to($email)->send(new warningMail($testMailData, $similarImages));
-    }
+//    public function SendWarningEmail(string $email, array $similarImages): void
+//    {
+//        $testMailData = [
+//            'title' => 'EDUspark',
+//            'body' => 'There is someone tried to make fuss',
+//            'img-path' => storage_path('app/public/assets/app_img/warning.png') // Updated path to point to your uploaded image
+//        ];
+//
+//        Mail::to($email)->send(new warningMail($testMailData, $similarImages));
+//    }
 }

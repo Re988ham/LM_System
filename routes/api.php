@@ -139,9 +139,11 @@ Route::middleware('auth:sanctum')->prefix('sidebar')->controller(SidebarControll
 
 //searching in course
 Route::middleware('auth:sanctum')->group(function () {
-Route::get('/search',[SearchController::class,'search']);
+    Route::get('/search',[SearchController::class,'search']);
 
 });
+Route::post('/searchincourses', [SearchController::class, 'getcoursesbyimage']);
+
 //send notification to mobile
 Route::post('/send_notify', [sendnotify::class, 'sendWebNotification']);
 

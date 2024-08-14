@@ -38,9 +38,9 @@ class RegisterService
 //            if ($data['image']) {
 //                $similarImages = $this->imageComparisonService->compareImage($data['image'], $data['name']);
 //            }
-            if ($data['image']) {
-                CompareImagesJob::dispatch($data['image'], $data['name']);
-            }
+//            if ($data['image']) {
+//                CompareImagesJob::dispatch($data['image'], $data['name']);
+//            }
             $user = User::create($data);
 
             $token = $user->createToken('API Token')->plainTextToken;
