@@ -74,6 +74,7 @@ class QuizController extends Controller
         } else {
             return $this->responseService->sendError("No courses found.");
         }
+
     }
 
 }

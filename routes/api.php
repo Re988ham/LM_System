@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\sendnotify;
 use App\Http\Controllers\User\Auth\AuthController;
 use App\Http\Controllers\User\Auth\CodeCheckController;
@@ -20,7 +21,9 @@ use App\Http\Controllers\User\Sidebar\SidebarController;
 use App\Http\Controllers\User\Specializationwedget\SpecializationwedgetController;
 use App\Http\Controllers\User\LiveWedget\LiveController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
+use Google\Client as GoogleClient;
 
 
 /*
@@ -152,5 +155,6 @@ Route::post('/send_notify', [sendnotify::class, 'sendWebNotification']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();});
 
-//testing controller
-Route::post('/index', [\App\Http\Controllers\testController::class, 'index']);
+
+Route::get('/send_notification',[sendnotify::class,'sendWebNotification']);
+Route::post('/send_report',[ReportsController::class,'send_reports'])->middleware('auth:sanctum');

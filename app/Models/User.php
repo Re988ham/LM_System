@@ -92,4 +92,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Wallet::class);
     }
 
+
+    public function report()
+    {
+        return $this->hasMany(Reports::class);
+    }
+
 }

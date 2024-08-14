@@ -1,52 +1,68 @@
 <?php
-
-namespace App\Http\Controllers;
-
-use App\Models\User;
-use Illuminate\Http\Request;
-
-class sendnotify extends Controller
-{
-    public function sendWebNotification(Request $request)
-    {
-        $url = 'https://fcm.googleapis.com/fcm/send';
-        $FcmToken = User::whereNotNull('device_key')->pluck('device_key')->all();
-
-        $serverKey = '';
-
-        $data = [
-            "registration_ids" => $FcmToken,
-            "notification" => [
-                "title" => $request->title,
-                "body" => $request->body,
-            ]
-        ];
-        $encodedData = json_encode($data);
-
-        $headers = [
-            'Authorization:key=' . $serverKey,
-            'Content-Type: application/json',
-        ];
-
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-        // Disabling SSL Certificate support temporarly
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $encodedData);
-        // Execute post
-        $result = curl_exec($ch);
-        if ($result === FALSE) {
-            die('Curl failed: ' . curl_error($ch));
-        }
-        // Close connection
-        curl_close($ch);
-        // FCM response
-        print_r($result);
-    }
-}
+//
+//namespace App\Http\Controllers;
+//
+//use Google\Client as GoogleClient;
+//
+//use Illuminate\Support\Facades\Http;
+//
+//class sendnotify extends Controller
+//{
+//    public function sendWebNotification()
+//
+//    {
+//        $fcm = "DEVICE_FCM_TOKEN";
+//
+//        $title = "اشعار جديد";
+//        $description = "تيست تيست تيست";
+//
+////    $credentialsFilePath = "json/file.json";  // local
+//        $credentialsFilePath = Http::get(asset('json/file.json')); // in server
+//        $client = new GoogleClient();
+//        $client->setAuthConfig($credentialsFilePath);
+//        $client->addScope('https://www.googleapis.com/auth/firebase.messaging');
+//        $client->refreshTokenWithAssertion();
+//        $token = $client->getAccessToken();
+//
+//        $access_token = $token['access_token'];
+//
+//        $headers = [
+//            "Authorization: Bearer $access_token",
+//            'Content-Type: application/json'
+//        ];
+//
+//        $data = [
+//            "message" => [
+//                "token" => $fcm,
+//                "notification" => [
+//                    "title" => $title,
+//                    "body" => $description,
+//                ],
+//            ]
+//        ];
+//        $payload = json_encode($data);
+//
+//        $ch = curl_init();
+//        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/v1/projects/project_id/messages:send');
+//        curl_setopt($ch, CURLOPT_POST, true);
+//        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+//        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+//        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+//        curl_setopt($ch, CURLOPT_VERBOSE, true); // Enable verbose output for debugging
+//        $response = curl_exec($ch);
+//        $err = curl_error($ch);
+//        curl_close($ch);
+//
+//        if ($err) {
+//            return response()->json([
+//                'message' => 'Curl Error: ' . $err
+//            ], 500);
+//        } else {
+//            return response()->json([
+//                'message' => 'Notification has been sent',
+//                'response' => json_decode($response, true)
+//            ]);
+//        }
+//    }
+//}
