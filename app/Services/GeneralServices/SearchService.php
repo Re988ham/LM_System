@@ -11,14 +11,22 @@ class SearchService
 {
 
     // Search for courses by name with pagination
-    public function searchCourses(string $query)
+    public function searchCourses(string $query, $spec_id = null, $country_id = null)
     {
-        return Course::where('name', 'LIKE', '%' . $query . '%')
+        $response = Course::where('name', 'LIKE', '%' . $query . '%')
+        ->where('status','accepted');
 
-            ->take(10)
-            ->get();
+        if (!empty($spec_id)) {
+            $response->where('specialization_id', $spec_id);
+        }
 
+        if (!empty($country_id)) {
+            $response->where('country_id', $country_id);
+        }
+
+        return $response->take(10)->get();
     }
+
     /**
      * @throws \Exception
      */

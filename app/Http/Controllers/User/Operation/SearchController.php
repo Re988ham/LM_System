@@ -30,23 +30,23 @@ class SearchController extends Controller
         $this->comparisonService = $comparisonService;
     }
 
-    public function search(SearchValidation $request): \Illuminate\Http\JsonResponse
+    public function search(SearchValidation $request, $spec_id = null, $country_id = null): \Illuminate\Http\JsonResponse
     {
-        $query = request()->input('query');
+        $query = $request->input('query');
 
-        $results = $this->searchService->searchCourses($query);
+        $results = $this->searchService->searchCourses($query, $spec_id, $country_id);
 
         $this->searchService->saveSearch($query);
 
         $lastSearches = $this->searchService->getLastSearches();
 
-        // Return the results along with the last searches
         return response()->json([
             'success' => true,
             'results' => $results,
             'last_searches' => $lastSearches,
         ]);
     }
+
 
 
 

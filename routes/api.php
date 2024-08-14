@@ -147,11 +147,6 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 Route::post('/searchincourses', [SearchController::class, 'getcoursesbyimage']);
 
-//send notification to mobile
-Route::post('/send_notify', [sendnotify::class, 'sendWebNotification']);
-
-
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();});
 
