@@ -14,7 +14,6 @@ use App\Services\GeneralServices\ResponseService;
 use App\Services\GeneralServices\SearchService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
 use SapientPro\ImageComparator\ImageComparator;
 
 class SearchController extends Controller
