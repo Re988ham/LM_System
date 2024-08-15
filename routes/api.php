@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\sendnotify;
 use App\Http\Controllers\User\Auth\AuthController;
 use App\Http\Controllers\User\Auth\CodeCheckController;
@@ -157,4 +157,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('/send_notification',[sendnotify::class,'sendWebNotification']);
-Route::post('/send_report',[ReportsController::class,'send_reports'])->middleware('auth:sanctum');
+Route::post('/send_report',[ReportController::class,'send_reports'])->middleware('auth:sanctum');

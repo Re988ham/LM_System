@@ -104,7 +104,7 @@
                                         </td>
 
                                         <td class="text-center">
-                                            @if($course->status->value === 'pending')
+                                            @if(Auth::user()->role->name === 'super-admin' && $course->status->value === 'pending')
                                                 <a href="{{ route('admin.course.accept', $course->id) }}" class="mx-3"
                                                    data-bs-toggle="tooltip" data-bs-original-title="Accept Course">
                                                     <i class="fas fa-check text-secondary"></i>

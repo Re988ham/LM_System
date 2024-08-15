@@ -71,7 +71,7 @@
                                         </td>
                                         <td>
                                             <div>
-                                                <img src="{{ asset('images/users/' . $user->image) }}"
+                                                <img src="{{ asset($user->image) }}"
                                                      class="avatar avatar-sm me-3" alt="User Image">
                                             </div>
                                         </td>

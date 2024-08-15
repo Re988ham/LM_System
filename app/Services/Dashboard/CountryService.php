@@ -43,4 +43,9 @@ class CountryService
         }
         $country->delete();
     }
+
+    ############################# Additional #############################
+    public function getAllCountriesChoices() {
+        return Country::pluck('name', 'id');
+    }
 }
