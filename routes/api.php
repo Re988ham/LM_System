@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FCMController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\sendnotify;
@@ -147,8 +148,8 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 Route::post('/searchincourses', [SearchController::class, 'getcoursesbyimage']);
 
-//send notification to mobile
-Route::post('/send_notify', [sendnotify::class, 'sendWebNotification']);
+////send notification to mobile
+//Route::post('/send_notify', [sendnotify::class, 'sendWebNotification']);
 
 
 
@@ -156,5 +157,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();});
 
 
-Route::get('/send_notification',[sendnotify::class,'sendWebNotification']);
+Route::get('/send_notification',[FCMController::class,'sendWebNotification']);
 Route::post('/send_report',[ReportsController::class,'send_reports'])->middleware('auth:sanctum');

@@ -6,7 +6,7 @@ use App\Models\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ReportController extends Controller
+class ReportsController extends Controller
 {
     public function send_reports(Request $request){
         $user_id=Auth::user()->id;
