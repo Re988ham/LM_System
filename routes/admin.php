@@ -10,10 +10,12 @@ use App\Http\Controllers\Dashboard\EnrollmentController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\QuestionController;
 use App\Http\Controllers\Dashboard\QuizController;
+use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\SessionsController;
 use App\Http\Controllers\Dashboard\SpecializationController;
 use App\Http\Controllers\Dashboard\TypeController;
 use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\ReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -185,6 +187,31 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/destroy/{id}', 'destroy')->name('admin.types.destroy');
         });
     });
+
+    ############################# Roles #############################
+    Route::controller(RoleController::class)->group(function () {
+        Route::group(['prefix' => 'roles'], function () {
+            Route::get('/', 'index')->name('admin.roles.index');
+            Route::get('/create', 'create')->name('admin.roles.create');
+            Route::post('/store', 'store')->name('admin.roles.store');
+            Route::get('/edit/{id}', 'edit')->name('admin.roles.edit');
+            Route::post('/update', 'update')->name('admin.roles.update');
+            Route::get('/destroy/{id}', 'destroy')->name('admin.roles.destroy');
+        });
+    });
+
+    ############################# Reports #############################
+    Route::controller(ReportController::class)->group(function () {
+        Route::group(['prefix' => 'reports'], function () {
+            Route::get('/', 'index')->name('admin.reports.index');
+            Route::get('/create', 'create')->name('admin.reports.create');
+            Route::post('/store', 'store')->name('admin.reports.store');
+            Route::get('/edit/{id}', 'edit')->name('admin.reports.edit');
+            Route::post('/update', 'update')->name('admin.reports.update');
+            Route::get('/destroy/{id}', 'destroy')->name('admin.reports.destroy');
+        });
+    });
+
 
     ############################# Users #############################
     Route::controller(UserController::class)->group(function () {
