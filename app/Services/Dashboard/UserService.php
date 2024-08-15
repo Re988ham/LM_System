@@ -3,9 +3,9 @@
 namespace App\Services\Dashboard;
 
 use App\Models\User;
+use App\Services\GeneralServices\ImageService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
-use App\Services\ImageService;
 
 
 class UserService
@@ -22,7 +22,7 @@ class UserService
     public function create(array $data): User
     {
         if (isset($data['image'])) {
-            $destinationPath = public_path('images/users/');
+            $destinationPath = 'images/users/';
             $data['image'] = ImageService::saveImage($data['image'], $destinationPath);
         }
         return User::create($data);
@@ -32,9 +32,9 @@ class UserService
     {
         $user = $this->findById($id);
         $imagePath = public_path('images/users/') . $user->image;
-        $deleted = ImageService::deleteImage($imagePath);
+        //$deleted = ImageService::deleteImage($imagePath);
         if (isset($data['image'])) {
-            $destinationPath = public_path('images/users/');
+            $destinationPath = 'images/users/';
             $data['image'] = ImageService::saveImage($data['image'], $destinationPath);
         }
         $user->update($data);

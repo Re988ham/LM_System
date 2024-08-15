@@ -38,9 +38,6 @@ class AdsService
     public function destroy(string $id)
     {
         $advertisement = $this->findById($id);
-        if ($advertisement->specialization != null) {
-            throw new Exception('Advertisement cannot be deleted. Associated specialization exist', 409);
-        }
         $advertisement->delete();
     }
 }

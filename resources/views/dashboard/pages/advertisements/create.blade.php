@@ -50,7 +50,7 @@
 
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="advertisement-name" class="form-control-label">{{ __('Advertisement Image') }}</label>
+                                <label for="advertisement-image" class="form-control-label">{{ __('Advertisement Image') }}</label>
                                 <div class="@error('advertisement.image')border border-danger rounded-3 @enderror">
                                     <input class="form-control" type="file" id="advertisement-image" name="image">
                                     @error('image')
@@ -64,7 +64,7 @@
                             <div class="form-group">
                                 <label for="advertisement-description"
                                        class="form-control-label">{{ __('Advertisement Description') }}</label>
-                                <div class="@error('advertisement.name')border border-danger rounded-3 @enderror">
+                                <div class="@error('advertisement.description')border border-danger rounded-3 @enderror">
                                     <textarea class="form-control" id="advertisement-description" name="description"></textarea>
                                     @error('description')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>

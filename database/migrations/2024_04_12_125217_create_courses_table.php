@@ -19,9 +19,8 @@ return new class extends Migration
             $table->enum('status', ['pending', 'accepted']);
             $table->integer('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('specialization_id')->constrained('specializations')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->integer('country_id')->constrained('countries')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->integer('country_id')->nullable()->constrained('countries')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
-
         });
     }
 

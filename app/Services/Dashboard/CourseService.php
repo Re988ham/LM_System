@@ -14,7 +14,7 @@ class CourseService
         if (Auth::user()->hasRole('super-admin') || Auth::user()->role_id === 1) {
             return Course::where('status', CourseStatus::ACCEPTED)->get();
         } else {
-            return Course::where('teacher_id', Auth::id())->get();
+            return Course::where('user_id', Auth::id())->get();
         }
     }
 
@@ -25,6 +25,10 @@ class CourseService
 
     public function createCourse($data)
     {
+        $data['status'] = CourseStatus::PENDING;
+        if (Auth::user()->hasRole('teacher') || Auth::user()->role_id === 2) {
+            $data['user_id'] = Auth::id();
+        }
         return Course::create($data);
     }
 
