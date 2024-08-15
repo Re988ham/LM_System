@@ -20,18 +20,19 @@ class FCMController extends Controller
     public function sendWebNotification(Request $request){
 
         $request->validate([
-            'token'=>'required|string',
+//            'token'=>'required|string',
             'title'=>'required|string',
             'body'=>'required|string',
             'data'=>'nullable|string',
         ]);
 
-        $token=$request->input('token');
+//        $token=$request->input('token');
         $title=$request->input('title');
         $body=$request->input('body');
         $data=$request->input('data',[]);
 
-        $this->notificationService->send($token, $title, $body, $data);
+        $this->notificationService->send( //$token,
+            $title, $body, $data);
 
         return response()->json(['message'=>'Notification sent successfully ']);
     }
