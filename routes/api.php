@@ -157,5 +157,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();});
 
 
-Route::get('/send_notification',[FCMController::class,'sendWebNotification']);
+Route::post('/send_notification',[FCMController::class,'sendWebNotification']);
 Route::post('/send_report',[ReportsController::class,'send_reports'])->middleware('auth:sanctum');

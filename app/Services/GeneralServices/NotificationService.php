@@ -33,8 +33,9 @@ class NotificationService
      * @throws MessagingException
      * @throws FirebaseException
      */
-    public function send($token, $title, $body, $data = []): void
-    {
+    public function send( //$token,
+                         $title, $body, $data = []): void
+    {   $token='f-2vEzDHRMCnt9KgPo5tnP:APA91bETRO_3ty6ZG5bPH5Zs5-bc_MEA5tkGlp02WgPo9Z38aqksEQIh34Adlr2q9JzJDS1N4zJTqix50EQWQvHO4sAKzgJXBJb8Db5I6doPLHYf3maGTAk1u6WUY82SA8nuLibFrrHn';
         $message = CloudMessage::withTarget('token', $token)
             ->withNotification(['title' => $title, 'body' => $body])
             ->withData($data);
