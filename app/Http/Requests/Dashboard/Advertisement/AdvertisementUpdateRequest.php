@@ -25,7 +25,7 @@ class AdvertisementUpdateRequest extends FormRequest
         return [
             'id' => 'required',
             'specialization_id' => 'sometimes|exists:specializations,id',
-            'image' => 'sometimes|nullable|string|max:255',
+            'image' => 'sometimes|mimes:jpg,jpeg,png,pdf|max:2048',
             'description' => 'sometimes|string|max:255',
         ];
     }

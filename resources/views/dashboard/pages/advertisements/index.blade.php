@@ -53,7 +53,7 @@
                                         </td>
                                         <td class="text-center">
                                             <p class="text-xs font-weight-bold mb-0">
-                                                <img src="{{ $advertisement->image }}" alt="image">
+                                                <img src="{{ asset($advertisement->image) }}" width="40" height="40" alt="image">
                                             </p>
                                         </td>
                                         <td class="text-center">

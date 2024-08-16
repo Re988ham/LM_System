@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services\GeneralServices;
 
 use Illuminate\Http\UploadedFile;
@@ -23,5 +24,23 @@ class ImageService
 
         return null;
     }
+
+    /**
+     * Delete an image from a specific path.
+     *
+     * @param string $imagePath
+     * @return bool
+     */
+    public static function deleteImage(string $imagePath): bool
+    {
+        $fullPath = public_path($imagePath);
+
+        if (file_exists($fullPath)) {
+            return unlink($fullPath);
+        }
+
+        return false;
+    }
 }
+
 

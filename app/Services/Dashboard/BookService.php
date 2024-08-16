@@ -17,14 +17,20 @@ class BookService
 
     public function store(array $data): Book
     {
+        $data['image'] = ImageService::saveImage($data['image'], '/images/books/');
         $book = Book::create($data);
-        ImageService::saveImage($data['image'], '/images/books/');
         return $book;
     }
 
     public function update(array $data): Book
     {
         $book = $this->findById($data['id']);
+
+        $isDeleted = ImageService::deleteImage($book->image);
+        if (isset($data['image'])) {
+            $destinationPath = 'images/books/';
+            $data['image'] = ImageService::saveImage($data['image'], $destinationPath);
+        }
 
         $book->update($data);
 
@@ -43,6 +49,7 @@ class BookService
         if ($book->specialization != null) {
             throw new Exception('Book cannot be deleted. Associated specialization exist', 409);
         }
+        $isDeleted = ImageService::deleteImage($book->image);
         $book->delete();
     }
 }

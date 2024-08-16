@@ -65,7 +65,7 @@
                                         </td>
                                         <td class="text-center">
                                             <p class="text-xs font-weight-bold mb-0">
-                                                {{ $book->image }}
+                                                <img src="{{ asset($book->image) }}" alt="image" width="40" height="40">
                                             </p>
                                         </td>
                                         <td class="text-center">

@@ -24,7 +24,7 @@ class AdvertisementCreateRequest extends FormRequest
     {
         return [
             'specialization_id' => 'required|exists:specializations,id',
-            'image' => 'nullable|string|max:255',
+            'image' => 'required|mimes:jpg,jpeg,png,pdf|max:2048',
             'description' => 'required|string|max:255',
         ];
     }
