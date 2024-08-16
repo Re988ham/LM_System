@@ -46,18 +46,6 @@
                                     </th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Enrollment Date
-                                    </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Completion Date
-                                    </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Grade
-                                    </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Action
                                     </th>
                                 </tr>
@@ -72,12 +60,14 @@
                                         </td>
                                         <td class="text-center">
                                             <p class="text-xs font-weight-bold mb-0">
-                                                <a href="{{ $member->user_id }}" target="_blank">{{ $member->user_id }}</a>
+                                                <a href="{{ $member->user_id }}"
+                                                   target="_blank">{{ $member->user->name }}</a>
                                             </p>
                                         </td>
                                         <td class="text-center">
                                             <p class="text-xs font-weight-bold mb-0">
-                                                <a href="{{ $member->course->name }}" target="_blank">{{ $member->course->name }}</a>
+                                                <a href="{{ $member->course->name }}"
+                                                   target="_blank">{{ $member->course->name }}</a>
                                             </p>
                                         </td>
                                         <td class="text-center">
@@ -86,26 +76,12 @@
                                             </p>
                                         </td>
                                         <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">
-                                                {{ $member->enrollment_date }}
-                                            </p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">
-                                                {{ $member->completion_date }}
-                                            </p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">
-                                                {{ $member->grade }}
-                                            </p>
-                                        </td>
-                                        <td class="text-center">
                                             @if($member->status->value === 'pending')
-                                            <a href="{{ route('admin.enrollments.accept', $member->id) }}" class="mx-3"
-                                               data-bs-toggle="tooltip" data-bs-original-title="Accept Member">
-                                                <i class="fas fa-check text-secondary"></i>
-                                            </a>
+                                                <a href="{{ route('admin.enrollments.accept', $member->id) }}"
+                                                   class="mx-3"
+                                                   data-bs-toggle="tooltip" data-bs-original-title="Accept Member">
+                                                    <i class="fas fa-check text-secondary"></i>
+                                                </a>
                                             @endif
                                             <a href="{{ route('admin.enrollments.destroy', $member->id) }}" class="mx-3"
                                                data-bs-toggle="tooltip" data-bs-original-title="Delete Member">

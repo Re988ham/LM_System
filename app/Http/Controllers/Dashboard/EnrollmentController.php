@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Enrollment;
 use App\Services\Dashboard\CourseService;
 use App\Services\Dashboard\EnrollmentService;
 use Exception;
@@ -31,10 +32,11 @@ class EnrollmentController extends Controller
     public function destroy(string $id)
     {
         try {
-            $this->enrollmentService->destroy($id);
-            return redirect()->route('admin.courses.enrollments.index')->with('success', 'Content deleted successfully.');
+            $enrollment = $this->enrollmentService->findById($id);
+            $this->enrollmentService->destroy($enrollment);
+            return redirect()->route('admin.course.members', $enrollment->course_id)->with('success', 'Content deleted successfully.');
         } catch (Exception $e) {
-            return redirect()->route('admin.courses.enrollments.index')->with('error', $e->getMessage());
+            return redirect()->route('admin.course.members', $enrollment->course_id)->with('error', $e->getMessage());
         }
     }
 
@@ -43,7 +45,8 @@ class EnrollmentController extends Controller
      */
     public function acceptMember(string $id)
     {
-        $this->enrollmentService->accept($id);
-        return redirect()->route('admin.courses.enrollments.index')->with('success', 'Content accepted successfully.');
+        $enrollment = Enrollment::findOrFail($id);
+        $this->enrollmentService->accept($enrollment);
+        return redirect()->route('admin.course.members', $enrollment->course_id)->with('success', 'Content accepted successfully.');
     }
 }

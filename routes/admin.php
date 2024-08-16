@@ -103,7 +103,7 @@ Route::group(['middleware' => 'auth'], function () {
             // Basic Enrollments CRUD
             Route::get('/destroy/{id}', 'destroy')->name('admin.enrollments.destroy');
             // Extra Operations
-            Route::get('/accept/{id}', 'acceptContent')->name('admin.enrollments.accept');
+            Route::get('/accept/{id}', 'acceptMember')->name('admin.enrollments.accept');
         });
     });
 

@@ -14,22 +14,26 @@ class Enrollment extends Model
         'user_id',
         'course_id',
         'status',
-        'enrollment_date',
-        'completion_date',
-        'grade',
     ];
 
     protected $casts = [
         'status' => EnrollmentStatus::class,
     ];
 
-    public function user() {
+    public function changeStatus(EnrollmentStatus $newStatus)
+    {
+        $this->status = $newStatus;
+        $this->save();
+    }
+
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function course() {
+    public function course()
+    {
         return $this->belongsTo(Course::class);
     }
-
 
 }

@@ -4,6 +4,7 @@ namespace App\Services\Dashboard;
 
 use App\Enums\CourseStatus;
 use App\Models\Course;
+use App\Models\Enrollment;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -75,13 +76,15 @@ class CourseService
 
     public function showCourseMembers(string $courseId)
     {
-        $course = $this->findCourseById($courseId);
-        return $course->members;
+        $members = Enrollment::where('course_id', $courseId)
+            ->where('status', CourseStatus::ACCEPTED)->get();
+        return $members;
     }
 
     public function showCoursePendingMembers(string $courseId)
     {
-        $course = $this->findCourseById($courseId);
-        return $course->members->where('status', CourseStatus::PENDING);
+        $members = Enrollment::where('course_id', $courseId)
+            ->where('status', CourseStatus::PENDING)->get();
+        return $members;
     }
 }

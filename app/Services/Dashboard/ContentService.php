@@ -31,15 +31,15 @@ class ContentService
         return $content;
     }
 
-    public function destroy($id)
+    public function destroy(Content $content)
     {
-        $content = $this->findById($id);
         $content->delete();
     }
 
-    public function accept($id): void
+    public function accept($id): Content
     {
         $content = Content::findOrFail($id);
         $content->changeStatus(ContentStatus::ACCEPTED);
+        return $content->fresh();
     }
 }

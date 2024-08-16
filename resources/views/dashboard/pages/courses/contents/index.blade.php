@@ -15,10 +15,12 @@
                             <div>
                                 <h5 class="mb-0">All Contents</h5>
                             </div>
-                            <a href="{{ route('admin.contents.create', $courseId) }}" class="btn bg-gradient-primary btn-sm mb-0"
-                               type="button">
-                                +&nbsp; New Content
-                            </a>
+                            @if (Auth::user()->role->name === 'teacher')
+                                <a href="{{ route('admin.contents.create', $courseId) }}" class="btn bg-gradient-primary btn-sm mb-0"
+                                   type="button">
+                                    +&nbsp; New Content
+                                </a>
+                            @endif
                         </div>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
@@ -107,7 +109,7 @@
                                             </p>
                                         </td>
                                         <td class="text-center">
-                                            @if($content->status->value === 'pending')
+                                            @if($content->status->value === 'pending' && Auth::user()->role->name === 'super-admin')
                                             <a href="{{ route('admin.content.accept', $content->id) }}" class="mx-3"
                                                data-bs-toggle="tooltip" data-bs-original-title="Accept Content">
                                                 <i class="fas fa-check text-secondary"></i>

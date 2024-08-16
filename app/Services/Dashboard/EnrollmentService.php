@@ -31,15 +31,13 @@ class EnrollmentService
         return $enrollment;
     }
 
-    public function destroy($id)
+    public function destroy(Enrollment $enrollment)
     {
-        $enrollment = $this->findById($id);
         $enrollment->delete();
     }
 
-    public function accept($id): void
+    public function accept(Enrollment $enrollment): void
     {
-        $enrollment = Enrollment::findOrFail($id);
         $enrollment->changeStatus(EnrollmentStatus::ACCEPTED);
     }
 }

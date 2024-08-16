@@ -37,7 +37,7 @@ class ContentController extends Controller
     {
         $validatedData = $request->validated();
         $this->contentService->create($validatedData);
-        return redirect()->route('admin.course.courses.contents', $validatedData['course_id'])->with('success', 'Content created successfully');
+        return redirect()->route('admin.course.contents', $validatedData['course_id'])->with('success', 'Content created successfully');
     }
 
     /**
@@ -78,7 +78,7 @@ class ContentController extends Controller
         try {
             $validatedData = $request->validated();
             $content = $this->contentService->update($validatedData);
-            return redirect()->route('admin.course.courses.contents', $content->course_id)->with('success', 'Content updated successfully');
+            return redirect()->route('admin.course.contents', $content->course_id)->with('success', 'Content updated successfully');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->validator)->withInput();
         }
@@ -90,19 +90,26 @@ class ContentController extends Controller
     public function destroy(string $id)
     {
         try {
-            $this->contentService->destroy($id);
-            return redirect()->route('admin.courses.contents.index')->with('success', 'Content deleted successfully.');
+            $content = $this->contentService->findById($id);
+            $courseId = $content->course->id;
+            $this->contentService->destroy($content);
+            return redirect()->route('admin.course.contents', $courseId)->with('success', 'Content deleted successfully.');
         } catch (Exception $e) {
-            return redirect()->route('admin.courses.contents.index')->with('error', $e->getMessage());
+            return redirect()->route('admin.course.contents', $courseId)->with('error', $e->getMessage());
         }
     }
+
 
     /**
      * Accept the specified content.
      */
     public function acceptContent(string $id)
     {
-        $this->contentService->accept($id);
-        return redirect()->route('admin.courses.contents.index')->with('success', 'Content accepted successfully.');
+        $content = $this->contentService->accept($id);
+
+        $courseId = $content->course->id;
+
+        // Redirect to the course contents route with the course ID
+        return redirect()->route('admin.course.contents', $courseId)->with('success', 'Content accepted successfully.');
     }
 }
