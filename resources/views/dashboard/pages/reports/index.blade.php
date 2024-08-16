@@ -50,7 +50,7 @@
                                         </td>
                                         <td class="text-center">
                                             <p class="text-xs font-weight-bold mb-0">
-                                                {{ $report->name }}
+                                                {{ $report->report }}
                                             </p>
                                         </td>
                                     </tr>
