@@ -27,7 +27,7 @@ class CourseUpdateRequest extends FormRequest
             'name' => 'required',
             'description' => 'required',
             'specialization_id' => 'required',
-            'image' => '',
+            'image' => 'sometimes|mimes:jpg,jpeg,png,pdf|max:2048',
         ];
     }
 }

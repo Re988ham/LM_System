@@ -31,14 +31,15 @@ class ImageService
      * @param string $imagePath
      * @return bool
      */
-    public static function deleteImage(string $imagePath): bool
+    public static function deleteImage(?string $imagePath): bool
     {
-        $fullPath = public_path($imagePath);
+        if ($imagePath) {
+            $fullPath = public_path($imagePath);
 
-        if (file_exists($fullPath)) {
-            return unlink($fullPath);
+            if (file_exists($fullPath)) {
+                return unlink($fullPath);
+            }
         }
-
         return false;
     }
 }

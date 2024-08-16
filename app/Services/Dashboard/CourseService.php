@@ -6,6 +6,7 @@ use App\Enums\CourseStatus;
 use App\Models\Course;
 use App\Models\Enrollment;
 use App\Models\User;
+use App\Services\GeneralServices\ImageService;
 use Illuminate\Support\Facades\Auth;
 
 class CourseService
@@ -30,14 +31,23 @@ class CourseService
         if (Auth::user()->hasRole('teacher') || Auth::user()->role_id === 2) {
             $data['user_id'] = Auth::id();
         }
+        $data['image'] = ImageService::saveImage($data['image'], '/images/courses/');
         return Course::create($data);
     }
 
     public function updateCourse($id, $data)
     {
         $course = $this->findCourseById($id);
+
+        $isDeleted = ImageService::deleteImage($course->image);
+        if (isset($data['image'])) {
+            $destinationPath = 'images/courses/';
+            $data['image'] = ImageService::saveImage($data['image'], $destinationPath);
+        }
+
         $course->update($data);
-        return $course;
+
+        return $course->fresh();
     }
 
     public function findCourseById($id)
@@ -48,6 +58,7 @@ class CourseService
     public function deleteCourse($id)
     {
         $course = $this->findCourseById($id);
+        $isDeleted = ImageService::deleteImage($course->image);
         $course->delete();
     }
 
