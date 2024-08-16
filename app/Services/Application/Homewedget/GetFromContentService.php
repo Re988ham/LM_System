@@ -13,62 +13,46 @@ class GetFromContentService
 {
     public function Getvideos()
     {
-        $userId = auth('sanctum')->id();
-        $user = User::with('specializations')->find($userId);
+        $user = User::find(auth('sanctum')->id());
 
-        if (!$user) {
-            return null;
-        }
+        if ($user) {
+            $userSpecializations = $user->specializations;
+            $specializationIds = $userSpecializations->pluck('id');
+            $relatedvideos = [];
 
-        $specializationIds = $user->specializations->pluck('id')->toArray();
+            $relatedvid = Course::whereIn('specialization_id', $specializationIds)->where('status','accepted')->get();
 
-        if (empty($specializationIds)) {
-            return collect();
-        }
+            foreach ($relatedvid as $course) {
+                $relatedvideos[] = $course->contents->filter(function($content) {
+                    return $content->type == 'video' && $content->status == 'accepted';
+                });
+            }
 
-        $relatedVideos = Course::whereIn('specialization_id', $specializationIds)
-            ->where('status', 'accepted')
-            ->with(['contents' => function($query) {
-                $query->where('status', 'accepted')
-                    ->where('type_id', 1);
-            },])
-            ->get()
-            ->flatMap(function($course) {
-                return $course->contents;
-            });
-
-        return $relatedVideos;
-    }
+            return collect($relatedvideos)->flatten();
+        }}
 
     public function Getdocuments()
     {
-        $userId = auth('sanctum')->id();
-        $user = User::with('specializations')->find($userId);
+        $user = User::find(auth('sanctum')->id());
 
-        if (!$user) {
-            return null;
+        if ($user) {
+            $userSpecializations = $user->specializations;
+            $specializationIds = $userSpecializations->pluck('id');
+            $relatedvideos = [];
+
+            $relateddoc = Course::whereIn('specialization_id', $specializationIds)->where('status','accepted')->get();
+
+            foreach ($relateddoc as $course) {
+                $relateddocuments[] = $course->contents->filter(function($content) {
+                    return $content->type == 'document' && $content->status == 'accepted';
+                });;
+            }
+
+            return collect($relateddocuments)->flatten();
         }
 
-        $specializationIds = $user->specializations->pluck('id')->toArray();
-
-        if (empty($specializationIds)) {
-            return collect();
-        }
-
-        $relateddocuments = Course::whereIn('specialization_id', $specializationIds)
-            ->where('status', 'accepted')
-            ->with(['contents' => function($query) {
-                $query->where('status', 'accepted')
-                    ->where('type_id', 2);
-            },])
-            ->get()
-            ->flatMap(function($course) {
-                return $course->contents;
-            });
-
-        return $relateddocuments;
+        return null;
     }
-
 
 
 
@@ -79,32 +63,11 @@ class GetFromContentService
         if ($user) {
             $userSpecializations = $user->specializations;
             $specializationIds = $userSpecializations->pluck('id');
-            $courses =[];
+            $relatedcourses = [];
 
-             Course::whereIn('specialization_id', $specializationIds)
-                ->where('status','accepted')
-                ->chunk(10, function($chunk) use(&$courses){
+            $relatedcourses = Course::whereIn('specialization_id', $specializationIds)->where('status','accepted')->get();
 
-                    foreach($chunk as $course){
-                        $countryid =$course->country_id;
-                        $specializeid=$course->specialization_id;
-                        $autherid=$course->user_id;
-                        $country =Country::find($countryid);
-                        $specialization=Specialization::find($specializeid);
-                        $author=User::find($autherid);
-                        $course['country_id']= $country ? $country->name : 'Unknown Country';
-                        $course['specialization_id']= $specialization ? $specialization->name : 'Unknown Specialization';
-                        $course['user_id']= $author ? $author->name : 'Unknown Author';
-
-
-
-                        $courses[] = $course;
-
-                    }
-                });
-
-
-            return collect($courses)->flatten();
+            return collect($relatedcourses)->flatten();
         }
 
         return null;
