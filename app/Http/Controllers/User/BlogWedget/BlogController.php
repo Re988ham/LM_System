@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\User\BlogWedget;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Requests\BlogWedget\StorecommentRequest;
 use App\Requests\BlogWedget\StorelikeRequest;
 use App\Requests\BlogWedget\StorePostRequest;
 use App\Services\Application\BlogWedget\BlogService;
+use App\Services\GeneralServices\NotificationService;
 use App\Services\GeneralServices\ResponseService;
 
 class BlogController extends Controller
@@ -14,10 +16,12 @@ class BlogController extends Controller
     public BlogService $BlogService;
     public ResponseService $responseService;
 
-    public function __construct(ResponseService $responseService, BlogService $BlogService)
+    public NotificationService $notificationService;
+    public function __construct(ResponseService $responseService, BlogService $BlogService,NotificationService $notificationService)
     {
         $this->BlogService = $BlogService;
         $this->responseService = $responseService;
+        $this->notificationService=$notificationService;
     }
 
     public function createpost(StorePostRequest $storePostRequest)
@@ -34,6 +38,7 @@ class BlogController extends Controller
             return $this->responseService->sendError("Something went wrong!!");
         }
     }
+
     public function createcomment(StorecommentRequest $storecommentRequest)
     {
         if (!empty($storecommentRequest->getErrors())) {

@@ -8,13 +8,23 @@ use App\Models\Like;
 use App\Models\Post;
 use App\Models\User;
 use App\Services\GeneralServices\ImageService;
+use App\Services\GeneralServices\NotificationService;
+use App\Traits\FCMNotification;
 use Illuminate\Support\Facades\Auth;
+use Kreait\Firebase\Exception\FirebaseException;
+use Kreait\Firebase\Exception\MessagingException;
 
 class BlogService{
 
+    use FCMNotification;
 
+    /**
+     * @throws MessagingException
+     * @throws FirebaseException
+     */
     public function createpost($data)
     {
+
        $destinationPath ='/images/posts/';
        $userid = Auth::user()->id;
 
@@ -22,7 +32,13 @@ class BlogService{
             $data['image_url'] = ImageService::saveImage($data['image_url'],$destinationPath );
         }
         $data['user_id']=$userid;
+        $user_name = User::find($userid);
+        $notificationService = new NotificationService();
+        $notificationService->send('EDUspark', "{$user_name->name} added a new post");
+//        $this->dispatchNotification('EDUspark', "{$user_name->name} Added a new post");
+
         $post = Post::create($data);
+
         return $post;
     }
 

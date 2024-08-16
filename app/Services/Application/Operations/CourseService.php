@@ -7,6 +7,7 @@ use App\Models\course;
 use App\Models\Specialization;
 use App\Models\User;
 use App\Services\GeneralServices\ImageService;
+use App\Services\GeneralServices\NotificationService;
 use Illuminate\Support\Facades\Auth;
 
 class CourseService{
@@ -49,6 +50,10 @@ class CourseService{
             $data['image'] = ImageService::saveImage($data['image'],$destinationPath );
         }
         $data['user_id']=$userid;
+        $user_name = User::find($data['user_id']);
+        $notificationService = new NotificationService();
+        $notificationService->send('EDUspark', "{$user_name->name} added a new course ");
+
         $course = Course::create($data);
         return $course;
     }

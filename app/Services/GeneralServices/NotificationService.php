@@ -15,7 +15,7 @@ class NotificationService
 
     public function __construct()
     {
-        $serviceAccountPath = storage_path('app/learningapp-6f15a-a94d1d94ac73.json');
+        $serviceAccountPath = storage_path('app/learningapp-4736c-e9b4b11b72fc.json');
 
         // Initialize the Firebase Factory with the service account
         $factory = (new Factory)->withServiceAccount($serviceAccountPath);
@@ -34,14 +34,16 @@ class NotificationService
      * @throws FirebaseException
      */
     public function send( //$token,
-                         $title, $body, $data = []): void
-    {   $token='f-2vEzDHRMCnt9KgPo5tnP:APA91bETRO_3ty6ZG5bPH5Zs5-bc_MEA5tkGlp02WgPo9Z38aqksEQIh34Adlr2q9JzJDS1N4zJTqix50EQWQvHO4sAKzgJXBJb8Db5I6doPLHYf3maGTAk1u6WUY82SA8nuLibFrrHn';
+        $title, $body, $data = []): void
+    {   $token='cFCIC9hEQGiqDRXxG-0YX9:APA91bF5rXFV17oxRaOR6T5lrorSypCfHEJWsvAhOGfA78qZEYOWA7oSjLrqu2RX7HilEqoBwdyprUUFESq5RvRzsqjinf4YiC5sUSa7bD4qxLSa28KwWuEfCZnwR50braEi75ExjPQL';
         $message = CloudMessage::withTarget('token', $token)
             ->withNotification(['title' => $title, 'body' => $body])
             ->withData($data);
         $this->messaging->send($message);
     }
+
 }
+
 //    public function markAsRead($notificationId): bool
 //    {
 //        $notification = auth()->user()->notifications()->findOrFail($notificationId);

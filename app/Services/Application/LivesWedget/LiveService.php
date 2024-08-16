@@ -7,10 +7,13 @@ namespace App\Services\Application\LivesWedget;
 use App\Models\Live;
 use App\Models\Specialization;
 use App\Models\User;
+use App\Services\GeneralServices\NotificationService;
+use App\Traits\FCMNotification;
 use Carbon\Carbon;
 
 class LiveService
 {
+    use FCMNotification;
     /**
      Service for manage Lives operations in the system.
     */
@@ -18,9 +21,13 @@ class LiveService
     public function createlive($data){
       $data['user_id'] = Auth()->user()->id;
       $live =Live::create($data);
+        $user_name=User::find($data['user_id']);
+        $notificationService = new NotificationService();
+        $notificationService->send('EDUspark', "{$user_name->name} scheduled a new live");
+//         $this->dispatchNotification('EDUspark', "{$user_name->name} scheduled a new live ",['title'=>"{$live->title}",'in'=>"{$live->data_start}",'at'=>"{$live->time_start}"]);
+       // dd($live->time_start);
 
-
-      return $live;
+        return $live;
     }
 
     public function getlives(){

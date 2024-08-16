@@ -8,6 +8,7 @@ use App\Models\Question;
 use App\Models\Quiz;
 use App\Models\Specialization;
 use App\Models\User;
+use App\Services\GeneralServices\NotificationService;
 use App\Traits\SendCertificateEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +25,10 @@ class QuizService
         $answers = [];
 
         if ($quiz) {
+            $user_name = User::find($data['user_id']);
+            $notificationService = new NotificationService();
+            $notificationService->send('EDUspark', "{$user_name->name} added a new quiz");
+
             $quizID = $quiz->id;
             foreach ($data['questions'] as $ques) {
                 $ques['quiz_id'] = $quizID;
@@ -43,7 +48,6 @@ class QuizService
                 }
             }
         }
-
         return ['quiz' => $quiz, 'questions' => $questions, 'answers' => $answers];
     }
 
