@@ -1,28 +1,11 @@
-<!--
-=========================================================
-* Soft UI Dashboard - v1.0.3
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
-
 @if (\Request::is('rtl'))
-    <html dir="rtl" lang="ar">
+<html dir="rtl" lang="ar">
 @else
-    <html lang="en">
+<html lang="en">
 @endif
-
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     @if (env('IS_DEMO'))
@@ -36,16 +19,17 @@
         Learning UI Dashboard
     </title>
     <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
     <!-- Nucleo Icons -->
-    <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet"/>
     <!-- Font Awesome Icons -->
-    <link href="{{ asset('assets/plugins/fontawesome/css/fontawesome.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/plugins/fontawesome/css/all.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/fontawesome/css/fontawesome.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/plugins/fontawesome/css/all.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet"/>
     <!-- CSS Files -->
-    <link id="pagestyle" href="{{ asset('assets/css/soft-ui-dashboard.css?v=1.0.3') }}" rel="stylesheet" />
+    <link id="pagestyle" href="{{ asset('assets/css/soft-ui-dashboard.css?v=1.0.3') }}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toastr.min.css') }}">
     @yield('styles')
 </head>
 
@@ -58,12 +42,6 @@
         @yield('guest')
     @endguest
 
-    @if (session()->has('success'))
-        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
-            class="position-fixed bg-success rounded right-3 text-sm py-2 px-4">
-            <p class="m-0">{{ session('success') }}</p>
-        </div>
-    @endif
     <!--   Core JS Files   -->
     <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
@@ -93,6 +71,23 @@
     {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> --}}
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
+
+    <script>
+        @if(Session::has('success'))
+            toastr.success("{{ Session::get('success') }}");
+        @endif
+        @if(Session::has('error'))
+            toastr.error("{{ Session::get('error') }}");
+        @endif
+        @if(Session::has('info'))
+            toastr.info("{{ Session::get('info') }}");
+        @endif
+        @if(Session::has('warning'))
+            toastr.warning("{{ Session::get('warning') }}");
+        @endif
+    </script>
 
     @yield('scripts')
 </body>
